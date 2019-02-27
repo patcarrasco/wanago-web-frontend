@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom'
 
 import HomePageContent from '../Components/HomePageContent/HomePageContent';
 import styles from '../../src/assets/stylesheets/homepage.css'
+import CreateEventForm from '../Components/CreateEventForm/CreateEventForm';
 
 class HomePage extends PureComponent {
     state = {activeItem: 'content', sidebar: false}
@@ -49,7 +50,7 @@ class HomePage extends PureComponent {
                             <Sidebar.Pushable as={Segment} >
                                 <Sidebar
                                     as={Menu}
-                                    animation='overlay'
+                                    animation='slide out'
                                     icon='labeled'
                                     inverted
                                     vertical
@@ -67,11 +68,11 @@ class HomePage extends PureComponent {
                                     </ Menu.Item >
                                     < Menu.Item name='search' active={'search' === activeItem} onClick={this.handleItemClick} > 
                                         <Icon name='search' />
-                                        search
+                                        explore
                                     </ Menu.Item >
                                     < Menu.Item name='ticket' active={'ticket' === activeItem} onClick={this.handleItemClick} > 
                                         <Icon name='ticket' />
-                                        ticket
+                                        tickets
                                     </ Menu.Item >
                                     < Menu.Item name='friends' active={'friends' === activeItem} onClick={this.handleItemClick} > 
                                         <Icon name='users'/>
@@ -91,7 +92,7 @@ class HomePage extends PureComponent {
                                     <Segment>
                                         <Header> Content </Header>
                                         {activeItem === 'content' && <HomePageContent />}
-                                        {activeItem === 'form' && <Header>new events</Header>}
+                                        {activeItem === 'create' && <CreateEventForm />}
                                         {activeItem === 'ticket' && <Header>ticket</Header>}
                                         {activeItem === 'search' && <Header>search</Header>}
                                         {activeItem === 'friends' && <Header>friends</Header>}
