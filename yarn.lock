@@ -2697,6 +2697,11 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
+core-js@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
+  integrity sha1-TekR5mew6ukSTjQlS1OupvxhjT4=
+
 core-js@2.5.5:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
@@ -3486,6 +3491,11 @@ es-to-primitive@^1.2.0:
     is-callable "^1.1.4"
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
+
+es6-promise@3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.2.1.tgz#ec56233868032909207170c39448e24449dd1fc4"
+  integrity sha1-7FYjOGgDKQkgcXDDlEjiREndH8Q=
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -5944,6 +5954,11 @@ jsonify@~0.0.0:
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
 
+jsonschema@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.1.0.tgz#039cc219ed524b06e71daf12ca60d02639faf29a"
+  integrity sha1-A5zCGe1SSwbnHa8SymDQJjn68po=
+
 jsprim@^1.2.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsprim/-/jsprim-1.4.1.tgz#313e66bc1e5cc06e438bc1b7499c2e5c56acb6a2"
@@ -6175,6 +6190,11 @@ lodash.uniq@^4.5.0:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
+loglevel@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.4.1.tgz#95b383f91a3c2756fd4ab093667e4309161f2bcd"
+  integrity sha1-lbOD+Ro8J1b9SrCTZn5DCRYfK80=
 
 loglevel@^1.4.1:
   version "1.6.1"
@@ -7944,6 +7964,18 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.2, postcss@^7.0.5,
     chalk "^2.4.2"
     source-map "^0.6.1"
     supports-color "^6.1.0"
+
+predicthq@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/predicthq/-/predicthq-0.0.19.tgz#52236564cef4c14b269dc7a1debb6ed5c7a2ca01"
+  integrity sha1-UiNlZM70wUsmnceh3rtu1ceiygE=
+  dependencies:
+    core-js "2.4.1"
+    es6-promise "3.2.1"
+    jsonschema "1.1.0"
+    loglevel "1.4.1"
+    whatwg-fetch "1.0.0"
+    youarei "1.0.2"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -10194,6 +10226,11 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   dependencies:
     iconv-lite "0.4.24"
 
+whatwg-fetch@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-1.0.0.tgz#01c2ac4df40e236aaa18480e3be74bd5c8eb798e"
+  integrity sha1-AcKsTfQOI2qqGEgOO+dL1cjreY4=
+
 whatwg-fetch@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
@@ -10538,3 +10575,8 @@ yargs@^3.10.0:
     string-width "^1.0.1"
     window-size "^0.1.4"
     y18n "^3.2.0"
+
+youarei@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/youarei/-/youarei-1.0.2.tgz#d2c2fffc7b7037fb4f184445eb0df58e58f13c04"
+  integrity sha1-0sL//HtwN/tPGERF6w31jljxPAQ=
