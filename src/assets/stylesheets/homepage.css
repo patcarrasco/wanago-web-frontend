@@ -1,0 +1,11 @@
+:local(.headerImg) {
+    background-color: rgb(8,8,8);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    /* display: inline-block; */
+    -webkit-animation: fadein 1s;
+    animation: fadein 1s;
+}
