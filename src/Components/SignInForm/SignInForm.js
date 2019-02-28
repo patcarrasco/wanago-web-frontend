@@ -21,8 +21,9 @@ class SignInForm extends PureComponent {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                this.setToken(data.auth_token)
-                this.setApiToken(data.api_token)
+                token = data.auth_token
+                this.setToken(token)
+                this.setApiToken(data.api_key)
             })
             .then(() => {
                 firebase
@@ -37,12 +38,11 @@ class SignInForm extends PureComponent {
     }
 
     setToken = (token) => {
-        console.log(token)
         localStorage.setItem('token', token)
     }
 
-    setApiToken = (token) => {
-        localStorage.setItem('api_token', token)
+    setApiToken = (key) => {
+        localStorage.setItem('api_key', key)
     }
 
     fetchSignIn = () => {

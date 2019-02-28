@@ -6,6 +6,7 @@ import {withRouter} from 'react-router-dom'
 import HomePageContent from '../Components/HomePageContent/HomePageContent';
 import styles from '../../src/assets/stylesheets/homepage.css'
 import CreateEventForm from '../Components/CreateEventForm/CreateEventForm';
+import Explore from '../Components/Explore/Explore';
 
 class HomePage extends PureComponent {
     state = {activeItem: 'content', sidebar: false}
@@ -94,7 +95,7 @@ class HomePage extends PureComponent {
                                         {activeItem === 'content' && <HomePageContent />}
                                         {activeItem === 'create' && <CreateEventForm />}
                                         {activeItem === 'ticket' && <Header>ticket</Header>}
-                                        {activeItem === 'search' && <Header>search</Header>}
+                                        {activeItem === 'search' && <Explore />}
                                         {activeItem === 'friends' && <Header>friends</Header>}
                                         {activeItem === 'chats' && <Header>chats</Header>}
                                         {activeItem === 'settings' && <Header>settings</Header>}
