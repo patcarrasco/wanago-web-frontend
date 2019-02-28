@@ -1,9 +1,7 @@
 // Event Thunk Creators
 
-import {loadEvents} from '../actions/eventActions'
+import {loadSpotlightEvents} from '../actions/eventActions'
 
-export const getEvents = () => dispatch => (
-    fetch('EVENT_API')
-    .then(r => r.json())
-    .then(res => dispatch(loadEvents(res)))
-)
+export const getSpotlights = () => dispatch => {
+    return fetch('http://localhost:3001')
+}

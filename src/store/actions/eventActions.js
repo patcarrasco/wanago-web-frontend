@@ -1,5 +1,5 @@
 // event action creator
 
-import {LOAD_EVENTS} from './actionTypes'
+import {LOAD_SPOTLIGHT_EVENTS} from './actionTypes'
 
-export const loadEvents = (events) => ({type: LOAD_EVENTS, payload: events})
+export const loadSpotlightEvents = (events) => ({type: LOAD_SPOTLIGHT_EVENTS, payload: events})

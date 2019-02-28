@@ -1,6 +1,7 @@
 import React from 'react'
 import {Header, Segment} from 'semantic-ui-react'
 import EventContainer from '../EventContainer/EventContainer';
+import {connect} from 'react-redux'
 
 const HomePageContent = () => (
     <>
@@ -12,7 +13,7 @@ const HomePageContent = () => (
         <Segment inverted >
             <Header as='h1'> Happening in (City Name Here) </Header>
             <Segment>
-                <EventContainer />
+                <EventContainer/>
             </Segment>
 
 
@@ -41,5 +42,11 @@ const HomePageContent = () => (
         </Segment>
     </>
 )
+
+const mapStateToProps = (state) => ({
+    spotlightEvents: state.spotlightEvents
+})
+
+const mapDispatchToProps = (dispatch) => ({})
 
 export default HomePageContent

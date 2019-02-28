@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react'
 import {Form, Icon, Modal, Button, Divider, Item, Grid} from 'semantic-ui-react'
 import firebase from '../../Firebase'
+import {withRouter} from 'react-router-dom'
 
 import {connect} from 'react-redux'
 import {showLogin} from '../../store/actions/navbarActions'
-import {withRouter} from 'react-router-dom'
-
-const API_LOGIN = 'http://localhost:3000/api/v1/login'
+import {_signIn} from '../../store/thunks/auth'
 
 class SignInForm extends PureComponent {
     state = {username:'', password:''}
@@ -16,51 +15,48 @@ class SignInForm extends PureComponent {
     }
 
     handleSubmit = () => {
-        let token;
-        this.fetchSignIn()
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                token = data.auth_token
-                this.setToken(token)
-                this.setApiToken(data.api_key)
-            })
-            .then(() => {
-                firebase
-                    .auth()
-                    .signInWithCustomToken(token)
-                    .then(() => {
-                        this.props.history.push('/home')
-                        this.props.showLogin(false)
-                    })
-            })
-            .catch((err) => console.log('There was an ERROR: ', err))
-    }
+        // let token;
+        // this.fetchSignIn()
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data)
+        //         token = data.auth_token
+        //         this.setToken(token)
+        //     })
 
-    setToken = (token) => {
-        localStorage.setItem('token', token)
-    }
-
-    setApiToken = (key) => {
-        localStorage.setItem('api_key', key)
-    }
-
-    fetchSignIn = () => {
-        const {username, password} = this.state
-        const creds = {
-            username: username,
-            password: password,
-        }
-
-        return fetch(API_LOGIN, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify(creds)
+        this.props.signIn(this.state).then(() => {
+            console.log('sign in done with token:', localStorage.getItem('token'))
+            firebase
+                .auth()
+                .signInWithCustomToken(localStorage.getItem('token'))
+                .then(() => {
+                    this.props.history.push('/home')
+                    this.props.showLogin(false)
+                })
         })
-    }   
+        .catch((err) => console.log('There was an ERROR: ', err))
+    }
+
+    // setToken = (token) => {
+    //     localStorage.setItem('token', token)
+    // }
+
+    // fetchSignIn = () => {
+    //     const {username, password} = this.state
+    //     const creds = {
+    //         username: username,
+    //         password: password,
+    //     }
+
+    //     return fetch(API_LOGIN, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             Accept: 'application/json'
+    //         },
+    //         body: JSON.stringify(creds)
+    //     })
+    // }   
 
     handleExit = () => {  
         this.props.showLogin(false)
@@ -133,8 +129,8 @@ class SignInForm extends PureComponent {
 
 // const mapStateToProps = () => ()
 const mapDispatchToProps = (dispatch) => ({
+    signIn: (creds) => dispatch(_signIn(creds)),
     showLogin: (bool) => dispatch(showLogin(bool))
 }) 
-
 
 export default withRouter(connect(null, mapDispatchToProps)(SignInForm))
