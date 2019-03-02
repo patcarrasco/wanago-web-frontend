@@ -1,5 +1,5 @@
 import React from 'react'
-import {Menu, Header} from 'semantic-ui-react'
+import {Menu} from 'semantic-ui-react'
 import styles from '../../../src/assets/stylesheets/landingpage.css'
 
 import {connect} from 'react-redux'

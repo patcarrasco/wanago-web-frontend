@@ -1,18 +1,22 @@
 import React, { PureComponent } from 'react'
 import { Card } from 'semantic-ui-react'
-import data from '../../data.js'
 import EventCard from '../EventCard/EventCard';
 
 class EventContainer extends PureComponent {
 
-    cards() {
-        // console.log(data)
-        return data.map((e, idx) => <EventCard key={idx} event={e} />)
+    cards = () => {
+        let events = this.props.events || false
+        if (events !== false) {
+            let eventsArr = events._embedded.events
+            return eventsArr.map(e => <EventCard key={e.id} event={e} /> )
+        } else {
+            return null
+        }
     }
 
     render(){
         return(
-            <Card.Group>
+            <Card.Group inverted>
                 {this.cards()}
             </Card.Group>
         )

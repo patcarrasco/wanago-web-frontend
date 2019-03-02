@@ -64,7 +64,7 @@ class SignUpForm extends PureComponent {
             </Form>
             <Divider/>
             <Container textAlign='center'>
-                Already Have an Account? <a>Log in</a>
+                Already Have an Account? <a href='www.signin.com'>Log in</a>
             </Container>
         </>
     )

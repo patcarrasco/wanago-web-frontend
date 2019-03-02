@@ -3,9 +3,11 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 // import reducers here
 import landingNavbar from './reducers/navbar'
+import events from './reducers/events'
 
 const rootReducer = combineReducers({
-    landingNavbar: landingNavbar
+    landingNavbar: landingNavbar,
+    events: events
 })
 
 const configureStore = () => (

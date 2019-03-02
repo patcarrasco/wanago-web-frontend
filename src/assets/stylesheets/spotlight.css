@@ -1,0 +1,22 @@
+:local(.spotlightGrid) {
+    max-width: 100%;
+    min-height: 100px;
+    display: flex;
+    overflow-x: auto;
+}
+
+:local(.cardContent) {
+    min-width: 200px;
+    margin: 5px;
+}
+
+:local(.spotlightImg) {
+    height: 113px;
+    width: 200px;
+}
+
+:local(.imgContainer) {
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+}

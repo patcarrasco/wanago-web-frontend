@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Menu, Grid, Sidebar, Header, Icon, Button } from 'semantic-ui-react';
+import { Segment, Menu, Grid, Sidebar, Header, Icon, Button, Container } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom'
 
 
@@ -34,21 +34,21 @@ class HomePage extends PureComponent {
         console.log(activeItem)
         return (
             <div className={styles.headerImg}>
-                <Segment > 
-                    <Menu fluid className='fixed'>
+                <Segment inverted > 
+                    <Menu fluid inverted className='fixed' size='huge'>
                         <Menu.Item onClick={this.handleShow}>
                             <Icon name='bars'/>
                             Event App
                         </Menu.Item>
                         <Menu.Menu position='right' onClick={this.handleLogout}>
-                            < Button icon = 'power off' color='red'/>
+                            < Button icon = 'power off' color='black'/>
                         </Menu.Menu>
                     </Menu>
                 </Segment>
 
-                <Grid columns={1}>
-                        <Grid.Column>
-                            <Sidebar.Pushable as={Segment} >
+                <Grid columns={1} inverted>
+                        <Grid.Column color='black'>
+                            <Sidebar.Pushable as={Segment} inverted color='green'>
                                 <Sidebar
                                     as={Menu}
                                     animation='slide out'
@@ -90,8 +90,7 @@ class HomePage extends PureComponent {
                                 </Sidebar>
 
                                 <Sidebar.Pusher>
-                                    <Segment>
-                                        <Header> Content </Header>
+                                    <Segment inverted>
                                         {activeItem === 'content' && <HomePageContent />}
                                         {activeItem === 'create' && <CreateEventForm />}
                                         {activeItem === 'ticket' && <Header>ticket</Header>}

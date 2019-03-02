@@ -15,48 +15,17 @@ class SignInForm extends PureComponent {
     }
 
     handleSubmit = () => {
-        // let token;
-        // this.fetchSignIn()
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data)
-        //         token = data.auth_token
-        //         this.setToken(token)
-        //     })
-
         this.props.signIn(this.state).then(() => {
-            console.log('sign in done with token:', localStorage.getItem('token'))
             firebase
                 .auth()
                 .signInWithCustomToken(localStorage.getItem('token'))
                 .then(() => {
-                    this.props.history.push('/home')
                     this.props.showLogin(false)
+                    this.props.history.push('/home')
                 })
         })
         .catch((err) => console.log('There was an ERROR: ', err))
     }
-
-    // setToken = (token) => {
-    //     localStorage.setItem('token', token)
-    // }
-
-    // fetchSignIn = () => {
-    //     const {username, password} = this.state
-    //     const creds = {
-    //         username: username,
-    //         password: password,
-    //     }
-
-    //     return fetch(API_LOGIN, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             Accept: 'application/json'
-    //         },
-    //         body: JSON.stringify(creds)
-    //     })
-    // }   
 
     handleExit = () => {  
         this.props.showLogin(false)

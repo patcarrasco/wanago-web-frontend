@@ -1,52 +1,69 @@
 import React from 'react'
-import {Header, Segment} from 'semantic-ui-react'
-import EventContainer from '../EventContainer/EventContainer';
+import {Header, Segment, Button, Input, Form, Icon} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
-const HomePageContent = () => (
-    <>
-        <Header as='h1'> Spotlight </Header>
-        <Segment>
-            <EventContainer />
+// thunks
+import {getSpotlightEvents, getEventsByLocation} from '../../store/thunks/event'
+import SpotlightEventContainer from '../EventContainer/SpotlightEventContainer';
+import EventsByLocationContainer from '../EventContainer/EventsByLocationContainer';
+import LandingEventSearch from '../LandingEventSearch/LandingEventSearch';
+
+class HomePageContent extends React.PureComponent {
+    state = {userLocation: 'New York'}
+
+    componentDidMount() {
+        this.props.getSpotlightEvents()
+    }
+
+    onChangeHandler = e => this.setState({userLocation: e.target.value})
+
+    eventSearchHandler = () => {this.props.getEventsByLocation(this.state.userLocation)}
+
+    searchByUserLocation = () => (
+        <Segment >
+            <Form inverted>
+                <Form.Field >
+                    <Form.Input 
+                        size='massive' 
+                        placeholder = {`Find events near ${this.state.userLocation}`} 
+                        icon={
+                            <Icon 
+                                name='search'
+                                inverted
+                                circular
+                                link
+                                color='violet'
+                                onClick={this.eventSearchHandler}
+                            />
+                        }
+                        onChange={this.onChangeHandler} 
+                        />
+                </Form.Field>                 
+            </Form>
         </Segment>
 
-        <Segment inverted >
-            <Header as='h1'> Happening in (City Name Here) </Header>
-            <Segment>
-                <EventContainer/>
-            </Segment>
+
+    )
+
+    render() {
+        return (
+            <>
+                <SpotlightEventContainer />
+                {this.searchByUserLocation()}
+                    <EventsByLocationContainer />
+                <Segment inverted>
+                    <Header> footer </Header>
+                </Segment>
+            </>
+        )
+    }
+}
 
 
-            <Header as='h1'>Top Selling</Header>
-            <Segment>
-                <EventContainer />
-            </Segment>
 
-            <Header as='h1'> Just announced </Header>
-            <Segment>
-                <EventContainer />
-            </Segment>
-
-            <Header as='h1'> Rock Concerts </Header>
-            <Segment>
-                <EventContainer />
-            </Segment>
-
-            <Header as='h1'> Hip Hop </Header>
-            <Segment>
-                <EventContainer />
-            </Segment>
-        </Segment>
-        <Segment inverted>
-            <Header> footer </Header>
-        </Segment>
-    </>
-)
-
-const mapStateToProps = (state) => ({
-    spotlightEvents: state.spotlightEvents
+const mapDispatchToProps = (dispatch) => ({
+    getSpotlightEvents: () => dispatch(getSpotlightEvents()),
+    getEventsByLocation: (query) => dispatch(getEventsByLocation(query))
 })
 
-const mapDispatchToProps = (dispatch) => ({})
-
-export default HomePageContent
+export default connect(null, mapDispatchToProps)(HomePageContent)
