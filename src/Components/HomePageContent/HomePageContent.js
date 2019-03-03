@@ -14,11 +14,7 @@ class HomePageContent extends React.PureComponent {
     componentDidMount() {
         this.props.getSpotlightEvents()
     }
-
-    onChangeHandler = e => this.setState({userLocation: e.target.value})
-
-    eventSearchHandler = () => {this.props.getEventsByLocation(this.state.userLocation)}
-
+    
     searchByUserLocation = () => {
         const genres = [
             {   

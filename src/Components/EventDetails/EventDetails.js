@@ -11,10 +11,10 @@ class EventDetails extends PureComponent {
 
         console.log(this.props.event)
 
-        const {dates, images, name, priceRanges, _embedded} = this.props.event
+        const {images, name, priceRanges, _embedded} = this.props.event
         const image = images.shift()
-        const date = dates.start.localDate
-        const time = dates.start.localTime
+        // const date = dates.start.localDate
+        // const time = dates.start.localTime
         const attractions = _embedded.attractions.map(e => e.name)
         const venues = _embedded.venues.map(e => e.name)
         console.log('price ranges is', !!priceRanges)

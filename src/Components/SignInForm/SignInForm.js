@@ -21,7 +21,7 @@ class SignInForm extends PureComponent {
                 .signInWithCustomToken(localStorage.getItem('token'))
                 .then(() => {
                     this.props.showLogin(false)
-                    this.props.history.push('/home')
+                    this.props.history.push('/map')
                 })
         })
         .catch((err) => console.log('There was an ERROR: ', err))

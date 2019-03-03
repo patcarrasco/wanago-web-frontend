@@ -1,16 +1,21 @@
 import React, { PureComponent } from 'react'
-import { Segment, Menu, Grid, Sidebar, Header, Icon, Button } from 'semantic-ui-react';
+import { Segment, Menu, Grid, Sidebar, Input, Icon, Button } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom'
 
-
-import HomePageContent from '../Components/HomePageContent/HomePageContent';
 import styles from '../../src/assets/stylesheets/homepage.css'
-import CreateEventForm from '../Components/CreateEventForm/CreateEventForm';
-import Explore from '../Components/Explore/Explore';
+import MapContainer from '../Components/MapContainer/MapContainer';
+import SearchBar from '../Components/SearchBar/SearchBar';
 
-class HomePage extends PureComponent {
-    state = {activeItem: 'content', sidebar: false}
 
+class HomePageMap extends PureComponent {
+    state = {activeItem: 'content', sidebar: false, userLocation: 'New York', selected: false}
+
+    handleShow = () => this.setState({sidebar: !this.state.sidebar})
+    
+    handleLogout = () => {
+        localStorage.clear()
+        this.props.history.push('/')
+    }
 
     handleItemClick = (e, {name}) => {
         const types = ['create', 'search', 'ticket', 'friends', 'chats', 'settings']
@@ -21,31 +26,25 @@ class HomePage extends PureComponent {
         }
     }
 
-    handleShow = () => this.setState({sidebar: !this.state.sidebar})
-
-    handleLogout = () => {
-        localStorage.clear()
-        this.props.history.push('/')
-    }
-
     render(){
         
         const {activeItem, sidebar} = this.state
-        console.log(activeItem)
         return (
-            <div className={styles.headerImg}>
-                <Segment inverted > 
-                    <Menu fluid inverted className='fixed' size='huge'>
+                <div className={styles.Nav} > 
+                    <Menu size='huge'>
                         <Menu.Item onClick={this.handleShow}>
                             <Icon name='bars'/>
                             Event App
                         </Menu.Item>
-                        <Menu.Menu position='right' onClick={this.handleLogout}>
-                            < Button icon = 'power off' color='black'/>
+                        <Menu.Menu position = 'right'>
+                           
+                            <SearchBar />
+                         
+                            <Menu.Item>
+                                <Button circular fluid icon = 'power off' color='red' onClick={this.handleLogout}/>
+                            </Menu.Item>
                         </Menu.Menu>
                     </Menu>
-                </Segment>
-
                 <Grid columns={1} inverted>
                         <Grid.Column color='black'>
                             <Sidebar.Pushable as={Segment} inverted color='green'>
@@ -90,21 +89,9 @@ class HomePage extends PureComponent {
                                 </Sidebar>
 
                                 <Sidebar.Pusher>
-                                    <Segment inverted>
+                                    <Segment inverted className={styles.mapSegment}>
 
-
-
-
-                                    <Header>Map Goes Here</Header>
-
-
-
-
-
-
-
-
-
+                                    <MapContainer />
 
                                     </Segment>
                                 </Sidebar.Pusher>
@@ -116,4 +103,5 @@ class HomePage extends PureComponent {
     }
 }
 
-export default withRouter(HomePage)
+
+export default withRouter(HomePageMap)

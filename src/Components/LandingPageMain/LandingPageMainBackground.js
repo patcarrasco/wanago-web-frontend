@@ -1,7 +1,5 @@
 import React from 'react'
-import {Grid} from 'semantic-ui-react'
 import NavBar from '../Navbar/Navbar';
-import LandingEventSearch from '../LandingEventSearch/LandingEventSearch';
 import styles from '../../assets/stylesheets/landingpage.css'
 
 const LandingPageMainBackground = () => (

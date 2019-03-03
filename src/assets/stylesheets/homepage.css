@@ -9,3 +9,12 @@
     -webkit-animation: fadein 1s;
     animation: fadein 1s;
 }
+
+:local(.mapSegment) {
+    height: 89.2vh;
+    width: 100%;
+}
+
+:local(.Nav) {
+    color: aliceblue;
+}
