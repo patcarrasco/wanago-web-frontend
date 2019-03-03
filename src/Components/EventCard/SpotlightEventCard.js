@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react'
-import { Card, Image, Grid, Segment, Header, Button } from 'semantic-ui-react'
+import { Card, Image, Header } from 'semantic-ui-react'
 import styles from '../../assets/stylesheets/spotlight.css'
 
 class SpotlightEventCard extends PureComponent {
+    state = {flipped: true}
+
+    clickHandler = () => this.setState({flipped: !this.state.flipped})
 
     render() {
         const {name, _embedded, dates, images} = this.props.event
@@ -15,48 +18,24 @@ class SpotlightEventCard extends PureComponent {
         const time = dates.start.localTime
         // console.log(images)
         return (
-
                 <div className={styles.cardContent}>
-                    <img src={image} alt='spotlightImage' className={styles.spotlightImg}/>
+                    
+                    {this.state.flipped
+                    ?
+                    <Card onClick={this.clickHandler}>
+                        <Image 
+                            src={image} 
+                            className={styles.spotlightImg}
+                        />
+                    </Card>
+                    :
+                    <Card onClick={this.clickHandler}>
+                        <Card.Content>
+                            <Header color='black'>{name}</Header>
+                        </Card.Content>
+                    </Card>
+                    }
                 </div>
-
-
-                // {/* <Card.Content>
-                //     <Card.Header>
-                //         {name}
-                //     </Card.Header>
-                //     <Card.Meta>
-                //         {artists}
-                //     </Card.Meta>
-                // </Card.Content>
-                // <Card.Content extra>
-                //     {city}
-                //     {date}
-                //     {time}
-                // </Card.Content> */}
-            
-            // <Grid.Row>
-            //     <Grid.Column floated='right'>
-            //         <img src={image} alt='spotlightImage' className={styles.spotlightImg}/>
-            //     </Grid.Column>
-            //     <Grid.Column floated='left'>
-            //         <Card fluid >
-            //             <Card.Content>
-            //                 <Card.Header>
-            //                     {name}
-            //                 </Card.Header>
-            //                 <Card.Meta>
-            //                     {artists}
-            //                 </Card.Meta>
-            //             </Card.Content>
-            //             <Card.Content extra>
-            //                 {city}, {date}, {time}
-            //             </Card.Content>
-            //         </Card>
-            //         <Button>Add to Favorites</Button>
-            //         <Button> Send to Friends </Button>
-            //     </Grid.Column>
-            // </Grid.Row>
         )
     }
 }

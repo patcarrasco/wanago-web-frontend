@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Card, Header} from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import EventCard from '../EventCard/EventCard';
 import {connect} from 'react-redux'
 

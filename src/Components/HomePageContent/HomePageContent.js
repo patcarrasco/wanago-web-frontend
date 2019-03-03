@@ -1,15 +1,15 @@
 import React from 'react'
-import {Header, Segment, Button, Input, Form, Icon} from 'semantic-ui-react'
+import {Header, Segment, Form, Icon, Modal} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 // thunks
 import {getSpotlightEvents, getEventsByLocation} from '../../store/thunks/event'
 import SpotlightEventContainer from '../EventContainer/SpotlightEventContainer';
 import EventsByLocationContainer from '../EventContainer/EventsByLocationContainer';
-import LandingEventSearch from '../LandingEventSearch/LandingEventSearch';
+import EventDetails from '../EventDetails/EventDetails';
 
 class HomePageContent extends React.PureComponent {
-    state = {userLocation: 'New York'}
+    state = {userLocation: 'New York', selected: false}
 
     componentDidMount() {
         this.props.getSpotlightEvents()
@@ -25,7 +25,7 @@ class HomePageContent extends React.PureComponent {
                 <Form.Field >
                     <Form.Input 
                         size='massive' 
-                        placeholder = {`Find events near ${this.state.userLocation}`} 
+                        placeholder = {`Search by city name: ${this.state.userLocation}`} 
                         icon={
                             <Icon 
                                 name='search'
@@ -47,10 +47,13 @@ class HomePageContent extends React.PureComponent {
 
     render() {
         return (
-            <>
+            <>  
+                <Modal open={this.props.selectedEvent}>
+                    <EventDetails />
+                </Modal>
                 <SpotlightEventContainer />
                 {this.searchByUserLocation()}
-                    <EventsByLocationContainer />
+                <EventsByLocationContainer />
                 <Segment inverted>
                     <Header> footer </Header>
                 </Segment>
@@ -59,11 +62,13 @@ class HomePageContent extends React.PureComponent {
     }
 }
 
-
+const mapStateToProps = (state) => ({
+    selectedEvent: !!state.events.selectedEvent
+})
 
 const mapDispatchToProps = (dispatch) => ({
     getSpotlightEvents: () => dispatch(getSpotlightEvents()),
     getEventsByLocation: (query) => dispatch(getEventsByLocation(query))
 })
 
-export default connect(null, mapDispatchToProps)(HomePageContent)
+export default connect(mapStateToProps, mapDispatchToProps)(HomePageContent)

@@ -5,6 +5,11 @@
     overflow-x: auto;
 }
 
+:local(.sponsoredText) {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 :local(.cardContent) {
     min-width: 200px;
     margin: 5px;

@@ -37,7 +37,6 @@ class LandingPage extends PureComponent {
                 <LandingPageMainBackground />
 
                 {/* Page Content */}
-                {this.state.loadSuccess ? <LandingPageContent /> : null}
             </>
         )
     }

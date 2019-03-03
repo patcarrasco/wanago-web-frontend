@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Menu, Grid, Sidebar, Header, Icon, Button, Container } from 'semantic-ui-react';
+import { Segment, Menu, Grid, Sidebar, Header, Icon, Button } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom'
 
 

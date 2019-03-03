@@ -1,8 +1,9 @@
-import {LOAD_SPOTLIGHT_EVENTS, LOAD_EVENTS_BY_LOCATION} from '../actions/actionTypes'
+import {LOAD_SPOTLIGHT_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS} from '../actions/actionTypes'
 
 const initState = {
     spotlightEvents: null,
-    eventsByLocation: null
+    eventsByLocation: null,
+    selectedEvent: null
 }
 
 const reducer = (state = initState, action) => {
@@ -16,6 +17,11 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 eventsByLocation: action.payload.events
+            }
+        case LOAD_EVENT_DETAILS:
+            return {
+                ...state,
+                selectedEvent: action.payload
             }
         default:
             return state;
