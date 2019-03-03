@@ -1,5 +1,5 @@
 import React from 'react'
-import {Header, Segment, Form, Icon, Modal} from 'semantic-ui-react'
+import {Header, Segment, Form, Icon, Modal, Input, Dropdown} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 // thunks
@@ -19,31 +19,44 @@ class HomePageContent extends React.PureComponent {
 
     eventSearchHandler = () => {this.props.getEventsByLocation(this.state.userLocation)}
 
-    searchByUserLocation = () => (
-        <Segment >
+    searchByUserLocation = () => {
+        const genres = [
+            {   
+                key: "concerts",
+                text: "concerts",
+                value: "concert"
+            },
+            {
+                key: "sportevent",
+                text: "Sport Events",
+                value: "sporting event"
+            }
+        ]
+
+        return (
+        <Segment centered>
             <Form inverted>
-                <Form.Field >
-                    <Form.Input 
-                        size='massive' 
-                        placeholder = {`Search by city name: ${this.state.userLocation}`} 
-                        icon={
-                            <Icon 
-                                name='search'
-                                inverted
-                                circular
-                                link
-                                color='violet'
-                                onClick={this.eventSearchHandler}
+                    <Form.Field>
+                        <Input 
+                            size='massive' 
+                            placeholder = {`Search by city name: ${this.state.userLocation}`} 
+                            icon={
+                                <Icon 
+                                    name='search'
+                                    inverted
+                                    circular
+                                    link
+                                    color='violet'
+                                    onClick={this.eventSearchHandler}
+                                />
+                            }
+                            onChange={this.onChangeHandler} 
                             />
-                        }
-                        onChange={this.onChangeHandler} 
-                        />
-                </Form.Field>                 
+                    </Form.Field>
             </Form>
         </Segment>
-
-
-    )
+        )
+    }
 
     render() {
         return (
