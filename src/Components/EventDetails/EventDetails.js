@@ -31,9 +31,12 @@ class EventDetails extends PureComponent {
                             {localTime}, {localDate}
                         </Header>
                         <Header>
-
                         </Header>
-                        <Button onClick={this.exitHandler} />
+                        <Button onClick={this.exitHandler}> close </Button>
+                        <Button> add to events </Button>
+                        <Button> share with friends </Button>
+
+
                     </Segment>
                 </Modal.Content>
             </Modal>

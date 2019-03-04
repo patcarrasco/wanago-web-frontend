@@ -46,6 +46,7 @@ class SignInForm extends PureComponent {
     }
 
     render() {
+        console.log(this.state.username, this.state.password)
         return(
             <Modal open={true} size='tiny' dimmer={'blurring'}>
                 <Modal.Content>

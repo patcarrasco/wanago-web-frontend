@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react'
 import {Form, Icon, Modal, Button, Divider, Item, Container} from 'semantic-ui-react'
+import firebase from '../../Firebase'
+import {withRouter} from 'react-router-dom'
 
 import {connect} from 'react-redux'
 import { showSignup } from '../../store/actions/navbarActions';
+import { _signUp } from '../../store/thunks/auth';
 
 class SignUpForm extends PureComponent {
     state = {username:'', password:'', showForm: false}
@@ -17,6 +20,19 @@ class SignUpForm extends PureComponent {
 
     handleExit = () => {
         this.props.showSignup(false)
+    }
+
+    createUser = () => {
+        this.props.createUser(this.state).then(() => {
+                firebase
+                    .auth()
+                    .signInWithCustomToken(localStorage.getItem('token'))
+                    .then(() => {
+                        this.props.showSignup(false)
+                        this.props.history.push('/map')
+                    })
+            })
+            .catch((err) => console.log('There was an ERROR: ', err))
     }
 
 
@@ -53,12 +69,12 @@ class SignUpForm extends PureComponent {
 
             <Form>
                 <Form.Field>
-                    <Form.Input size='large' placeholder='Create a username' icon='user circle outline' />
+                    <Form.Input size='large' placeholder='Create a username' icon='user circle outline' name='username' value={this.state.username} onChange={this.handleInputChange} />
                 </Form.Field>
                 <Form.Field>
-                    <Form.Input type='password' size='large' placeholder='Password' icon='lock' />
+                    <Form.Input type='password' size='large' placeholder='Password' icon='lock' name='password' value={this.state.password} onChange={this.handleInputChange} />
                 </Form.Field>
-                <Button fluid size='large' color='purple'>
+                <Button fluid size='large' color='purple' onClick={this.createUser}>
                     Sign up
                 </Button>
             </Form>
@@ -84,6 +100,7 @@ class SignUpForm extends PureComponent {
     }
 
     render() {
+        console.log(this.state.username, this.state.password)
         return(
             <Modal open={true} size='tiny' dimmer={'blurring'} >
                 <Modal.Content>
@@ -100,7 +117,8 @@ class SignUpForm extends PureComponent {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showSignup: (bool) => dispatch(showSignup(bool))
+    showSignup: (bool) => dispatch(showSignup(bool)),
+    createUser: (creds) => dispatch(_signUp(creds))
 })
 
-export default connect(null, mapDispatchToProps)(SignUpForm)
+export default withRouter(connect(null, mapDispatchToProps)(SignUpForm))
