@@ -5,8 +5,10 @@
   "dependencies": {
     "firebase": "^5.8.4",
     "google-maps-react": "^2.0.2",
+    "latlon-geohash": "^1.1.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-geocode": "^0.1.2",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",

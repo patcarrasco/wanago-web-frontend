@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react'
 import { Segment, Menu, Grid, Sidebar, Input, Icon, Button } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 import styles from '../../src/assets/stylesheets/homepage.css'
 import MapContainer from '../Components/MapContainer/MapContainer';
 import SearchBar from '../Components/SearchBar/SearchBar';
+import EventDetails from '../Components/EventDetails/EventDetails';
 
 
 class HomePageMap extends PureComponent {
@@ -90,9 +92,8 @@ class HomePageMap extends PureComponent {
 
                                 <Sidebar.Pusher>
                                     <Segment inverted className={styles.mapSegment}>
-
-                                    <MapContainer />
-
+                                        {this.props.eventSelected ? <EventDetails /> : null}
+                                        <MapContainer />
                                     </Segment>
                                 </Sidebar.Pusher>
                             </Sidebar.Pushable>
@@ -103,5 +104,8 @@ class HomePageMap extends PureComponent {
     }
 }
 
+const mapStateToProps = state => ({
+    eventSelected: !!state.events.selectedEvent
+})
 
-export default withRouter(HomePageMap)
+export default withRouter(connect(mapStateToProps)(HomePageMap))

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Header, Segment, Button, Image } from 'semantic-ui-react'
+import { Header, Segment, Button, Image, Modal } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import { loadEventDetails } from '../../store/actions/eventActions';
 
@@ -8,43 +8,35 @@ class EventDetails extends PureComponent {
     exitHandler = () => this.props.loadEventDetails()
 
     render() {
-
         console.log(this.props.event)
+        const {name, title} = this.props.event.free
+        const {images, _embedded, dates, priceRanges} = this.props.event.event
+        const image = images.shift().url
+        const localDate = dates.start.localDate
+        const localTime = dates.start.localTime
 
-        const {images, name, priceRanges, _embedded} = this.props.event
-        const image = images.shift()
-        // const date = dates.start.localDate
-        // const time = dates.start.localTime
-        const attractions = _embedded.attractions.map(e => e.name)
-        const venues = _embedded.venues.map(e => e.name)
-        console.log('price ranges is', !!priceRanges)
-        debugger
-        let priceRange;
-        if (priceRanges) {
-            priceRange = priceRanges.map(e => `${e.min} - ${e.max}`)
-        }
-        
-
-
-        console.log(this.props)
-
+        console.log(image)
         return (
-            <Segment>
-                <Header as='h2'>
-                    {name}
-                </Header>
-                <Header as='h3'>
-                    {attractions}
-                </Header>
-                <Image src={image.url} />
-                <Header>
-                    {priceRange}
-                </Header>
-                <Header>
-                    {venues}
-                </Header>
-                <Button onClick={this.exitHandler} />
-            </Segment>
+            <Modal open={true}>
+                <Modal.Content>
+                    <Image src={image}/>
+                    <Segment>
+                        <Header as='h1'>
+                            {title}
+                        </Header>
+                        <Header as='h3'>
+                            {name}
+                        </Header>
+                        <Header>
+                            {localTime}, {localDate}
+                        </Header>
+                        <Header>
+
+                        </Header>
+                        <Button onClick={this.exitHandler} />
+                    </Segment>
+                </Modal.Content>
+            </Modal>
         )
     }
 }
