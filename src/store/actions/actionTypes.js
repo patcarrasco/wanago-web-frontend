@@ -10,3 +10,10 @@ export const LOAD_EVENT_DETAILS = 'LOAD_EVENT_DETAILS'
 // auth actions
 export const SIGN_IN = 'SIGN_IN'
 export const SIGN_UP = 'SIGN_UP'
+
+// friendsBar actions
+export const LOAD_FOLLOWS = 'LOAD_FOLLOWS'
+export const LOAD_FOLLOWING = 'LOAD_FOLLOWING'
+export const LOAD_USERS = 'LOAD_USERS'
+export const FOLLOW_USER = 'FOLLOW_USER'
+export const UNFOLLOW_USER = 'UNFOLLOW_USER'

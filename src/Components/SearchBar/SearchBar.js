@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Geohash from 'latlon-geohash'
 import {getEventsByLocation} from '../../store/thunks/event'
 
-import { Icon, Input, Menu, Dropdown } from 'semantic-ui-react'
+import { Icon, Input, Menu, Dropdown, Header, Item } from 'semantic-ui-react'
 
 class SearchBar extends PureComponent {
     state = {queryLocation: '', queryCat: ''}
@@ -35,7 +35,6 @@ class SearchBar extends PureComponent {
 
     }
     
-    
     render() {
         const searchOptions = [
             {
@@ -50,15 +49,15 @@ class SearchBar extends PureComponent {
 
         return (
             <>
-                <Menu.Item>
-                    <Dropdown selection name='queryCat' value={this.state.queryCat} options={searchOptions} onChange={this.dropdownHandler}/>
-                </Menu.Item>
-                <Menu.Item>
+                <Item >
+                    <Dropdown selection name='queryCat' value={this.state.queryCat} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
+                </Item>
+                <Item>
                     <Input 
                         name='queryLocation'
                         onChange={this.onChangeHandler}
                         value={this.state.queryLocation}
-                        placeholder = {'search by city'} 
+                        placeholder = {'location'} 
                         icon={
                             <Icon 
                                 name='search'
@@ -70,7 +69,7 @@ class SearchBar extends PureComponent {
                             />
                         }
                     />
-                </Menu.Item>
+                </Item>
             </>
         )
     }

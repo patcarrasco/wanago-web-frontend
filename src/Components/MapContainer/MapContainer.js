@@ -4,7 +4,7 @@ import {Map, GoogleApiWrapper, Marker} from 'google-maps-react'
 import { loadEventDetails } from '../../store/actions/eventActions';
 
 const styles = [
-    {width: '98%', height:'98%'},
+    // {width: '10vh', height:'10%'},
     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
     {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
@@ -84,6 +84,8 @@ const styles = [
         stylers: [{color: '#17263c'}]
     }
     ]
+    
+const size = {width: '98%', height:'98%'}
 
 class MapContainer extends PureComponent {
     state = {
@@ -94,11 +96,14 @@ class MapContainer extends PureComponent {
     markers() {
         const rawEvents = this.props.events
         // debugger
-        if (!!rawEvents) {
+        console.log(rawEvents)
+        // let valid = rawEvents._embedded || false
+        if (rawEvents && rawEvents.page.totalElements > 0) {
+            console.log('found events!')
             const events = rawEvents._embedded.events.filter(e => !!e._embedded)
             const marks = events.map((e,idx) => {
                 const event = e
-                if (e._embedded.venues[0].location) {
+                if (event._embedded.venues[0].location) {
                     const {name, _embedded} = e
                     const venueInfo = _embedded.venues[0]
                     const venue = venueInfo.name
@@ -128,8 +133,13 @@ class MapContainer extends PureComponent {
     }
 
     selectMarkerHandler = (e) => {
-        console.log(e)
+        
         this.props.loadEventDetails(e)
+      
+        // if (this.props.selectedEvent.free === e.free) {
+        //     this.props.loadEventDetails(false)
+        // } else {
+        // }
     }
 
     userLocation = () => {
@@ -145,12 +155,13 @@ class MapContainer extends PureComponent {
     }
 
     render() {
-        console.log('re rendered with', this.state.lat, this.state.lng)
+        // console.log('re rendered with', this.state.lat, this.state.lng)
         return (
             <Map 
                 google={this.props.google}
                 zoom={14}
                 styles={styles}
+                style={size}
                 center={{
                     lat: this.state.lat,
                     lng: this.state.lng
@@ -163,7 +174,7 @@ class MapContainer extends PureComponent {
 } 
 
 const mapStateToProps = (state) => ({
-    events: state.events.eventsByLocation
+    events: state.events.eventsByLocation,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -172,4 +183,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default GoogleApiWrapper({
     apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    // apiKey: ''
 })(connect(mapStateToProps, mapDispatchToProps)(MapContainer))

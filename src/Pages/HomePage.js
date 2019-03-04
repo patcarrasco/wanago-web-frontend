@@ -58,6 +58,7 @@ class HomePage extends PureComponent {
                                     visible={sidebar}
                                     width='thin'
                                     size='massive'
+                                    direction='left'
                                 > 
                                     < Menu.Item header name='home' active={'home' === activeItem} onClick={this.handleItemClick}>
                                         <Icon name="connectdevelop"/>
@@ -89,8 +90,20 @@ class HomePage extends PureComponent {
                                     </ Menu.Item >                                
                                 </Sidebar>
 
+                                <Sidebar
+                                    as={Menu}
+                                    direction='right'
+                                    vertical
+                                    inverted
+                                    visible={sidebar}
+                                >
+                                    <Menu.Item header>
+                                        stuff
+                                    </Menu.Item>
+                                </Sidebar>
+
                                 <Sidebar.Pusher>
-                                    <Segment inverted>
+                                    <Segment inverted basic>
                                         {activeItem === 'content' && <HomePageContent />}
                                         {activeItem === 'create' && <CreateEventForm />}
                                         {activeItem === 'ticket' && <Header>ticket</Header>}
