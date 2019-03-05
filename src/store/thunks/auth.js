@@ -17,9 +17,10 @@ export const _signIn = (credentials) => dispatch => {
         })
         .then(res => res.json())
         .then(data => {
-            const {auth_token, uuid} = data
+            const {auth_token, uuid, id } = data
             localStorage.setItem('token', auth_token)
             localStorage.setItem('uuid', uuid)
+            localStorage.setItem('id', id)
         })
 }
 
@@ -42,9 +43,10 @@ export const _signUp = (credentials) => dispatch => {
         })
         .then(res => res.json())
         .then(data => {
-            const {auth_token, uuid} = data
+            const {auth_token, uuid, id} = data
             localStorage.setItem('token', auth_token)
             localStorage.setItem('uuid', uuid)
+            localStorage.setItem('id', id)
         })
 }
 

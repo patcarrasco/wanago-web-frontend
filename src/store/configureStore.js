@@ -4,10 +4,12 @@ import thunk from 'redux-thunk'
 // import reducers here
 import landingNavbar from './reducers/navbar'
 import events from './reducers/events'
+import users from './reducers/users'
 
 const rootReducer = combineReducers({
     landingNavbar: landingNavbar,
-    events: events
+    events: events,
+    users: users
 })
 
 const configureStore = () => (
