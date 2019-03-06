@@ -1,29 +1,16 @@
 import React, { PureComponent } from 'react'
-import { Button, Header, Card} from "semantic-ui-react"
+import { Button, Header, Card, Segment, Container, Grid} from "semantic-ui-react"
 import {connect} from 'react-redux'
 import {loadHangouts, loadAllHangouts} from '../../store/thunks/hangouts'
 
 
 class HangoutFeed extends PureComponent {
-   state = {page: 0}
-
 
     componentDidMount() {
         this.props._loadHangouts()
         this.props._loadAllHangouts()
-        window.addEventListener('scroll', this.onScroll, false)
     }
     
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.onScroll, false)
-    }
-
-    onScroll = () => {
-        if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) && this.handoutFeedArray().length) {
-            this.props.onPaginatedSearch();
-        }
-    }
-
     // myHangouts = () => {
     //     return this.props.myHangouts.map(e => <Header as='h3' key={e.id}>{e.name}</Header>) 
     // }
@@ -33,31 +20,28 @@ class HangoutFeed extends PureComponent {
         return this.props.hangouts.map((e, idx) => {
             // console.log('in hangoutfeedarray map')
             return (
-            <Card key={idx} >
-                <Header color='red'>
-                    {e.name}
-                </Header>
-                <Card.Content color='blue'>
-                    <Header as='h4'>
-                        {e.information}
+            <Grid.Row key={idx}>
+                <Card>
+                    <Header color='red'>
+                        {e.name}
                     </Header>
-                </Card.Content>
-                <Card.Content extra>
-                    <Button icon='heart'/>
-                </Card.Content>
-            </Card>
+                    <Card.Content color='blue'>
+                        <Header as='h4'>
+                            {e.information}
+                        </Header>
+                    </Card.Content>
+                    <Card.Content extra>
+                        <Button circular icon='heart' color='red' />
+                    </Card.Content>
+                </Card>
+            </Grid.Row>
             )
         }) 
     }
 
 
     render() {
-        return(
-            <>
-                <Header> All Hangouts </Header>
-            </>
-
-        )
+        return this.hangoutFeedArray()
     }
 }
 

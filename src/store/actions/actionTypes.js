@@ -6,6 +6,8 @@ export const SHOW_SIGNUP = 'SHOW_SIGNUP'
 export const LOAD_SPOTLIGHT_EVENTS = 'LOAD_SPOTLIGHT_EVENTS'
 export const LOAD_EVENTS_BY_LOCATION = 'LOAD_EVENTS_BY_LOCATION'
 export const LOAD_EVENT_DETAILS = 'LOAD_EVENT_DETAILS'
+export const LOAD_SAVED_EVENTS = 'LOAD_SAVED_EVENTS'
+export const SAVE_EVENT = 'SAVE_EVENT'
 
 // auth actions
 export const SIGN_IN = 'SIGN_IN'
@@ -21,3 +23,4 @@ export const UNFOLLOW_USER = 'UNFOLLOW_USER'
 // hangout actions
 export const LOAD_HANGOUTS = 'LOAD_HANGOUTS'
 export const LOAD_ALL_HANGOUTS = 'LOAD_ALL_HANGOUTS'
+export const CREATE_HANGOUT = 'CREATE_HANGOUT'

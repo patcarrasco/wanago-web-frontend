@@ -24,19 +24,19 @@ class FriendsBar extends PureComponent {
 
     render() {
         return(
-            <Grid columns={'equal'}>
-                <Grid.Column>
-                    <Segment style={{overflowY: 'auto', maxHeight: '300px'}}>
+            <Grid>
+                <Grid.Row>
+                    <Segment fluid style={{overflowY: 'auto', maxHeight: '300px'}}>
                         <Header as='h1'>following</Header>
                         {this.followingList()}
                     </Segment>
-                </Grid.Column>
-                <Grid.Column>
-                    <Segment style={{overflowY: 'auto', maxHeight: '300px'}}>
+                </Grid.Row>
+                <Grid.Row>
+                    <Segment fluid style={{overflowY: 'auto', maxHeight: '300px'}}>
                         <Header as='h1'>followers</Header>
                         {this.followerList()}
                     </Segment>
-                </Grid.Column>
+                </Grid.Row>
             </Grid>
         )
     }

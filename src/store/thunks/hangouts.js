@@ -1,4 +1,4 @@
-import {saveHangouts, loadFullHangouts} from '../actions/hangoutActions'
+import {saveHangouts, loadFullHangouts, createHang} from '../actions/hangoutActions'
 
 const ROOT_URL = process.env.REACT_APP_ROOT_URL
 
@@ -13,7 +13,6 @@ export const loadHangouts = () => dispatch => {
 }
 
 export const loadAllHangouts = () => dispatch => {
-    console.log('in redux loadAllHangouts')
     const url = ROOT_URL + `/hangouts`
     return fetch(url)
         .then(res => res.json())
@@ -22,5 +21,22 @@ export const loadAllHangouts = () => dispatch => {
             dispatch(loadFullHangouts(feed))
         })
 }
+
+export const createHangout = (eventInfo) => dispatch => {
+    const user_id = localStorage.getItem('id')
+    const data = {hangout: {...eventInfo, user_id: user_id}}
+    const url = ROOT_URL + '/hangouts'
+    return fetch(url, {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        .then(data => dispatch(createHang(data.created)))
+}
+
 
 

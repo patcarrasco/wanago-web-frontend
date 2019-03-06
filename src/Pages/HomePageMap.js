@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Menu, Grid, Sidebar, Input, Icon, Button, Label, Header } from 'semantic-ui-react';
+import { Segment, Menu, Grid, Sidebar, Input, Icon, Button, Label, Header, Container } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -9,9 +9,10 @@ import SearchBar from '../Components/SearchBar/SearchBar';
 import EventDetails from '../Components/EventDetails/EventDetails';
 import { loadEventDetails } from '../store/actions/eventActions';
 import FriendsBar from '../Components/BottomNavBarComponents/FriendsBar/FriendsBar';
-import EventsBar from '../Components/BottomNavBarComponents/EventsBar/EventsBar';
 import Chats from '../Components/BottomNavBarComponents/Chats/Chats';
 import HangoutFeed from '../Components/HangoutFeed/HangoutFeed';
+import CreateHangout from '../Components/CreateHangout/CreateHangout';
+import UserEvents from '../Components/UserEvents/UserEvents';
 
 
 class HomePageMap extends PureComponent {
@@ -27,7 +28,7 @@ class HomePageMap extends PureComponent {
     }
 
     handleItemClick = (e, {name}) => {
-        const types = ['create', 'search', 'events', 'friends', 'chats', 'settings']
+        const types = ['create', 'search', 'friend feed', 'friends', 'chats', 'settings', 'events']
         if (types.includes(name)) {
             this.setState({activeItem: name})    
         } else {
@@ -42,10 +43,14 @@ class HomePageMap extends PureComponent {
         switch (this.state.activeItem) {
             case 'friends':
                 return <FriendsBar />
-            case 'events':
+            case 'friend feed':
                 return <HangoutFeed />
+            case 'create':
+                return <CreateHangout/>
             case 'chats':
                 return <Chats />
+            case 'events':
+                return <UserEvents />
             case 'home':
                 return null
             default:
@@ -68,8 +73,7 @@ class HomePageMap extends PureComponent {
                         </Menu.Menu>
 
                         <Menu.Menu position = 'right'>
-                           
-                         
+                        
                             <Menu.Item>
                                 <Button icon = 'power off' color='red' onClick={this.handleLogout}/>
                             </Menu.Item>
@@ -93,11 +97,22 @@ class HomePageMap extends PureComponent {
                                         <Icon name="connectdevelop"/>
                                         minimize menus
                                     </ Menu.Item >
+
+                                    < Menu.Item header name='create' active={'create' === activeItem} onClick={this.handleItemClick}>
+                                        <Icon name="hand peace"/>
+                                        create hangout
+                                    </ Menu.Item >
                             
+                                    < Menu.Item name='friend feed' active={'friend feed' === activeItem} onClick={this.handleItemClick} > 
+                                        <Icon name='ticket' />
+                                        my friend feed
+                                    </ Menu.Item >
+
                                     < Menu.Item name='events' active={'events' === activeItem} onClick={this.handleItemClick} > 
                                         <Icon name='ticket' />
                                         my events
                                     </ Menu.Item >
+
                                     < Menu.Item name='friends' active={'friends' === activeItem} onClick={this.handleItemClick} > 
                                         <Icon name='users'/>
                                         friends
@@ -143,10 +158,20 @@ class HomePageMap extends PureComponent {
                                     vertical
                                     visible={this.state.infobar}
                                 >
-                                    <Menu.Item header>
-                                        <Button fluid onClick={this.closeInfoBar}>close</Button>
-                                    </Menu.Item>
-                                    {this.infoContent()}
+
+                                    <Segment size='massive'>
+                                        <Grid>
+                                            <Grid.Row columns={2}>
+                                                <Grid.Column>
+                                                    <Button circular icon="left arrow" onClick={this.closeInfoBar}/>
+                                                </Grid.Column>
+                                                <Grid.Column>
+                                                    <Header>{this.state.activeItem}</Header>
+                                                </Grid.Column>
+                                            </Grid.Row>
+                                            {this.infoContent()}
+                                        </Grid>
+                                    </Segment>
                                 </Sidebar>
 
 

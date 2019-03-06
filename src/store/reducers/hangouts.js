@@ -1,12 +1,12 @@
-import {LOAD_HANGOUTS, LOAD_ALL_HANGOUTS} from '../actions/actionTypes'
+import {LOAD_HANGOUTS, LOAD_ALL_HANGOUTS, CREATE_HANGOUT} from '../actions/actionTypes'
 
 const initState = {
     myHangouts: [],
-    hangouts: []
+    hangouts: [],
+    created: false
 }
 
 const reducer = (state = initState, action) => {
-    console.log('load success, in reducer with', action)
     switch(action.type) {
         case LOAD_HANGOUTS:
             return {
@@ -17,6 +17,12 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 hangouts: action.payload.hangouts
+            }
+        case CREATE_HANGOUT:
+            console.log('hangout created', action.payload)
+            return {
+                ...state,
+                created: action.payload
             }
         default:
             return state;

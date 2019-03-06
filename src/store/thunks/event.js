@@ -1,4 +1,4 @@
-import {loadSpotlightEvents, loadEventsByLocation} from '../actions/eventActions'
+import {loadSpotlightEvents, loadEventsByLocation, loadSavedEvents} from '../actions/eventActions'
 
 const ROOT_URL = process.env.REACT_APP_ROOT_URL
 
@@ -33,6 +33,26 @@ export const getEventsByLocation = (query) => dispatch => {
         },
         body: JSON.stringify(params)
     }).then(res => res.json()).then(r => dispatch(loadEventsByLocation(r))).catch(e => console.log("ERROR: ", e))
+}
+
+export const getSavedEvents = () => dispatch => {
+    const id = localStorage.getItem("id")
+    const url = ROOT_URL + `/users/${id}/events`
+    return fetch(url).then(res => res.json()).then(data => dispatch(loadSavedEvents(data)))
+} 
+
+export const addEvent = (params) => dispatch => {
+    const id = localStorage.getItem("id")
+    const url = ROOT_URL + `/users/${id}/events`
+    console.log('adding event')
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({data:params})
+    }).then(res => res.json()).then(console.log)
 }
 
 

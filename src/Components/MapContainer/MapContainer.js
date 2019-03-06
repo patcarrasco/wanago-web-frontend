@@ -143,6 +143,7 @@ class MapContainer extends PureComponent {
     }
 
     userLocation = () => {
+        // debugger
         const first = this.props.events._embedded.events[0]._embedded.venues[0].location
         this.setState({
             lat: first.latitude,
