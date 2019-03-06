@@ -1,6 +1,6 @@
 import {loadSpotlightEvents, loadEventsByLocation} from '../actions/eventActions'
 
-const ROOT_URL = `http://localhost:3000/api/v1`
+const ROOT_URL = process.env.REACT_APP_ROOT_URL
 
 export const getSpotlightEvents = () => dispatch => {
     const url = ROOT_URL + '/spotlight'

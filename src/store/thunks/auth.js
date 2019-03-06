@@ -1,5 +1,8 @@
+
+const ROOT_URL = process.env.REACT_APP_ROOT_URL
+
 export const _signIn = (credentials) => dispatch => {
-    const url = `http://localhost:3000/api/v1/login`
+    const url = ROOT_URL + `/login`
     const {username, password} = credentials
     const creds = {
         user:{
@@ -25,7 +28,7 @@ export const _signIn = (credentials) => dispatch => {
 }
 
 export const _signUp = (credentials) => dispatch => {
-    const url = 'http://localhost:3000/api/v1/users'
+    const url = ROOT_URL + '/users'
     const {username, password} = credentials
     const creds = {
         user: {

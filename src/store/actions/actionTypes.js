@@ -17,3 +17,7 @@ export const LOAD_FOLLOWING = 'LOAD_FOLLOWING'
 export const LOAD_USERS = 'LOAD_USERS'
 export const FOLLOW_USER = 'FOLLOW_USER'
 export const UNFOLLOW_USER = 'UNFOLLOW_USER'
+
+// hangout actions
+export const LOAD_HANGOUTS = 'LOAD_HANGOUTS'
+export const LOAD_ALL_HANGOUTS = 'LOAD_ALL_HANGOUTS'

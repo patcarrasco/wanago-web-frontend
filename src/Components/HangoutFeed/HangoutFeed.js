@@ -1,31 +1,27 @@
 import React, { PureComponent } from 'react'
+import { Button, Header, Card} from "semantic-ui-react"
 import {connect} from 'react-redux'
-import { Header, Grid, Segment, Card, Button} from 'semantic-ui-react'
-
-import {loadHangouts, loadAllHangouts} from '../../../store/thunks/hangouts'
+import {loadHangouts, loadAllHangouts} from '../../store/thunks/hangouts'
 
 
-class EventsBar extends PureComponent {
-    state = {page: 0}
+class HangoutFeed extends PureComponent {
+   state = {page: 0}
 
-    nextCardHandler = () => {
-        if (this.state.page === this.hangoutFeedArray().length - 1) {
-            this.setState({page: 0})
-        } else {
-            this.setState({page: this.state.page + 1})
-        }
-    }
-    prevCardHandler = () => {
-        if (this.state.page === 0) {
-            this.setState({page: this.hangoutFeedArray().length-1})
-        } else {
-            this.setState({page: this.state.page - 1})
-        }
-    }
 
     componentDidMount() {
         this.props._loadHangouts()
         this.props._loadAllHangouts()
+        window.addEventListener('scroll', this.onScroll, false)
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.onScroll, false)
+    }
+
+    onScroll = () => {
+        if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) && this.handoutFeedArray().length) {
+            this.props.onPaginatedSearch();
+        }
     }
 
     // myHangouts = () => {
@@ -54,24 +50,11 @@ class EventsBar extends PureComponent {
         }) 
     }
 
-    renderHangoutCard = (idx) => {
-        // console.log('in render hangoutcard')
-        // console.log('in render hangout card')
-        const val = this.hangoutFeedArray().find(e => {
-            return parseInt(e.key) === idx
-        })
-        return val
-    }
-
-
 
     render() {
         return(
             <>
-                <Button onClick={this.nextCardHandler} >next event</Button>
-                <Button onClick={this.prevCardHandler}>prev event</Button>
                 <Header> All Hangouts </Header>
-                {this.renderHangoutCard(this.state.page)}
             </>
 
         )
@@ -88,5 +71,5 @@ const mapDispatchToProps = (dispatch) => ({
     _loadAllHangouts: () => dispatch(loadAllHangouts())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventsBar)
-// export default EventsBar2
+
+export default connect(mapStateToProps, mapDispatchToProps)(HangoutFeed)

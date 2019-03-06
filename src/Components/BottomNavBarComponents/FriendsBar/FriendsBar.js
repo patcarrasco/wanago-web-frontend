@@ -23,7 +23,6 @@ class FriendsBar extends PureComponent {
     }
 
     render() {
-        console.log(this.props.followers)
         return(
             <Grid columns={'equal'}>
                 <Grid.Column>

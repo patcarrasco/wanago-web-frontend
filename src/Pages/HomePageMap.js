@@ -11,6 +11,7 @@ import { loadEventDetails } from '../store/actions/eventActions';
 import FriendsBar from '../Components/BottomNavBarComponents/FriendsBar/FriendsBar';
 import EventsBar from '../Components/BottomNavBarComponents/EventsBar/EventsBar';
 import Chats from '../Components/BottomNavBarComponents/Chats/Chats';
+import HangoutFeed from '../Components/HangoutFeed/HangoutFeed';
 
 
 class HomePageMap extends PureComponent {
@@ -37,12 +38,12 @@ class HomePageMap extends PureComponent {
 
     handleDeselectEvent = () => this.props.loadEventDetails(false)
 
-    bottomContent = () => {
+    infoContent = () => {
         switch (this.state.activeItem) {
             case 'friends':
                 return <FriendsBar />
             case 'events':
-                return <EventsBar />
+                return <HangoutFeed />
             case 'chats':
                 return <Chats />
             case 'home':
@@ -134,11 +135,18 @@ class HomePageMap extends PureComponent {
                                     </Segment>
                                 </Sidebar.Pusher>
 
-                                {/* BOTTOM SIDEBAR */}
-                                <Sidebar as={Segment} animation='overlay' direction='bottom' visible={this.state.infobar}>
-                                    <Button onClick={this.closeInfoBar}>close</Button>
-                                    {this.bottomContent()}
-                               
+                                <Sidebar
+                                    as={Segment}
+                                    direction='left'
+                                    animation='overlay'
+                                    inverted
+                                    vertical
+                                    visible={this.state.infobar}
+                                >
+                                    <Menu.Item header>
+                                        <Button fluid onClick={this.closeInfoBar}>close</Button>
+                                    </Menu.Item>
+                                    {this.infoContent()}
                                 </Sidebar>
 
 
