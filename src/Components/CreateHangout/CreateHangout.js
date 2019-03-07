@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Form, Header, Segment, Grid, Button, TextArea} from 'semantic-ui-react'
+import { Form, Grid, Button, TextArea} from 'semantic-ui-react'
 import Calendar from 'react-calendar'
 import {connect} from 'react-redux'
 import {createHangout} from '../../store/thunks/hangouts'
@@ -14,7 +14,7 @@ class CreateHangout extends PureComponent {
         if (this.state.location.length > 2) {
             let geocoder = new window.google.maps.Geocoder()
             geocoder.geocode({'address': this.state.location}, (res, status) => {
-                if (status == 'OK') {
+                if (status.toUpperCase() === 'OK') {
                     const {lng, lat} = res[0].geometry.location;
                     const obj = {...this.state, long:lng(), lat:lat()}
                     this.props._createHangout(obj)

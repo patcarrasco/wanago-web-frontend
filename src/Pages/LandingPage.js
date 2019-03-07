@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 
-import LandingPageContent from '../Components/LandingPageContent/LandingPageContent';
+// import LandingPageContent from '../Components/LandingPageContent/LandingPageContent';
 import LandingPageMainBackground from '../Components/LandingPageMain/LandingPageMainBackground';
 
 import SignInForm from '../Components/SignInForm/SignInForm'

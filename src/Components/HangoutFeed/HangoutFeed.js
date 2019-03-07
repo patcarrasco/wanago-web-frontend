@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Button, Header, Card, Segment, Container, Grid, Icon} from "semantic-ui-react"
+import { Button, Card, Grid, Icon} from "semantic-ui-react"
 import {connect} from 'react-redux'
 import {addHangout, loadAllHangouts, loadHangouts} from '../../store/thunks/hangouts'
 
@@ -26,9 +26,7 @@ class HangoutFeed extends PureComponent {
     })
 
     hangoutFeedArray = () => {
-        // console.log('in hangout feed array')
         return this.props.hangouts.map((e, idx) => {
-            console.log(e)
             return (
             <Grid.Row key={idx}>
                 <Card>

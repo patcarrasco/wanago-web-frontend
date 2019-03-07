@@ -1,12 +1,17 @@
 import React, { PureComponent } from 'react'
-import { Header, Card, Grid, Button, Icon } from 'semantic-ui-react'
+import { Card, Grid, Button, Icon } from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {getSavedEvents} from '../../store/thunks/event'
+import {getSavedEvents, deleteEvent} from '../../store/thunks/event'
 
 class UserEvents extends PureComponent {
 
     componentDidMount(){
         this.props._loadEvents()
+    }
+
+    deleteHandler = (id) => {
+        this.props._loadEvents()
+        this.props._deleteEvent(id)
     }
 
     eventList = () => {
@@ -15,10 +20,10 @@ class UserEvents extends PureComponent {
             return (
                 this.props.events.map((e, idx) => {
                     return (
-                    <Grid.Row>
+                    <Grid.Row key={idx}>
                         <Card>
                             <Card.Content>
-                                <Card.Header>
+                                <Card.Header as='h5'>
                                     {e.name}
                                 </Card.Header>
                                 <Card.Description>
@@ -27,11 +32,11 @@ class UserEvents extends PureComponent {
                             </Card.Content>
                             <Card.Content extra>
                                 <div className='ui two buttons'>
-                                    <Button inverted color='red'>
+                                    <Button inverted color='red' disabled onClick={() => this.deleteHandler(e.id)}>
                                         <Icon name='trash' /> 
                                     </Button>
 
-                                    <Button inverted color='orange' position='right'>
+                                    <Button inverted color='orange' position='right' disabled>
                                         <Icon name='map marker' /> find
                                     </Button>
                                 </div>
@@ -55,7 +60,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    _loadEvents: () => dispatch(getSavedEvents())
+    _loadEvents: () => dispatch(getSavedEvents()),
+    _deleteEvent: (id) => dispatch(deleteEvent())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserEvents)

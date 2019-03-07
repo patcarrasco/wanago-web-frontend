@@ -55,5 +55,18 @@ export const addEvent = (params) => dispatch => {
     }).then(res => res.json()).then(console.log)
 }
 
+export const deleteEvent = (id) => dispatch => {
+    const user_id = localStorage.getItem('id')
+    const url = ROOT_URL + `/users/${user_id}/tickets`
+    return fetch(url, {
+        method:'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({event: id})
+    }).then(res=> res.json()).then(()=>dispatch(getSavedEvents()))
+}
+
 
 

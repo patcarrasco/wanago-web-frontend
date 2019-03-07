@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Geohash from 'latlon-geohash'
 import {getEventsByLocation} from '../../store/thunks/event'
 
-import { Icon, Input, Menu, Dropdown, Header, Item, Button } from 'semantic-ui-react'
+import { Icon, Input, Menu, Dropdown, Item, Button } from 'semantic-ui-react'
 
 class SearchBar extends PureComponent {
     state = {queryLocation: '', queryCat: ''}
@@ -17,7 +17,7 @@ class SearchBar extends PureComponent {
         let geocoder = new window.google.maps.Geocoder()
         
         geocoder.geocode({'address': queryLocation}, (res, status) => {
-            if (status == 'OK') {
+            if (status.toUpperCase() === 'OK') {
                 const {lng, lat} = res[0].geometry.location;
                 const geohash = Geohash.encode(lat(), lng())
                 const obj = {
@@ -56,7 +56,7 @@ class SearchBar extends PureComponent {
                         name='queryLocation'
                         onChange={this.onChangeHandler}
                         value={this.state.queryLocation}
-                        placeholder = {'location'} 
+                        placeholder = {'city/address/location'} 
                     />
                 </Menu.Item>
                 <Item>

@@ -1,4 +1,4 @@
-import {LOAD_FOLLOWING, LOAD_FOLLOWS, LOAD_USERS, LOAD_POSITION, RESET_SEARCH} from '../actions/actionTypes'
+import {LOAD_FOLLOWING, LOAD_FOLLOWS, LOAD_USERS, LOAD_POSITION} from '../actions/actionTypes'
 
 const initState = {
     following: [],
@@ -26,10 +26,10 @@ const reducer = (state = initState, action) => {
                 lat: action.payload.lat,
                 lon: action.payload.lon
             }
-        case RESET_SEARCH:
+        case LOAD_USERS:
             return {
                 ...state,
-
+                users: action.payload
             }
         default:
             return state;

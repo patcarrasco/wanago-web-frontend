@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Menu, Grid, Sidebar, Input, Icon, Button, Label, Header, Container, Item } from 'semantic-ui-react';
+import { Segment, Menu, Grid, Sidebar, Icon, Button, Header, Item } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -13,6 +13,7 @@ import Chats from '../Components/BottomNavBarComponents/Chats/Chats';
 import HangoutFeed from '../Components/HangoutFeed/HangoutFeed';
 import CreateHangout from '../Components/CreateHangout/CreateHangout';
 import UserEvents from '../Components/UserEvents/UserEvents';
+import {loadPositional} from '../store/thunks/users'
 
 
 
@@ -59,10 +60,13 @@ class HomePageMap extends PureComponent {
         }
     }
 
-    resetLocation = () => this.props._resetSearch()
+    resetLocation = () => {
+        this.props._loadPosition()
+        this.props._resetSearch()
+    }
 
     render(){
-        const {activeItem, sidebar, infobar} = this.state
+        const {activeItem, sidebar} = this.state
         // console.log(this.state.sidebar, this.state.infobar)
         return (
             <div className={styles.page}>
@@ -154,7 +158,8 @@ class HomePageMap extends PureComponent {
                                     vertical
                                     visible={this.state.infobar}
                                 >
-                                    <Segment inverted size='massive'>
+                                    {/* <Segment inverted size='massive'> */}
+                                    <Segment style={{backgroundColor:'rgb(27,27,27'}}>
                                         <Grid columns='equal'>
                                             <Grid.Row columns={2}>
                                                 <Grid.Column>
@@ -167,6 +172,7 @@ class HomePageMap extends PureComponent {
                                             {this.infoContent()}
                                         </Grid>
                                     </Segment>
+                                    {/* </Segment> */}
                                 </Sidebar>
                             </Sidebar.Pushable>
                         </Grid.Column>
@@ -182,7 +188,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     loadEventDetails: () => dispatch(loadEventDetails(false)),
-    _resetSearch: () => dispatch(resetSearch())
+    _resetSearch: () => dispatch(resetSearch()),
+    _loadPosition: () => dispatch(loadPositional())
 })
 
 

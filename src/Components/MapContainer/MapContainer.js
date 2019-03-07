@@ -98,12 +98,10 @@ class MapContainer extends PureComponent {
     state={mouseover:false}
 
     mouseOverHandler = () => {
-        console.log('in')
         this.setState({mouseover: true})
     }
 
     mouseOutHandler = () => {
-        console.log('out')
         this.setState({mouseover: false})
     }
 
@@ -115,15 +113,11 @@ class MapContainer extends PureComponent {
 
     eventMarkers = () => {
         const rawEvents = this.props.events
-        console.log('in event markers')
-        console.log(rawEvents)
         if (!!rawEvents._embedded && rawEvents.page.totalElements > 0) {
-            console.log('found events!')
             const events = rawEvents._embedded.events.filter(e => !!e._embedded)
             const marks = events.map((e,idx) => {
                 const event = e
                 if (event._embedded.venues[0].location) {
-                    console.log('creating!')
                     const {name, _embedded} = e
                     const venueInfo = _embedded.venues[0]
                     const venue = venueInfo.name
@@ -131,7 +125,7 @@ class MapContainer extends PureComponent {
                     const lng = venueInfo.location.longitude
                     return (
                             <Marker
-                                key={name+idx}
+                                key={name+idx+lat+lng}
                                 title={name}
                                 name={venue}
                                 position={
@@ -159,10 +153,9 @@ class MapContainer extends PureComponent {
 
     hangoutMarkers = () => {
         const hangouts = this.props.hangouts.map(e => {
-            // console.log(e.lat, e.long)
             return (
                 <Marker 
-                    key={e.name+e.id}
+                    key={e.name+e.id+e.lat+e.long}
                     title={e.name}
                     position={
                         {
@@ -175,13 +168,15 @@ class MapContainer extends PureComponent {
                         anchor: new window.google.maps.Point(17, 34),
                         scaledSize: new window.google.maps.Size(40, 40)  
                     }}
-                    onClick={free => console.log('hangout clicked', e.name)}
+                    onClick={this.eventMarkerClickHandler}
                 />
+ 
             )
         })
         return hangouts
     }
 
+ 
     userLocation = () => {
         // debugger
         const first = this.props.events._embedded.events[0]._embedded.venues[0].location
@@ -191,35 +186,18 @@ class MapContainer extends PureComponent {
         }
     }
 
-
     componentDidMount() {
         this.props._loadMyHangouts()
     }
     
-    componentDidUpdate() {
-        console.log('in update')
-        if (this.props.events.length > 0) {
-            this.userLocation()
-            return 0
-        }
-        this.props._loadPosition()
-    }
-
-    // checkHangouts = () => {
-    //     if (!!this.props.hangouts) {
-    //         if (this.props.hangouts.length === this.state.hangouts) {
-    //             return true
-    //         } else {
-    //             this.setState({
-    //                 hangouts: this.props.hangouts.length
-    //             })
-    //             return false
-    //         }
-    //     } else {
-    //         return false
+    // componentDidUpdate() {
+    //     if (this.props.events.length > 0) {
+    //         this.userLocation()
+    //         return 0
     //     }
-
+    //     // this.props._loadPosition()
     // }
+
 
     render() {
         return (

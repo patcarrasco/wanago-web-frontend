@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
-import { Header, Grid, Segment, Button, Input, Dropdown, Form, Item } from 'semantic-ui-react'
+import { Header, Grid, Form } from 'semantic-ui-react'
 import {load_following, load_followers, loadUsers, followAUser} from '../../../store/thunks/users'
 
 
@@ -48,8 +48,8 @@ class FriendsBar extends PureComponent {
                             options={this.userSearchOptions()} 
                             value={value}
                         />
+                        <Form.Button fluid icon='plus' color='green' onClick={this.followUserHandler}/>
                     </Form.Group>
-                    <Form.Button circular icon='plus' color='green' onClick={this.followUserHandler}/>
                 </Form>
             </Grid.Row>
         )
@@ -66,6 +66,7 @@ class FriendsBar extends PureComponent {
     }
 
     render() {
+        console.log(this.props.users)
         return ( 
             <>
                 {this.props.users.data && this.props.users.data.length > 0 && this.userSearch()}
