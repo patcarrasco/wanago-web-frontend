@@ -38,5 +38,19 @@ export const createHangout = (eventInfo) => dispatch => {
         .then(data => dispatch(createHang(data.created)))
 }
 
+export const addHangout = (hangoutInfo) => dispatch => {
+    console.log('adding', hangoutInfo)
+    const id = localStorage.getItem('id')
+    const url = ROOT_URL + `/users/${id}/hangouts`
+    return fetch(url, {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({data: {hangout_id: hangoutInfo}})
+    })
+}
+
 
 

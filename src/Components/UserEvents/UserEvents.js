@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Header } from 'semantic-ui-react'
+import { Header, Card, Grid, Button, Icon } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {getSavedEvents} from '../../store/thunks/event'
 
@@ -12,15 +12,41 @@ class UserEvents extends PureComponent {
     eventList = () => {
         console.log(this.props.events)
         if (this.props.events) {
-            return this.props.events.map((e, idx) => <Header as='h3' key={idx}>{e.name}</Header>)
+            return (
+                this.props.events.map((e, idx) => {
+                    return (
+                    <Grid.Row>
+                        <Card>
+                            <Card.Content>
+                                <Card.Header>
+                                    {e.name}
+                                </Card.Header>
+                                <Card.Description>
+                                    {e.date} - {e.time}
+                                </Card.Description>
+                            </Card.Content>
+                            <Card.Content extra>
+                                <div className='ui two buttons'>
+                                    <Button inverted color='red'>
+                                        <Icon name='trash' /> 
+                                    </Button>
+
+                                    <Button inverted color='orange' position='right'>
+                                        <Icon name='map marker' /> find
+                                    </Button>
+                                </div>
+                            </Card.Content>
+                        </Card>
+                    </Grid.Row>
+                    ) 
+                })
+            )
         }
         return null
     }
 
-    render(){
-        console.log(this.props.events)
-        // return "stuff"
-        return <Header> {this.props.events ? this.eventList(): "not loaded"} </Header>
+    render() {
+        return this.eventList()
     }
 }
 

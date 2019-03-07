@@ -3,6 +3,7 @@ import { Header, Segment, Button, Image, Modal, Container, Grid, Menu } from 'se
 import {connect} from 'react-redux'
 import { loadEventDetails} from '../../store/actions/eventActions';
 import {addEvent} from '../../store/thunks/event'
+import { auth } from 'firebase';
 
 class EventDetails extends PureComponent {
 
@@ -30,10 +31,8 @@ class EventDetails extends PureComponent {
         // console.log(image)
         return (
                 <Segment inverted>
+                    <Image src={image.url}/>
                     <Grid centered columns='equal'>
-                        <Grid.Row>
-                            <Image fluid src={image.url} />
-                        </Grid.Row>
                         <Grid.Row>
                             <Header as='h2' color='red'>
                                 {title}
@@ -44,7 +43,7 @@ class EventDetails extends PureComponent {
                             {name}
                         </Grid.Row>
                         <Grid.Row>
-                                <Button fluid circular color='green' onClick={this.handleEventSave}> save </Button>
+                                <Button fluid color='green' inverted onClick={this.handleEventSave}> save </Button>
                             {/* <Grid.Column>
                                 <Button circular color='violet'> share </Button>
                             </Grid.Column> */}

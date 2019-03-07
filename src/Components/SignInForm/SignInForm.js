@@ -6,6 +6,8 @@ import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {showLogin} from '../../store/actions/navbarActions'
 import {_signIn} from '../../store/thunks/auth'
+import {loadPositional} from '../../store/thunks/users'
+
 
 class SignInForm extends PureComponent {
     state = {username:'', password:''}
@@ -20,6 +22,7 @@ class SignInForm extends PureComponent {
                 .auth()
                 .signInWithCustomToken(localStorage.getItem('token'))
                 .then(() => {
+                    this.props._loadPositional()
                     this.props.showLogin(false)
                     this.props.history.push('/map')
                 })
@@ -55,12 +58,12 @@ class SignInForm extends PureComponent {
                                 <Button circular icon='x' onClick={this.handleExit}/>
                             </Item>
                             <Item>
-                                <Button size='large' fluid color='facebook'>
+                                <Button size='large' fluid color='facebook' disabled>
                                     <Icon name='facebook'/> Log in with facebook
                                 </Button>
                             </Item>
                             <Item>
-                                <Button size='large' fluid>
+                                <Button size='large' fluid disabled>
                                     <Icon name='google' /> Log in with google
                                 </Button>
                             </Item>
@@ -100,7 +103,8 @@ class SignInForm extends PureComponent {
 // const mapStateToProps = () => ()
 const mapDispatchToProps = (dispatch) => ({
     signIn: (creds) => dispatch(_signIn(creds)),
-    showLogin: (bool) => dispatch(showLogin(bool))
+    showLogin: (bool) => dispatch(showLogin(bool)),
+    _loadPositional: () => dispatch(loadPositional())
 }) 
 
 export default withRouter(connect(null, mapDispatchToProps)(SignInForm))

@@ -6,6 +6,8 @@ import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { showSignup } from '../../store/actions/navbarActions';
 import { _signUp } from '../../store/thunks/auth';
+import {loadPositional} from '../../store/thunks/users'
+
 
 class SignUpForm extends PureComponent {
     state = {username:'', password:'', showForm: false}
@@ -28,6 +30,7 @@ class SignUpForm extends PureComponent {
                     .auth()
                     .signInWithCustomToken(localStorage.getItem('token'))
                     .then(() => {
+                        this.props._loadPosition()
                         this.props.showSignup(false)
                         this.props.history.push('/map')
                     })
@@ -40,12 +43,12 @@ class SignUpForm extends PureComponent {
         <>
             <Item.Group>
                 <Item>
-                    <Button size='large' fluid color='facebook'>
+                    <Button size='large' fluid color='facebook' disabled>
                         <Icon name='facebook'/> Continue with facebook
                     </Button>
                 </Item>
                 <Item>
-                    <Button size='large' fluid>
+                    <Button size='large' fluid disabled>
                         <Icon name='google' /> Continue with google
                     </Button>
                 </Item>
@@ -63,7 +66,7 @@ class SignUpForm extends PureComponent {
     signUpForm = () => (
         <>
             <Container textAlign='center'>
-                Sign up with <a href='www.facebook.com'>Facebook</a> or <a href='www.google.com'>Google</a>
+                Sign up with Facebook or Google
             </Container>
             <Divider horizontal> or </Divider>
 
@@ -80,7 +83,7 @@ class SignUpForm extends PureComponent {
             </Form>
             <Divider/>
             <Container textAlign='center'>
-                Already Have an Account? <a href='www.signin.com'>Log in</a>
+                Already Have an Account? Log in
             </Container>
         </>
     )
@@ -118,7 +121,8 @@ class SignUpForm extends PureComponent {
 
 const mapDispatchToProps = (dispatch) => ({
     showSignup: (bool) => dispatch(showSignup(bool)),
-    createUser: (creds) => dispatch(_signUp(creds))
+    createUser: (creds) => dispatch(_signUp(creds)),
+    _loadPosition: () => dispatch(loadPositional())
 })
 
 export default withRouter(connect(null, mapDispatchToProps)(SignUpForm))

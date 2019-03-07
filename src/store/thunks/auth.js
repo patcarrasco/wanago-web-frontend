@@ -1,4 +1,3 @@
-
 const ROOT_URL = process.env.REACT_APP_ROOT_URL
 
 export const _signIn = (credentials) => dispatch => {
@@ -24,7 +23,7 @@ export const _signIn = (credentials) => dispatch => {
             localStorage.setItem('token', auth_token)
             localStorage.setItem('uuid', uuid)
             localStorage.setItem('id', id)
-        })
+        }).catch(e => console.log('Error!', e))
 }
 
 export const _signUp = (credentials) => dispatch => {

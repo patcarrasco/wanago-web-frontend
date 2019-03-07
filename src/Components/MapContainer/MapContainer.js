@@ -2,6 +2,13 @@ import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {Map, GoogleApiWrapper, Marker} from 'google-maps-react'
 import { loadEventDetails } from '../../store/actions/eventActions';
+import { loadHangouts } from '../../store/thunks/hangouts'
+import {loadPositional} from '../../store/thunks/users'
+
+
+import pin from '../../assets/images/pin.svg'
+import hangoutPin from '../../assets/images/hangoutpin.svg'
+import { Header, Portal } from 'semantic-ui-react';
 
 const styles = [
     // {width: '10vh', height:'10%'},
@@ -85,43 +92,61 @@ const styles = [
     }
     ]
     
-const size = {width: '98%', height:'98%'}
+const size = {width: '100%', height:'100%'}
 
 class MapContainer extends PureComponent {
-    state = {
-        lat: 40.698330,
-        lng: -74.053250
+    state={mouseover:false}
+
+    mouseOverHandler = () => {
+        console.log('in')
+        this.setState({mouseover: true})
     }
 
-    markers() {
+    mouseOutHandler = () => {
+        console.log('out')
+        this.setState({mouseover: false})
+    }
+
+    hangoutInfo = () => (
+        <Portal>
+            <Header>stuff</Header>
+        </Portal>
+    )
+
+    eventMarkers = () => {
         const rawEvents = this.props.events
-        // debugger
+        console.log('in event markers')
         console.log(rawEvents)
-        // let valid = rawEvents._embedded || false
-        if (rawEvents && rawEvents.page.totalElements > 0) {
+        if (!!rawEvents._embedded && rawEvents.page.totalElements > 0) {
             console.log('found events!')
             const events = rawEvents._embedded.events.filter(e => !!e._embedded)
             const marks = events.map((e,idx) => {
                 const event = e
                 if (event._embedded.venues[0].location) {
+                    console.log('creating!')
                     const {name, _embedded} = e
                     const venueInfo = _embedded.venues[0]
                     const venue = venueInfo.name
                     const lat = venueInfo.location.latitude
                     const lng = venueInfo.location.longitude
                     return (
-                        <Marker
-                            key={idx}
-                            title={name}
-                            name={venue}
-                            position={
-                                {
-                                    lat: lat,
-                                    lng: lng,
-                                }
-                            } 
-                            onClick={(free) => this.selectMarkerHandler({event, free})}
-                        />
+                            <Marker
+                                key={idx}
+                                title={name}
+                                name={venue}
+                                position={
+                                    {
+                                        lat: lat,
+                                        lng: lng,
+                                    }
+                                } 
+                                icon={{
+                                    url: pin,
+                                    anchor: new window.google.maps.Point(17, 34),
+                                    scaledSize: new window.google.maps.Size(40, 40)
+                                }}
+                                onClick={(free) => this.props._loadEventDetails({event, free})}
+                            />
                     ) 
                 } else {
                     return null
@@ -132,31 +157,54 @@ class MapContainer extends PureComponent {
         return null
     }
 
-    selectMarkerHandler = (e) => {
-        
-        this.props.loadEventDetails(e)
-      
-        // if (this.props.selectedEvent.free === e.free) {
-        //     this.props.loadEventDetails(false)
-        // } else {
-        // }
+    hangoutMarkers = () => {
+        const hangouts = this.props.hangouts.map(e => {
+            // console.log(e.lat, e.long)
+            return (
+                <Marker 
+                    key={e.id}
+                    title={e.name}
+                    position={
+                        {
+                            lat:e.lat,
+                            lng: e.long,
+                        }
+                    }
+                    icon={{
+                        url: hangoutPin, 
+                        anchor: new window.google.maps.Point(17, 34),
+                        scaledSize: new window.google.maps.Size(40, 40)  
+                    }}
+                    onClick={free => console.log('hangout clicked', e.name)}
+                />
+            )
+        })
+        return hangouts
     }
 
     userLocation = () => {
         // debugger
         const first = this.props.events._embedded.events[0]._embedded.venues[0].location
-        this.setState({
+        return {
             lat: first.latitude,
             lng: first.longitude
-        })
+        }
     }
 
+
+    componentDidMount() {
+        this.props._loadMyHangouts()
+    }
+    
     componentDidUpdate() {
-        this.userLocation()
+        if (this.props.events.length > 0) {
+            this.userLocation()
+            return 0
+        }
+        this.props._loadPosition()
     }
 
     render() {
-        // console.log('re rendered with', this.state.lat, this.state.lng)
         return (
             <Map 
                 google={this.props.google}
@@ -164,11 +212,12 @@ class MapContainer extends PureComponent {
                 styles={styles}
                 style={size}
                 center={{
-                    lat: this.state.lat,
-                    lng: this.state.lng
+                    lat: this.props.eventsPresent ? this.userLocation().lat : this.props.lat,
+                    lng: this.props.eventsPresent ? this.userLocation().lng : this.props.long,
                 }}
             >
-                {this.markers()}
+                {this.eventMarkers()}
+                {this.props.hangouts.length > 0 && this.hangoutMarkers()}
             </Map>
         )
     }
@@ -176,10 +225,16 @@ class MapContainer extends PureComponent {
 
 const mapStateToProps = (state) => ({
     events: state.events.eventsByLocation,
+    eventsPresent: !!state.events.eventsByLocation._embedded,
+    hangouts: state.hangouts.myHangouts,
+    lat: state.users.lat,
+    long: state.users.lon,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    loadEventDetails: (e) => dispatch(loadEventDetails(e))
+    _loadEventDetails: (e) => dispatch(loadEventDetails(e)),
+    _loadMyHangouts: () => dispatch(loadHangouts()),
+    _loadPosition: () => dispatch(loadPositional())
 })
 
 export default GoogleApiWrapper({

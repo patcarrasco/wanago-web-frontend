@@ -2,7 +2,7 @@
     background-color: rgb(8,8,8);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100%;
+    height: 10%;
     width: 100%;
     padding: 10px;
     /* display: inline-block; */
@@ -11,10 +11,25 @@
 }
 
 :local(.mapSegment) {
-    height: 89.2vh;
+    height: 88.1vh;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    border-color: blueviolet;
+    background-color: rgb(29, 29, 29);
 }
 
 :local(.Nav) {
-    color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    /* justify-content: space-between; */
+    height: 8vh;
+    background-color: orange
+}
+:local(.page) {
+    background-color: rgb(29,29,29);
+    width: 100vw;
+    height: 100vh;
 }

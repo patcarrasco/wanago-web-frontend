@@ -1,6 +1,7 @@
 // navbar actions
 export const SHOW_LOGIN = 'SHOW_LOGIN'
 export const SHOW_SIGNUP = 'SHOW_SIGNUP'
+export const LOAD_POSITION = 'LOAD_POSITION'
 
 // event actions
 export const LOAD_SPOTLIGHT_EVENTS = 'LOAD_SPOTLIGHT_EVENTS'
@@ -24,3 +25,4 @@ export const UNFOLLOW_USER = 'UNFOLLOW_USER'
 export const LOAD_HANGOUTS = 'LOAD_HANGOUTS'
 export const LOAD_ALL_HANGOUTS = 'LOAD_ALL_HANGOUTS'
 export const CREATE_HANGOUT = 'CREATE_HANGOUT'
+export const ADD_HANGOUT = 'ADD_HANGOUT'

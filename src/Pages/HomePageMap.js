@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Menu, Grid, Sidebar, Input, Icon, Button, Label, Header, Container } from 'semantic-ui-react';
+import { Segment, Menu, Grid, Sidebar, Input, Icon, Button, Label, Header, Container, Item } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -15,6 +15,7 @@ import CreateHangout from '../Components/CreateHangout/CreateHangout';
 import UserEvents from '../Components/UserEvents/UserEvents';
 
 
+
 class HomePageMap extends PureComponent {
     state = {activeItem: 'home', sidebar: false, userLocation: 'New York', selected: false, infobar: false}
 
@@ -28,7 +29,7 @@ class HomePageMap extends PureComponent {
     }
 
     handleItemClick = (e, {name}) => {
-        const types = ['create', 'search', 'friend feed', 'friends', 'chats', 'settings', 'events']
+        const types = ['create a hangout', 'search', 'hangout feed', 'following list', 'chats', 'settings', 'events']
         if (types.includes(name)) {
             this.setState({activeItem: name})    
         } else {
@@ -41,11 +42,11 @@ class HomePageMap extends PureComponent {
 
     infoContent = () => {
         switch (this.state.activeItem) {
-            case 'friends':
+            case 'following list':
                 return <FriendsBar />
-            case 'friend feed':
+            case 'hangout feed':
                 return <HangoutFeed />
-            case 'create':
+            case 'create a hangout':
                 return <CreateHangout/>
             case 'chats':
                 return <Chats />
@@ -62,50 +63,42 @@ class HomePageMap extends PureComponent {
         const {activeItem, sidebar, infobar} = this.state
         // console.log(this.state.sidebar, this.state.infobar)
         return (
-                <div className={styles.Nav} > 
-                    <Menu size='huge'>
-                        <Menu.Item onClick={this.handleShow}>
-                            <Icon name='bars'/>
-                            Event App
-                        </Menu.Item>
-                        <Menu.Menu>
-                            <SearchBar />
-                        </Menu.Menu>
-
-                        <Menu.Menu position = 'right'>
-                        
-                            <Menu.Item>
-                                <Button icon = 'power off' color='red' onClick={this.handleLogout}/>
-                            </Menu.Item>
-                        </Menu.Menu>
-                    </Menu>
+            <div className={styles.page}>
+                <Menu className={styles.Nav} size='small'> 
+                    <Item onClick={this.handleShow} >
+                        <Icon name='bars'/>
+                        Evio
+                    </Item>
+                    <SearchBar />
+                    <Menu.Menu position='right'>
+                        <Item>
+                            <Button inverted color='red' onClick={this.handleLogout}>
+                                <Icon name='power off'/> logout
+                            </Button>
+                        </Item>
+                    </Menu.Menu>
+                </Menu>
                 <Grid columns={1} >
-                        <Grid.Column color='black'>
+                        <Grid.Column>
                             {/* LEFT SIDEBAR MENU */}
                             <Sidebar.Pushable as={Segment} inverted color='green'>
                                 <Sidebar
                                     as={Menu}
                                     animation='overlay'
                                     icon='labeled'
-                                    inverted
                                     vertical
                                     visible={sidebar}
                                     width='thin'
                                     size='massive'
                                 > 
-                                    < Menu.Item header name='home' active={'home' === activeItem} onClick={this.handleItemClick}>
-                                        <Icon name="connectdevelop"/>
-                                        minimize menus
-                                    </ Menu.Item >
-
-                                    < Menu.Item header name='create' active={'create' === activeItem} onClick={this.handleItemClick}>
+                                    < Menu.Item header name='create a hangout' active={'create a hangout' === activeItem} onClick={this.handleItemClick}>
                                         <Icon name="hand peace"/>
-                                        create hangout
+                                        create a hangout
                                     </ Menu.Item >
                             
-                                    < Menu.Item name='friend feed' active={'friend feed' === activeItem} onClick={this.handleItemClick} > 
-                                        <Icon name='ticket' />
-                                        my friend feed
+                                    < Menu.Item name='hangout feed' active={'hangout feed' === activeItem} onClick={this.handleItemClick} > 
+                                        <Icon name='handshake' />
+                                        hangout feed
                                     </ Menu.Item >
 
                                     < Menu.Item name='events' active={'events' === activeItem} onClick={this.handleItemClick} > 
@@ -113,26 +106,23 @@ class HomePageMap extends PureComponent {
                                         my events
                                     </ Menu.Item >
 
-                                    < Menu.Item name='friends' active={'friends' === activeItem} onClick={this.handleItemClick} > 
+                                    < Menu.Item name='following list' active={'following list' === activeItem} onClick={this.handleItemClick} > 
                                         <Icon name='users'/>
-                                        friends
+                                        following list
                                     </ Menu.Item>
-                                    < Menu.Item name='chats' active={'chats' === activeItem} onClick={this.handleItemClick} >
-                                        <Icon name='chat' />
-                                        chats
-                                    </ Menu.Item>
-                                        < Menu.Item name='settings' active={'settings' === activeItem} onClick={this.handleItemClick} > 
+
+                                    {/* < Menu.Item name='settings' active={'settings' === activeItem} onClick={this.handleItemClick} > 
                                         <Icon name='setting' />
                                         settings
-                                    </ Menu.Item >                                
+                                    </ Menu.Item >                                 */}
                                 </Sidebar>
 
                                 {/* EVENT INFORMATION SECTION */}
                                 <Sidebar
                                     as={Menu}
+                                    inverted
                                     direction='right'
                                     animation='overlay'
-                                    inverted
                                     vertical
                                     visible={this.props.eventSelected}
                                 >
@@ -144,38 +134,32 @@ class HomePageMap extends PureComponent {
 
                                 {/* MAP CONTENT */}
                                 <Sidebar.Pusher>
-                                    <Segment inverted className={styles.mapSegment}>
-                                        {/* {this.props.eventSelected ? <EventDetails /> : null} */}
+                                    <div className={styles.mapSegment}>
                                         <MapContainer />
-                                    </Segment>
+                                    </div>
                                 </Sidebar.Pusher>
 
                                 <Sidebar
                                     as={Segment}
                                     direction='left'
                                     animation='overlay'
-                                    inverted
                                     vertical
                                     visible={this.state.infobar}
                                 >
-
-                                    <Segment size='massive'>
-                                        <Grid>
+                                    <Segment inverted size='massive'>
+                                        <Grid columns='equal'>
                                             <Grid.Row columns={2}>
                                                 <Grid.Column>
                                                     <Button circular icon="left arrow" onClick={this.closeInfoBar}/>
                                                 </Grid.Column>
                                                 <Grid.Column>
-                                                    <Header>{this.state.activeItem}</Header>
+                                                    <Header as='h2' inverted>{this.state.activeItem}</Header>
                                                 </Grid.Column>
                                             </Grid.Row>
                                             {this.infoContent()}
                                         </Grid>
                                     </Segment>
                                 </Sidebar>
-
-
-
                             </Sidebar.Pushable>
                         </Grid.Column>
                 </Grid>

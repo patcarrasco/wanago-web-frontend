@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Geohash from 'latlon-geohash'
 import {getEventsByLocation} from '../../store/thunks/event'
 
-import { Icon, Input, Menu, Dropdown, Header, Item } from 'semantic-ui-react'
+import { Icon, Input, Menu, Dropdown, Header, Item, Button } from 'semantic-ui-react'
 
 class SearchBar extends PureComponent {
     state = {queryLocation: '', queryCat: ''}
@@ -14,7 +14,6 @@ class SearchBar extends PureComponent {
     eventSearchHandler = () => {
         const {queryLocation, queryCat} = this.state
         console.log('querying with', queryLocation)
-        // console.log(Geocode.fromAddress({address:'new york'})
         let geocoder = new window.google.maps.Geocoder()
         
         geocoder.geocode({'address': queryLocation}, (res, status) => {
@@ -49,32 +48,27 @@ class SearchBar extends PureComponent {
 
         return (
             <>
-                <Item >
+                <Menu.Item>
                     <Dropdown selection name='queryCat' value={this.state.queryCat} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
-                </Item>
-                <Item>
+                </Menu.Item>
+                <Menu.Item>
                     <Input 
                         name='queryLocation'
                         onChange={this.onChangeHandler}
                         value={this.state.queryLocation}
                         placeholder = {'location'} 
-                        icon={
-                            <Icon 
-                                name='search'
-                                inverted
-                                circular
-                                link
-                                color='violet'
-                                onClick={this.eventSearchHandler}
-                            />
-                        }
                     />
+                </Menu.Item>
+                <Item>
+                    <Button fluid color='green' inverted onClick={this.eventSearchHandler}>
+                        <Icon name='search'/>
+                        find events
+                    </Button>
                 </Item>
             </>
         )
     }
 }
-
 
 const mapDispatchToProps = (dispatch) => ({
     getEventsByLocation: (query) => dispatch(getEventsByLocation(query))

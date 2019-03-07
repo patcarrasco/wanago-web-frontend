@@ -1,8 +1,8 @@
 import {LOAD_SPOTLIGHT_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS} from '../actions/actionTypes'
 
 const initState = {
-    spotlightEvents: null,
-    eventsByLocation: null,
+    spotlightEvents: [],
+    eventsByLocation: [],
     selectedEvent: null,
     savedEvents: []
 }
