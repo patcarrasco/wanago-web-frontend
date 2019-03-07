@@ -37,13 +37,13 @@ class SearchBar extends PureComponent {
     render() {
         const searchOptions = [
             {
-                text: 'music',
+                text: 'Music',
                 value: 'music',
             },
             {
-                text: 'sports',
+                text: 'Sports',
                 value: 'sports'
-            }
+            },
         ]
 
         return (
@@ -62,7 +62,7 @@ class SearchBar extends PureComponent {
                 <Item>
                     <Button fluid color='green' inverted onClick={this.eventSearchHandler}>
                         <Icon name='search'/>
-                        find events
+                        FIND EVENTS
                     </Button>
                 </Item>
             </>

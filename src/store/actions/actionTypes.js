@@ -2,6 +2,7 @@
 export const SHOW_LOGIN = 'SHOW_LOGIN'
 export const SHOW_SIGNUP = 'SHOW_SIGNUP'
 export const LOAD_POSITION = 'LOAD_POSITION'
+export const RESET_SEARCH = 'RESET_SEARCH'
 
 // event actions
 export const LOAD_SPOTLIGHT_EVENTS = 'LOAD_SPOTLIGHT_EVENTS'

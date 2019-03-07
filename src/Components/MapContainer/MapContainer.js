@@ -131,7 +131,7 @@ class MapContainer extends PureComponent {
                     const lng = venueInfo.location.longitude
                     return (
                             <Marker
-                                key={idx}
+                                key={name+idx}
                                 title={name}
                                 name={venue}
                                 position={
@@ -162,7 +162,7 @@ class MapContainer extends PureComponent {
             // console.log(e.lat, e.long)
             return (
                 <Marker 
-                    key={e.id}
+                    key={e.name+e.id}
                     title={e.name}
                     position={
                         {
@@ -197,12 +197,29 @@ class MapContainer extends PureComponent {
     }
     
     componentDidUpdate() {
+        console.log('in update')
         if (this.props.events.length > 0) {
             this.userLocation()
             return 0
         }
         this.props._loadPosition()
     }
+
+    // checkHangouts = () => {
+    //     if (!!this.props.hangouts) {
+    //         if (this.props.hangouts.length === this.state.hangouts) {
+    //             return true
+    //         } else {
+    //             this.setState({
+    //                 hangouts: this.props.hangouts.length
+    //             })
+    //             return false
+    //         }
+    //     } else {
+    //         return false
+    //     }
+
+    // }
 
     render() {
         return (
@@ -212,8 +229,8 @@ class MapContainer extends PureComponent {
                 styles={styles}
                 style={size}
                 center={{
-                    lat: this.props.eventsPresent ? this.userLocation().lat : this.props.lat,
-                    lng: this.props.eventsPresent ? this.userLocation().lng : this.props.long,
+                    lat: ( this.props.eventsPresent) ? this.userLocation().lat : this.props.lat,
+                    lng: ( this.props.eventsPresent) ? this.userLocation().lng : this.props.long,
                 }}
             >
                 {this.eventMarkers()}
@@ -226,6 +243,7 @@ class MapContainer extends PureComponent {
 const mapStateToProps = (state) => ({
     events: state.events.eventsByLocation,
     eventsPresent: !!state.events.eventsByLocation._embedded,
+    // hangoutsUnchanged: (state.hangouts.myHangouts.length === this.props.hangouts),
     hangouts: state.hangouts.myHangouts,
     lat: state.users.lat,
     long: state.users.lon,

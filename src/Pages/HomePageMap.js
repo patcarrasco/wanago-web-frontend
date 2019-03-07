@@ -7,7 +7,7 @@ import styles from '../../src/assets/stylesheets/homepage.css'
 import MapContainer from '../Components/MapContainer/MapContainer';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import EventDetails from '../Components/EventDetails/EventDetails';
-import { loadEventDetails } from '../store/actions/eventActions';
+import { loadEventDetails, resetSearch } from '../store/actions/eventActions';
 import FriendsBar from '../Components/BottomNavBarComponents/FriendsBar/FriendsBar';
 import Chats from '../Components/BottomNavBarComponents/Chats/Chats';
 import HangoutFeed from '../Components/HangoutFeed/HangoutFeed';
@@ -59,6 +59,8 @@ class HomePageMap extends PureComponent {
         }
     }
 
+    resetLocation = () => this.props._resetSearch()
+
     render(){
         const {activeItem, sidebar, infobar} = this.state
         // console.log(this.state.sidebar, this.state.infobar)
@@ -67,13 +69,18 @@ class HomePageMap extends PureComponent {
                 <Menu className={styles.Nav} size='small'> 
                     <Item onClick={this.handleShow} >
                         <Icon name='bars'/>
-                        Evio
+                        evio
                     </Item>
                     <SearchBar />
                     <Menu.Menu position='right'>
                         <Item>
+                            <Button inverted color='blue' onClick={this.resetLocation}>
+                                RESET LOCATION
+                            </Button>
+                        </Item>
+                        <Item>
                             <Button inverted color='red' onClick={this.handleLogout}>
-                                <Icon name='power off'/> logout
+                                <Icon name='power off'/> LOGOUT
                             </Button>
                         </Item>
                     </Menu.Menu>
@@ -126,10 +133,11 @@ class HomePageMap extends PureComponent {
                                     vertical
                                     visible={this.props.eventSelected}
                                 >
-                                    <Menu.Item header>
-                                        <Button fluid onClick={this.handleDeselectEvent}>close</Button>
-                                        {this.props.eventSelected ? <EventDetails /> : null}
-                                    </Menu.Item>
+
+                                    <Button fluid onClick={this.handleDeselectEvent}>
+                                        close <Icon name='right arrow'/>
+                                    </Button>
+                                    {this.props.eventSelected ? <EventDetails /> : null}
                                 </Sidebar>
 
                                 {/* MAP CONTENT */}
@@ -173,7 +181,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    loadEventDetails: () => dispatch(loadEventDetails(false))
+    loadEventDetails: () => dispatch(loadEventDetails(false)),
+    _resetSearch: () => dispatch(resetSearch())
 })
 
 

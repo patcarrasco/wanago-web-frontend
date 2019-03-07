@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { Header, Segment, Button, Image, Modal, Container, Grid, Menu } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import { loadEventDetails} from '../../store/actions/eventActions';
-import {addEvent} from '../../store/thunks/event'
+import {addEvent, getSavedEvents} from '../../store/thunks/event'
 import { auth } from 'firebase';
 
 class EventDetails extends PureComponent {
@@ -16,8 +16,8 @@ class EventDetails extends PureComponent {
 
         const data = {name, title, image, ...dates, ...priceRanges, id }
 
-        this.props._addEvent(data)        
-        // this.setState()
+        this.props._addEvent(data)    
+        this.props._loadSavedEvents() 
     }
 
     render() {
@@ -25,9 +25,9 @@ class EventDetails extends PureComponent {
         const {name, title} = this.props.event.free
         const {images, _embedded, dates, priceRanges} = this.props.event.event
         const image = images.find(img => img.ratio === "3_2")
-        const localTime = dates.localTime
-        const localDate = dates.localDate
-
+        const localTime = dates.start.localTime
+        const localDate = dates.start.localDate
+        console.log(dates)
         // console.log(image)
         return (
                 <Segment inverted>
@@ -43,7 +43,7 @@ class EventDetails extends PureComponent {
                             {name}
                         </Grid.Row>
                         <Grid.Row>
-                                <Button fluid color='green' inverted onClick={this.handleEventSave}> save </Button>
+                                <Button fluid color='green' inverted onClick={this.handleEventSave}> SAVE </Button>
                             {/* <Grid.Column>
                                 <Button circular color='violet'> share </Button>
                             </Grid.Column> */}
@@ -63,7 +63,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     loadEventDetails: () => dispatch(loadEventDetails(false)),
-    _addEvent: (data) => dispatch(addEvent(data))
+    _addEvent: (data) => dispatch(addEvent(data)),
+    _loadSavedEvents: () => dispatch(getSavedEvents())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventDetails)

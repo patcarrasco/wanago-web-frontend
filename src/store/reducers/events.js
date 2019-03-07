@@ -1,4 +1,4 @@
-import {LOAD_SPOTLIGHT_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS} from '../actions/actionTypes'
+import {LOAD_SPOTLIGHT_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS, RESET_SEARCH} from '../actions/actionTypes'
 
 const initState = {
     spotlightEvents: [],
@@ -28,6 +28,11 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 savedEvents: action.payload
+            }
+        case RESET_SEARCH:
+            return {
+                ...state,
+                eventsByLocation: []
             }
         default:
             return state;
