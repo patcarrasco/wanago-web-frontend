@@ -1,10 +1,11 @@
-import {LOAD_SPOTLIGHT_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS, RESET_SEARCH} from '../actions/actionTypes'
+import {LOAD_SPOTLIGHT_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS, RESET_SEARCH, SET_LOAD_STATUS} from '../actions/actionTypes'
 
 const initState = {
     spotlightEvents: [],
     eventsByLocation: [],
     selectedEvent: null,
-    savedEvents: []
+    savedEvents: [],
+    loading: false
 }
 
 const reducer = (state = initState, action) => {
@@ -33,6 +34,11 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 eventsByLocation: []
+            }
+        case SET_LOAD_STATUS:
+            return {
+                ...state,
+                loading: action.payload
             }
         default:
             return state;

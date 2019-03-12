@@ -10,6 +10,7 @@ export const LOAD_EVENTS_BY_LOCATION = 'LOAD_EVENTS_BY_LOCATION'
 export const LOAD_EVENT_DETAILS = 'LOAD_EVENT_DETAILS'
 export const LOAD_SAVED_EVENTS = 'LOAD_SAVED_EVENTS'
 export const SAVE_EVENT = 'SAVE_EVENT'
+export const SET_LOAD_STATUS = 'SET_LOAD_STATUS'
 
 // auth actions
 export const SIGN_IN = 'SIGN_IN'

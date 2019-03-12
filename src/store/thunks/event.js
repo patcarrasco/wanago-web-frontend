@@ -1,4 +1,4 @@
-import {loadSpotlightEvents, loadEventsByLocation, loadSavedEvents} from '../actions/eventActions'
+import {loadSpotlightEvents, loadEventsByLocation, loadSavedEvents, setLoadStatus} from '../actions/eventActions'
 
 const ROOT_URL = process.env.REACT_APP_ROOT_URL
 
@@ -19,6 +19,7 @@ export const getSpotlightEvents = () => dispatch => {
 }
 
 export const getEventsByLocation = (query) => dispatch => {
+    console.log('started search query to ticketmaster')
     const url = ROOT_URL + '/events/by_location'
     const params = {
         // parameters for spotlight search (will be universal)
@@ -32,7 +33,14 @@ export const getEventsByLocation = (query) => dispatch => {
             Accept: 'application/json'
         },
         body: JSON.stringify(params)
-    }).then(res => res.json()).then(r => dispatch(loadEventsByLocation(r))).catch(e => console.log("ERROR: ", e))
+    })
+    .then(res => res.json())
+    .then(r => {
+        console.log('recieved events, passing results to dispatch')
+        dispatch(setLoadStatus(false))
+        dispatch(loadEventsByLocation(r))
+    })
+    .catch(e => console.log("ERROR: ", e))
 }
 
 export const getSavedEvents = () => dispatch => {

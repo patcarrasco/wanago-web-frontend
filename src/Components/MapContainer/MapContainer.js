@@ -8,7 +8,7 @@ import {loadPositional} from '../../store/thunks/users'
 
 import eventMarker from '../../assets/images/eventMarker2.svg'
 import hangoutMarker from '../../assets/images/hangoutMarker.svg'
-import { Header, Portal } from 'semantic-ui-react';
+import { Header, Portal, Loader, Dimmer, Segment, Container } from 'semantic-ui-react';
 
 const styles = [
         {
@@ -203,7 +203,6 @@ class MapContainer extends PureComponent {
                     }}
                     onClick={this.eventMarkerClickHandler}
                 />
- 
             )
         })
         return hangouts
@@ -211,7 +210,6 @@ class MapContainer extends PureComponent {
 
  
     userLocation = () => {
-        // debugger
         const first = this.props.events._embedded.events[0]._embedded.venues[0].location
         return {
             lat: first.latitude,
@@ -222,32 +220,28 @@ class MapContainer extends PureComponent {
     componentDidMount() {
         this.props._loadMyHangouts()
     }
-    
-    // componentDidUpdate() {
-    //     if (this.props.events.length > 0) {
-    //         this.userLocation()
-    //         return 0
-    //     }
-    //     // this.props._loadPosition()
-    // }
-
 
     render() {
-        console.log('events', this.props.events)
+        // console.log('events', this.props.events)
         return (
-            <Map 
-                google={this.props.google}
-                zoom={14}
-                styles={styles}
-                style={size}
-                center={{
-                    lat: ( this.props.eventsPresent) ? this.userLocation().lat : this.props.lat,
-                    lng: ( this.props.eventsPresent) ? this.userLocation().lng : this.props.long,
-                }}
-            >
-                {this.eventMarkers()}
-                {this.props.hangouts.length > 0 && this.hangoutMarkers()}
-            </Map>
+            <Container>
+                <Dimmer active={this.props.loading}>
+                    <Loader indeterminate size='massive'> Searching... </Loader>
+                </Dimmer>
+                <Map 
+                    google={this.props.google}
+                    zoom={14}
+                    styles={styles}
+                    style={size}
+                    center={{
+                        lat: ( this.props.eventsPresent) ? this.userLocation().lat : this.props.lat,
+                        lng: ( this.props.eventsPresent) ? this.userLocation().lng : this.props.long,
+                    }}
+                >
+                    {!this.props.loading && this.eventMarkers()}
+                    {(!this.props.loading && this.props.hangouts.length > 0) && this.hangoutMarkers()}
+                </Map>
+            </Container>
         )
     }
 } 
@@ -259,6 +253,7 @@ const mapStateToProps = (state) => ({
     hangouts: state.hangouts.myHangouts,
     lat: state.users.lat,
     long: state.users.lon,
+    loading: state.events.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

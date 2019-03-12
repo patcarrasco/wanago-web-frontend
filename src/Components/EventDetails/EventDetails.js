@@ -20,7 +20,7 @@ class EventDetails extends PureComponent {
     }
 
     render() {
-        // console.log(this.props.event)
+        console.log(this.props.event)
         const {name, title} = this.props.event.free
         const {images, dates} = this.props.event.event
         const image = images.find(img => img.ratio === "3_2")
