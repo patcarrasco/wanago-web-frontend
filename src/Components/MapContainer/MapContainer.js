@@ -7,8 +7,10 @@ import {loadPositional} from '../../store/thunks/users'
 
 
 import eventMarker from '../../assets/images/eventMarker2.svg'
+import pin from '../../assets/images/pin.svg'
+
 import hangoutMarker from '../../assets/images/hangoutMarker.svg'
-import { Header, Portal, Loader, Dimmer, Segment, Container } from 'semantic-ui-react';
+import { Header, Portal, Loader, Dimmer, Container } from 'semantic-ui-react';
 
 const styles = [
     {
@@ -155,7 +157,7 @@ class MapContainer extends PureComponent {
                     const venueInfo = _embedded.venues[0]
                     const venue = venueInfo.name
                     const lat = venueInfo.location.latitude
-                    const lng = venueInfo.location.longitudemap
+                    const lng = venueInfo.location.longitude
                     return (
                             <Marker
                                 key={e.id}
@@ -219,15 +221,16 @@ class MapContainer extends PureComponent {
 
     componentDidMount() {
         this.props._loadMyHangouts()
+        this.props._loadPosition()
     }
 
     render() {
-        // console.log('events', this.props.events)
+        console.log('rendered with', this.props.events)
         return (
-            <Container>
-                <Dimmer active={this.props.loading}>
+            <>
+                {/* <Dimmer active={this.props.loading}>
                     <Loader indeterminate size='massive'> Searching... </Loader>
-                </Dimmer>
+                </Dimmer> */}
                 <Map 
                     google={this.props.google}
                     zoom={14}
@@ -241,7 +244,7 @@ class MapContainer extends PureComponent {
                     {!this.props.loading && this.eventMarkers()}
                     {(!this.props.loading && this.props.hangouts.length > 0) && this.hangoutMarkers()}
                 </Map>
-            </Container>
+            </>
         )
     }
 } 
