@@ -6,91 +6,124 @@ import { loadHangouts } from '../../store/thunks/hangouts'
 import {loadPositional} from '../../store/thunks/users'
 
 
-import pin from '../../assets/images/pin.svg'
-import hangoutPin from '../../assets/images/hangoutpin.svg'
+import eventMarker from '../../assets/images/eventMarker2.svg'
+import hangoutMarker from '../../assets/images/hangoutMarker.svg'
 import { Header, Portal } from 'semantic-ui-react';
 
 const styles = [
-    // {width: '10vh', height:'10%'},
-    {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-    {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-    {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+        {
+            "featureType": "administrative",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
     {
-        featureType: 'administrative.locality',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#d59563'}]
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [{
+                "lightness": "0"
+            },
+            {
+                "saturation": "0"
+            },
+            {
+                "color": "#f5f5f2"
+            },
+            {
+                "gamma": "1"
+            }
+        ]
     },
     {
-        featureType: 'poi',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#d59563'}]
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
     },
     {
-        featureType: 'poi.park',
-        elementType: 'geometry',
-        stylers: [{color: '#263c3f'}]
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
     },
     {
-        featureType: 'poi.park',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#6b9a76'}]
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            },
+            {
+                "weight": 0.6
+            },
+            {
+                "saturation": -85
+            },
+            {
+                "lightness": 61
+            }
+        ]
     },
     {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [{color: '#38414e'}]
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
     },
     {
-        featureType: 'road',
-        elementType: 'geometry.stroke',
-        stylers: [{color: '#212a37'}]
+        "featureType": "road.arterial",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-        featureType: 'road',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#9ca5b3'}]
+        "featureType": "road.local",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
     },
     {
-        featureType: 'road.highway',
-        elementType: 'geometry',
-        stylers: [{color: '#746855'}]
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
     },
     {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{color: '#1f2835'}]
-    },
-    {
-        featureType: 'road.highway',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#f3d19c'}]
-    },
-    {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{color: '#2f3948'}]
-    },
-    {
-        featureType: 'transit.station',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#d59563'}]
-    },
-    {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{color: '#17263c'}]
-    },
-    {
-        featureType: 'water',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#515c6d'}]
-    },
-    {
-        featureType: 'water',
-        elementType: 'labels.text.stroke',
-        stylers: [{color: '#17263c'}]
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [{
+                "lightness": "-49"
+            },
+            {
+                "saturation": "-53"
+            },
+            {
+                "gamma": "0.79"
+            }
+        ]
     }
-    ]
+]
     
 const size = {width: '100%', height:'100%'}
 
@@ -125,7 +158,7 @@ class MapContainer extends PureComponent {
                     const lng = venueInfo.location.longitude
                     return (
                             <Marker
-                                key={name+idx+lat+lng}
+                                key={e.id}
                                 title={name}
                                 name={venue}
                                 position={
@@ -135,7 +168,7 @@ class MapContainer extends PureComponent {
                                     }
                                 } 
                                 icon={{
-                                    url: pin,
+                                    url: eventMarker,
                                     anchor: new window.google.maps.Point(17, 34),
                                     scaledSize: new window.google.maps.Size(40, 40)
                                 }}
@@ -152,10 +185,10 @@ class MapContainer extends PureComponent {
     }
 
     hangoutMarkers = () => {
-        const hangouts = this.props.hangouts.map(e => {
+        const hangouts = this.props.hangouts.map((e, idx) => {
             return (
                 <Marker 
-                    key={e.name+e.id+e.lat+e.long}
+                    key={idx}
                     title={e.name}
                     position={
                         {
@@ -164,7 +197,7 @@ class MapContainer extends PureComponent {
                         }
                     }
                     icon={{
-                        url: hangoutPin, 
+                        url: hangoutMarker, 
                         anchor: new window.google.maps.Point(17, 34),
                         scaledSize: new window.google.maps.Size(40, 40)  
                     }}
@@ -200,6 +233,7 @@ class MapContainer extends PureComponent {
 
 
     render() {
+        console.log('events', this.props.events)
         return (
             <Map 
                 google={this.props.google}
