@@ -11,15 +11,15 @@ import hangoutMarker from '../../assets/images/hangoutMarker.svg'
 import { Header, Portal, Loader, Dimmer, Segment, Container } from 'semantic-ui-react';
 
 const styles = [
-        {
-            "featureType": "administrative",
-            "elementType": "all",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
+    {
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
     {
         "featureType": "landscape",
         "elementType": "geometry",
@@ -155,7 +155,7 @@ class MapContainer extends PureComponent {
                     const venueInfo = _embedded.venues[0]
                     const venue = venueInfo.name
                     const lat = venueInfo.location.latitude
-                    const lng = venueInfo.location.longitude
+                    const lng = venueInfo.location.longitudemap
                     return (
                             <Marker
                                 key={e.id}

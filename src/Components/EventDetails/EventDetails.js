@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
-import { Header, Segment, Button, Image, Grid } from 'semantic-ui-react'
+import { Header, Segment, Button, Image, Grid, Container } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import { loadEventDetails} from '../../store/actions/eventActions';
 import {addEvent, getSavedEvents} from '../../store/thunks/event'
 import Moment from 'react-moment'
+import 'moment-timezone'
 
 class EventDetails extends PureComponent {
 
@@ -24,8 +25,11 @@ class EventDetails extends PureComponent {
         const {name, title} = this.props.event.free
         const {images, dates} = this.props.event.event
         const image = images.find(img => img.ratio === "3_2")
-        const dateTime = dates.start.dataTime
+        const dateTime = dates.start.dateTime
+        const time = dates.start.localTime
+        const date = dates.start.localDate
         // console.log(image)
+        // debugger
         return (
                 <Segment inverted>
                     <Segment>
@@ -36,10 +40,11 @@ class EventDetails extends PureComponent {
                             <Header as='h2' inverted>
                                 {title}
                             </Header>
-
                         </Grid.Row>
                         <Grid.Row>
-                            {name}
+                            <Container>
+                                {name}
+                            </Container>
                         </Grid.Row>
                         <Grid.Row>
                                 <Button color='green' inverted onClick={this.handleEventSave}> SAVE </Button>
@@ -48,8 +53,12 @@ class EventDetails extends PureComponent {
                             </Grid.Column> */}
                         </Grid.Row>
                         <Grid.Row>
-                            {/* {localTime}, {localDate} */}
-                            <Moment>{dateTime}</Moment>
+                            <Container>
+                                <Moment tz="America/New_York" format="ha z">{dateTime}</Moment>
+                            </Container>
+                            <Container>
+                                <Moment format= "dddd MMM Do, YYYY">{dateTime}</Moment>
+                            </Container>
                         </Grid.Row>
                     </Grid>
                 </Segment>
