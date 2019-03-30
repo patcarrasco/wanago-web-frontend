@@ -20,8 +20,10 @@ class FriendsBar extends PureComponent {
     followingList = () => {
         return this.props.following.map(e => {
             return (
-                <Grid.Row key={e.uuid}>
-                    <Header as='h3' inverted>{e.username}</Header>
+                <Grid.Row key={e.uuid} columns={1}>
+                    <Grid.Column>
+                        <Header as='h2' inverted>{e.username}</Header>
+                    </Grid.Column>
                 </Grid.Row>
             )
         })

@@ -1,9 +1,9 @@
 import * as firebase from 'firebase'
 
-let config = {
-   // key information from rails
-};
+const ROOT_URL = process.env.REACT_APP_ROOT_URL
 
-firebase.initializeApp(config)
+fetch(ROOT_URL+'/firebase').then(res => res.json()).then(dat => {
+    firebase.initializeApp(dat.key)
+})
 
 export default firebase

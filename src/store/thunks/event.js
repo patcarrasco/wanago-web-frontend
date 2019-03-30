@@ -19,7 +19,6 @@ export const getSpotlightEvents = () => dispatch => {
 }
 
 export const getEventsByLocation = (query) => dispatch => {
-    console.log('started search query to ticketmaster')
     const url = ROOT_URL + '/events/by_location'
     const params = {
         // parameters for spotlight search (will be universal)
@@ -36,7 +35,6 @@ export const getEventsByLocation = (query) => dispatch => {
     })
     .then(res => res.json())
     .then(r => {
-        console.log('recieved events, passing results to dispatch')
         dispatch(setLoadStatus(false))
         dispatch(loadEventsByLocation(r))
     })
@@ -52,7 +50,6 @@ export const getSavedEvents = () => dispatch => {
 export const addEvent = (params) => dispatch => {
     const id = localStorage.getItem("id")
     const url = ROOT_URL + `/users/${id}/events`
-    console.log('adding event')
     return fetch(url, {
         method: 'POST',
         headers: {

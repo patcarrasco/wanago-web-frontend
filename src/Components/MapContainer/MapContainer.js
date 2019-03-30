@@ -127,7 +127,7 @@ const styles = [
     }
 ]
     
-const size = {width: '100%', height:'100%'}
+const size = {width: '100%%', height:'100%'}
 
 class MapContainer extends PureComponent {
     state={mouseover:false}
@@ -225,12 +225,11 @@ class MapContainer extends PureComponent {
     }
 
     render() {
-        console.log('rendered with', this.props.events)
         return (
             <>
-                {/* <Dimmer active={this.props.loading}>
+                <Dimmer active={this.props.loading}>
                     <Loader indeterminate size='massive'> Searching... </Loader>
-                </Dimmer> */}
+                </Dimmer>
                 <Map 
                     google={this.props.google}
                     zoom={14}

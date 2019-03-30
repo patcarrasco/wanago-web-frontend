@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Menu, Grid, Sidebar, Icon, Button, Header, Item } from 'semantic-ui-react';
+import { Segment, Menu, Grid, Sidebar, Icon, Button, Header, Item, Container } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -69,7 +69,7 @@ class HomePageMap extends PureComponent {
         const {activeItem, sidebar} = this.state
         // console.log(this.state.sidebar, this.state.infobar)
         return (
-            <div className={styles.page}>
+            <>
                 <Menu className={styles.Nav} size='small'> 
                     <Item onClick={this.handleShow} >
                         <Icon name='bars'/>
@@ -89,10 +89,10 @@ class HomePageMap extends PureComponent {
                         </Item>
                     </Menu.Menu>
                 </Menu>
-                <Grid columns={1} >
-                        <Grid.Column>
+                <Grid columns={1} className={styles.pageContent}>
+                    <Grid.Column>
                             {/* LEFT SIDEBAR MENU */}
-                            <Sidebar.Pushable as={Segment} inverted color='green'>
+                            <Sidebar.Pushable as={Segment} color='green' style={{height:"100%"}}> 
                                 <Sidebar
                                     as={Menu}
                                     animation='overlay'
@@ -128,7 +128,7 @@ class HomePageMap extends PureComponent {
                                     </ Menu.Item >                                 */}
                                 </Sidebar>
 
-                                {/* EVENT INFORMATION SECTION */}
+                                {/* EVENT INFORMATION SECTION RIGHT SIDEBAR */}
                                 <Sidebar
                                     as={Menu}
                                     inverted
@@ -137,19 +137,34 @@ class HomePageMap extends PureComponent {
                                     vertical
                                     visible={this.props.eventSelected}
                                 >
-
                                     <Button fluid onClick={this.handleDeselectEvent}>
                                         close <Icon name='right arrow'/>
                                     </Button>
                                     {this.props.eventSelected ? <EventDetails /> : null}
                                 </Sidebar>
 
-                                {/* MAP CONTENT */}
+                                {/* MAP CONTENT CONTAINER */}
                                 <Sidebar.Pusher>
                                     <div className={styles.mapSegment}>
-                                        <MapContainer />
+                                        <MapContainer /> 
                                     </div>
+                                    <Sidebar
+                                        as={Segment}
+                                        direction='top'
+                                        animation='overlay'
+                                        visible={this.props.eventsPresent}
+                                    >
+                                        <Grid textAlign="center">
+                                            <Grid.Row>
+                                                <Header>
+                                                    Event List info here
+                                                </Header>
+                                            </Grid.Row>
+                                        </Grid>
+                                    </Sidebar>
                                 </Sidebar.Pusher>
+
+                                {/* {BOTTOM BAR WITH EVENT RESULTS FROM SEARCH} */}
 
                                 <Sidebar
                                     as={Segment}
@@ -157,33 +172,32 @@ class HomePageMap extends PureComponent {
                                     animation='overlay'
                                     vertical
                                     visible={this.state.infobar}
+                                    size='massive'
+                                    style={{backgroundColor:'rgb(27,27,27'}}
                                 >
-                                    {/* <Segment inverted size='massive'> */}
-                                    <Segment style={{backgroundColor:'rgb(27,27,27'}}>
-                                        <Grid columns='equal'>
-                                            <Grid.Row columns={2}>
-                                                <Grid.Column>
-                                                    <Button circular icon="left arrow" onClick={this.closeInfoBar}/>
-                                                </Grid.Column>
-                                                <Grid.Column>
-                                                    <Header as='h2' inverted>{this.state.activeItem}</Header>
-                                                </Grid.Column>
-                                            </Grid.Row>
-                                            {this.infoContent()}
-                                        </Grid>
-                                    </Segment>
-                                    {/* </Segment> */}
+                                    <Grid>
+                                        <Grid.Row columns={2}>
+                                            <Grid.Column>
+                                                <Button circular icon="left arrow" onClick={this.closeInfoBar}/>
+                                            </Grid.Column>
+                                            <Grid.Column>
+                                                <Header as='h2' inverted>{this.state.activeItem}</Header>
+                                            </Grid.Column>
+                                        </Grid.Row>
+                                        {this.infoContent()}
+                                    </Grid>
                                 </Sidebar>
                             </Sidebar.Pushable>
-                        </Grid.Column>
+                    </Grid.Column>
                 </Grid>
-            </div>
+            </>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    eventSelected: !!state.events.selectedEvent
+    eventSelected: !!state.events.selectedEvent,
+    eventsPresent: !!state.events.eventsByLocation._embedded,
 })
 
 const mapDispatchToProps = dispatch => ({
