@@ -14,6 +14,7 @@ import HangoutFeed from '../Components/HangoutFeed/HangoutFeed';
 import CreateHangout from '../Components/CreateHangout/CreateHangout';
 import UserEvents from '../Components/UserEvents/UserEvents';
 import {loadPositional} from '../store/thunks/users'
+import SearchResultBox from '../Components/SearchBar/SearchResultBox';
 
 
 
@@ -148,6 +149,8 @@ class HomePageMap extends PureComponent {
                                     <div className={styles.mapSegment}>
                                         <MapContainer /> 
                                     </div>
+
+                                    {/* SEARCH CONTENT */}
                                     <Sidebar
                                         as={Segment}
                                         direction='top'
@@ -155,16 +158,14 @@ class HomePageMap extends PureComponent {
                                         visible={this.props.eventsPresent}
                                     >
                                         <Grid textAlign="center">
-                                            <Grid.Row>
-                                                <Header>
-                                                    Event List info here
-                                                </Header>
-                                            </Grid.Row>
+                                            <SearchResultBox />
                                         </Grid>
                                     </Sidebar>
+
+
                                 </Sidebar.Pusher>
 
-                                {/* {BOTTOM BAR WITH EVENT RESULTS FROM SEARCH} */}
+                                {/* LEFT BAR */}
 
                                 <Sidebar
                                     as={Segment}
