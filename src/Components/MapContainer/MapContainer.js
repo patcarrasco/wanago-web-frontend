@@ -209,7 +209,6 @@ class MapContainer extends PureComponent {
         })
         return hangouts
     }
-
  
     userLocation = () => {
         const first = this.props.events._embedded.events[0]._embedded.venues[0].location
@@ -217,6 +216,21 @@ class MapContainer extends PureComponent {
             lat: first.latitude,
             lng: first.longitude
         }
+    }
+
+    userMarker = () => {
+        return (
+            <Marker 
+                key={'marker-user'}
+                title={'my location'}
+                position={
+                    {
+                        lat: this.props.lat,
+                        lng: this.props.long,
+                    }
+                }
+            />
+        )
     }
 
     componentDidMount() {
@@ -240,6 +254,7 @@ class MapContainer extends PureComponent {
                         lng: ( this.props.eventsPresent) ? this.userLocation().lng : this.props.long,
                     }}
                 >
+                    {!this.props.loading && this.userMarker()}
                     {!this.props.loading && this.eventMarkers()}
                     {(!this.props.loading && this.props.hangouts.length > 0) && this.hangoutMarkers()}
                 </Map>

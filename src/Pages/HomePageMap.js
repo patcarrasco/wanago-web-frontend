@@ -174,7 +174,7 @@ class HomePageMap extends PureComponent {
                                     vertical
                                     visible={this.state.infobar}
                                     size='massive'
-                                    style={{backgroundColor:'rgb(27,27,27'}}
+                                    style={{backgroundColor:'rgb(27,27,27)'}}
                                 >
                                     <Grid>
                                         <Grid.Row columns={2}>
