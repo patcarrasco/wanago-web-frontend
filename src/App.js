@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import LandingPage from '../src/Pages/LandingPage'
-import HomePage from './Pages/HomePage';
+import LandingPage from './v1/Pages/LandingPage'
+import HomePage from './v1/Pages/HomePage';
 import { PrivateRoute } from './helpers/Routes/PrivateRoute';
-import HomePageMap from './Pages/HomePageMap';
+import HomePageMap from './v1/Pages/HomePageMap';
 
 class App extends Component {
 
