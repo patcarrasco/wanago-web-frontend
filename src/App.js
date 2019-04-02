@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-            <PrivateRoute exact path="/main" component={MainPage} />
+            <PrivateRoute exact path="/home" component={MainPage} />
             <Route exact path="/" component={LandingPage} />
         </Switch>
       </Router>

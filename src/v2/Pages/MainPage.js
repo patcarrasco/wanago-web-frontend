@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react'
-import { Header } from 'semantic-ui-react';
+import MapContainer from '../Components/MapContainer/MapContainer';
 
 
 class MainPage extends PureComponent {
 
     render() {
         return (
-            <Header> Main Page </Header>
+            <>
+                <MapContainer />    
+            </>
         )
     }
 }

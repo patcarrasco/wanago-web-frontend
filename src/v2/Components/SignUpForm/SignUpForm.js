@@ -32,7 +32,7 @@ class SignUpForm extends PureComponent {
                     .then(() => {
                         this.props._loadPosition()
                         this.props.showSignup(false)
-                        this.props.history.push('/map')
+                        this.props.history.push('/home')
                     })
             })
             .catch((err) => console.log('There was an ERROR: ', err))
@@ -72,10 +72,25 @@ class SignUpForm extends PureComponent {
 
             <Form>
                 <Form.Field>
-                    <Form.Input size='large' placeholder='Create a username' icon='user circle outline' name='username' value={this.state.username} onChange={this.handleInputChange} />
+                    <Form.Input 
+                        size='large' 
+                        placeholder='Create a username' 
+                        icon='user circle outline' 
+                        name='username' 
+                        value={this.state.username} 
+                        onChange={this.handleInputChange}
+                    />
                 </Form.Field>
                 <Form.Field>
-                    <Form.Input type='password' size='large' placeholder='Password' icon='lock' name='password' value={this.state.password} onChange={this.handleInputChange} />
+                    <Form.Input 
+                        type='password' 
+                        size='large' 
+                        placeholder='Password' 
+                        icon='lock' 
+                        name='password' 
+                        value={this.state.password} 
+                        onChange={this.handleInputChange}
+                    />
                 </Form.Field>
                 <Button fluid size='large' color='purple' onClick={this.createUser}>
                     Sign up
@@ -90,7 +105,7 @@ class SignUpForm extends PureComponent {
 
     escFunction = (e) => {
         if (e.keyCode === 27) {
-            this.handleExit()
+            this.props.showSignup(false)
         }
     }
 
