@@ -1,0 +1,53 @@
+:local(.landingNav) {
+    background-color: #6534ff;
+    color:blue;
+    border-color: orange;
+}
+
+:local(.headerContainer) {
+    margin: 0;
+    padding: 0;
+    background-color: gray;
+    height: 100vh;
+    widows: 100vw;
+}
+
+:local(.headerImg) {
+    background-color: gray;
+    background: url('../images/music-light-structure-people-night-auditorium-913537-pxhere.com.jpg') center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    /* display: inline-block; */
+    -webkit-animation: fadein 1s;
+    animation: fadein 1s;
+}
+
+:local(.headerGrid) {
+    height: 90vh;
+}
+
+:local(.landingPageElements) {
+    background-color: white;
+    border-radius: 10px;
+}
+
+:local(.landingPageForm) {
+    padding: 7%;
+    /* background-color: red; */
+}
+
+:local(.landingPageContent) {
+    padding:2%;
+}
+
+:local(.landingPagePartnerContent) {
+    padding: 3%;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

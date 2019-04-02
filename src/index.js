@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
-import configureStore from '../src/store/configureStore'
+import configureStore from './store/configureStore'
+import './semantic/dist/semantic.min.css'
 require('dotenv').config()
 
 const store = configureStore()
