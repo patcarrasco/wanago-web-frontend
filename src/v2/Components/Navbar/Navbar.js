@@ -1,36 +1,44 @@
 import React from 'react'
 import Geohash from 'latlon-geohash'
+import _ from 'lodash'
 
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
-import {getEventsByLocation} from '../../../store/thunks/event'
 import { setLoadStatus, loadEventDetails, resetSearch} from '../../../store/actions/eventActions';
+import {getEventsByLocation} from '../../../store/thunks/event'
 import {loadPositional} from '../../../store/thunks/users'
 
-
-
-import { Header, Segment, Menu, Input, Select, Button } from 'semantic-ui-react';
+import { Header, Segment, Menu, Input, Search, Button } from 'semantic-ui-react';
+import {data as cityLoc} from '../../assets/usCities/usaCities'
 
 
 class NavBar extends React.PureComponent {
+    state = {searchLocation:"", searchPlaceholder: "controlled search"}
 
     handleLogout = () => {
         localStorage.clear()
         this.props.history.push('/')
     }
+    handleSignUpClick = (e, {name}) => name === 'signUp' && this.props.showSignup(true)
+    // handleLocationSearch = (e) => this.setState({searchLocation: e.target.value})
 
-    handleSignUpClick = (e, {name}) => {
-        name === 'signUp' && this.props.showSignup(true)
+    resetComponent = () => this.setState({searchLoading:false, results:[], searchLocation:""})
+
+    handleLocationSearchChange = (e, {value}) => {
+        this.setState({searchLocation: value}, () => {
+            let filteredArray = cityLoc.filter(value => {
+                return value.title.toUpperCase().includes(this.state.searchLocation.toUpperCase())
+            })
+            this.setState({
+                searchPlaceholder: filteredArray[0].title
+            })
+        })
     }
 
-    options() {
-        return [
-            { key:'all', text:'All', value:'all'},
-            { key: 'music', text:'Music', value:'music'},
-            { key: 'sports', text: 'Sports', value:'sports'}
-        ]
-    }
+    handleLocationSelect = (e, {result}) => this.setState({searchLocation: result.title})
+
+    componentWillMount() {this.resetComponent()}
 
     render() {
         return (
@@ -64,22 +72,33 @@ class NavBar extends React.PureComponent {
                                 wanago 
                             </Header>
                         </Menu.Item>
-                        <div style={{display:'flex', alignItems:'center', justifyContent:"center", marginLeft:'1em'}}>
-                            <Button circular icon = "user" style={{color:"3D52D5", backgroundColor:'#B4C5E4'}}/>
-                            <Button circular icon = "comment alternate" style={{color:"3D52D5", backgroundColor:'#B4C5E4'}}/>
-                            <Button circular icon = "feed" style={{color:"3D52D5", backgroundColor:'#B4C5E4'}}/>
-                        </div>
-
-
-                        <Menu.Item>
-                            {/* <Segment style={{minWidth:'9em', maxWidth:'100%'}}> */}
-                                <Input placeholder="search" style={{borderColor:"red"}}>
-                                    <Select compact options={this.options()} defaultValue='all' style={{minWidth:'9em'}} />
-                                    <input/>
-                                    <Button type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}>Search</Button>
-                                </Input>
-                            {/* </Segment> */}
+                        <Menu.Item> 
+                            <div style={{display:'flex', alignItems:'center', justifyContent:"center", marginLeft:'1em'}}>
+                                <Button circular icon = "user" style={{color:"3D52D5", backgroundColor:'#B4C5E4'}}/>
+                                <Button circular icon = "comment alternate" style={{color:"3D52D5", backgroundColor:'#B4C5E4'}}/>
+                                <Button circular icon = "feed" style={{color:"3D52D5", backgroundColor:'#B4C5E4'}}/>
+                            </div>
                         </Menu.Item>
+                        <Menu.Menu>
+                            {/* POSSIBLE ADDITIONAL SEARCH TERM, MAYBE BY EVENT TYPE??? */}
+                            <Menu.Item style={{position:"static", padding:'1'}}>
+                                {/* <Input size='large' placeholder="search term"/>                            */}
+                            </Menu.Item>
+                            <Menu.Item style={{position:"static", padding:'0'}}>
+                                FIND EVENTS NEAR YOU
+                                <Input 
+                                    placeholder={this.state.searchPlaceholder}
+                                    name="searchLocation"
+                                    value={this.state.searchLocation}
+                                    onChange={this.handleLocationSearchChange}
+                                />
+                               
+                                {/* <Input size='large' placeholder="autocomplete city....." value={this.state.searchLocation} onChange={this.handleLocationSearch} /> */}
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Button size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}>SEARCH</Button>
+                            </Menu.Item>
+                        </Menu.Menu>
                         <Menu.Menu position="right">
                             <Menu.Item>
                                 <Button onClick={this.handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}>LOGOUT</Button>

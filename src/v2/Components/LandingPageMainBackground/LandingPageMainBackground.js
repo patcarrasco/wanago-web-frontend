@@ -9,7 +9,7 @@ const LandingPageMainBackground = () => (
             height: "100vh",
             minHeight: "100vh",
             backgroundColor: '#3c3744',
-            backgroundImage: `-webkit-linear-gradient(20deg, #b4c5e4 10%, transparent)`,
+            // backgroundImage: `-webkit-linear-gradient(20deg, #b4c5e4 10%, transparent)`,
             // backgroundRepeat:'no-repeat',
             backgroundSize: 'contain',
             display: "flex",
