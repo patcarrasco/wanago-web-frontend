@@ -18,7 +18,17 @@ const reducer = (state = initState, action) => {
         case LOAD_EVENTS_BY_LOCATION:
             return {
                 ...state,
-                eventsByLocation: action.payload.events
+                eventsByLocation: action.payload.events._embedded.events.map(e => {
+                    return {
+                        key: e.id,
+                        id: e.id,
+                        name: e.name,
+                        dates: e.dates,
+                        image: e.images.find(img => img.ratio === "16_9" && img.height > 600).url,
+                        venues: e._embedded.venues,
+                        attractions: e._embedded.attractions
+                    }
+                })
             }
         case LOAD_EVENT_DETAILS:
             return {

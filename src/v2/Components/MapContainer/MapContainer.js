@@ -1,16 +1,11 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {Map, GoogleApiWrapper, Marker} from 'google-maps-react'
+
 import { loadEventDetails } from '../../../store/actions/eventActions';
-import { loadHangouts } from '../../../store/thunks/hangouts'
-import {loadPositional} from '../../../store/thunks/users'
 
-
-import eventMarker from '../../assets/images/eventMarker2.svg'
-
-import hangoutMarker from '../../assets/images/hangoutMarker.svg'
-import { Header, Portal, Loader, Dimmer, Container, Segment } from 'semantic-ui-react';
 import Navbar from '../Navbar/Navbar';
+import EventFeed from '../EventFeed/EventFeed';
 
 const styles = [{
         "elementType": "geometry",
@@ -230,87 +225,7 @@ const styles = [{
 const size = {width: '100%%', height:'100%'}
 
 class MapContainer extends PureComponent {
-    state={mouseover:false}
-
-    mouseOverHandler = () => {
-        this.setState({mouseover: true})
-    }
-
-    mouseOutHandler = () => {
-        this.setState({mouseover: false})
-    }
-
-    eventMarkers = () => {
-        const rawEvents = this.props.events
-        if (!!rawEvents._embedded && rawEvents.page.totalElements > 0) {
-            const events = rawEvents._embedded.events.filter(e => !!e._embedded)
-            const marks = events.map((e,idx) => {
-                const event = e
-                if (event._embedded.venues[0].location) {
-                    const {name, _embedded} = e
-                    const venueInfo = _embedded.venues[0]
-                    const venue = venueInfo.name
-                    const lat = venueInfo.location.latitude
-                    const lng = venueInfo.location.longitude
-                    return (
-                            <Marker
-                                key={e.id}
-                                title={name}
-                                name={venue}
-                                position={
-                                    {
-                                        lat: lat,
-                                        lng: lng,
-                                    }
-                                } 
-                                icon={{
-                                    url: eventMarker,
-                                    anchor: new window.google.maps.Point(17, 34),
-                                    scaledSize: new window.google.maps.Size(40, 40)
-                                }}
-                                onClick={(free) => this.props._loadEventDetails({event, free})}
-                            />
-                    ) 
-                } else {
-                    return null
-                }
-            })
-            return marks
-        }
-        return null
-    }
-
-    hangoutMarkers = () => {
-        const hangouts = this.props.hangouts.map((e, idx) => {
-            return (
-                <Marker 
-                    key={idx}
-                    title={e.name}
-                    position={
-                        {
-                            lat:e.lat,
-                            lng: e.long,
-                        }
-                    }
-                    icon={{
-                        url: hangoutMarker, 
-                        anchor: new window.google.maps.Point(17, 34),
-                        scaledSize: new window.google.maps.Size(40, 40)  
-                    }}
-                    onClick={this.eventMarkerClickHandler}
-                />
-            )
-        })
-        return hangouts
-    }
- 
-    userLocation = () => {
-        const first = this.props.events._embedded.events[0]._embedded.venues[0].location
-        return {
-            lat: first.latitude,
-            lng: first.longitude
-        }
-    }
+    state={loaded: false}
 
     userMarker = () => {
         return (
@@ -328,45 +243,55 @@ class MapContainer extends PureComponent {
     }
 
     componentDidMount() {
-        this.props._loadMyHangouts()
-        this.props._loadPosition()
+        this.setState({loaded:true})
+    }
+
+    componentWillMount() {
+        this.mapCenter = {}
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        // console.log(window.google.map)
+    }
+
+    dragHandler = (e, val) => {
+        this.mapCenter = {lat: val.center.lat(), lng: val.center.lng()}
     }
 
     render() {
+        console.log('MAP RENDER??')
         return (
             <>
-                <Dimmer active={this.props.loading}>
-                    <Loader indeterminate size='massive'> Searching... </Loader>
-                </Dimmer>
-                <Map 
-                    google={this.props.google}
-                    zoom={14}
-                    styles={styles}
-                    style={size}
-                    streetViewControl={false}
-                    fullscreenControl={false}
-                    mapTypeControl={false}                    
-                    center={{
-                        lat: ( this.props.eventsPresent) ? this.userLocation().lat : this.props.lat,
-                        lng: ( this.props.eventsPresent) ? this.userLocation().lng : this.props.long,
-                    }}
-                >
-                    <Navbar />
-                    
-                    {!this.props.loading && this.userMarker()}
-                    {!this.props.loading && this.eventMarkers()}
-                    {(!this.props.loading && this.props.hangouts.length > 0) && this.hangoutMarkers()}
-                </Map>
+                {this.state.loaded ? 
+                    <Map 
+                        google={this.props.google}
+                        zoom={14}
+                        styles={styles}
+                        style={size}
+                        streetViewControl={false}
+                        fullscreenControl={false}
+                        mapTypeControl={false}                    
+                        center={{
+                            // Clicking on an event will center map on that event, by default it is the user's position
+                            lat: this.mapCenter.lat ? this.mapCenter.lat : this.props.lat, 
+                            lng: this.mapCenter.lng ? this.mapCenter.lng : this.props.long,
+                        }}
+                        onDragend={this.dragHandler}
+                    >  
+                        <Navbar />
+                        <EventFeed />
+
+                    </Map>
+                    :
+                    console.log('map not rendered')
+                }
             </>
         )
     }
 } 
 
 const mapStateToProps = (state) => ({
-    events: state.events.eventsByLocation,
-    eventsPresent: !!state.events.eventsByLocation._embedded,
     // hangoutsUnchanged: (state.hangouts.myHangouts.length === this.props.hangouts),
-    hangouts: state.hangouts.myHangouts,
     lat: state.users.lat,
     long: state.users.lon,
     loading: state.events.loading
@@ -374,11 +299,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     _loadEventDetails: (e) => dispatch(loadEventDetails(e)),
-    _loadMyHangouts: () => dispatch(loadHangouts()),
-    _loadPosition: () => dispatch(loadPositional())
 })
 
 export default GoogleApiWrapper({
     apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-    // apiKey: ''
 })(connect(mapStateToProps, mapDispatchToProps)(MapContainer))

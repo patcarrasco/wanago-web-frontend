@@ -28,7 +28,7 @@ class LandingPage extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    showSignUp: state.landingNavbar.showSignup,
+    showSignUp: state.navbar.showSignup,
 })
 
 export default connect(mapStateToProps)(LandingPage)

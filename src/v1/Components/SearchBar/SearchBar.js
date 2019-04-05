@@ -14,7 +14,7 @@ class SearchBar extends PureComponent {
     
     eventSearchHandler = () => {
         // dispatch function that changes status to loading
-        this.props._setLoadStatus(true)
+        // this.props._setLoadStatus(true)
         console.log('event search started')
         const {queryLocation, queryCat} = this.state
         console.log('querying with', queryLocation)
@@ -36,21 +36,9 @@ class SearchBar extends PureComponent {
                 alert('Geocode not succesfull:' + status)
             }
         })
-
-
     }
     
     render() {
-        const searchOptions = [
-            {
-                text: 'Music',
-                value: 'music',
-            },
-            {
-                text: 'Sports',
-                value: 'sports'
-            },
-        ]
 
         return (
             <>

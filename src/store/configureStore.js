@@ -2,13 +2,13 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 // import reducers here
-import landingNavbar from './reducers/navbar'
+import navbar from './reducers/navbar'
 import events from './reducers/events'
 import users from './reducers/users'
 import hangouts from './reducers/hangouts'
 
 const rootReducer = combineReducers({
-    landingNavbar: landingNavbar,
+    navbar: navbar,
     events: events,
     users: users,
     hangouts: hangouts,

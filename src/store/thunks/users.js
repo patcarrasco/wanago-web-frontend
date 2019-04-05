@@ -21,7 +21,6 @@ export const load_following = () => dispatch => {
 
 export const loadPositional = () => dispatch => {
     navigator.geolocation.getCurrentPosition(pos => {
-        console.log(pos)
         dispatch(loadPosition({lat: pos.coords.latitude, lon:pos.coords.longitude}))
     })
 }
@@ -34,7 +33,6 @@ export const loadUsers = () => dispatch => {
 export const followAUser = (uuid) => dispatch => {
     const id = localStorage.getItem('id')
     const url = ROOT_URL + `/users/${id}/following`
-    console.log(uuid)
     return fetch(url, {
         method: "POST",
         headers: {

@@ -1,9 +1,9 @@
-import {SHOW_LOGIN, SHOW_SIGNUP} from '../actions/actionTypes'
+import {SHOW_LOGIN, SHOW_SIGNUP, TOGGLE_FEED} from '../actions/actionTypes'
 
 const initState = {
     showSignup: false,
     showLogin: false,
-    thing: 'booooo'
+    showFeed: false,
 }
 
 const reducer = (state = initState, action) => {
@@ -17,6 +17,11 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 showSignup: action.payload
+            }
+        case TOGGLE_FEED:
+            return {
+                ...state,
+                showFeed: !state.showFeed
             }
         default:
             return state;
