@@ -247,12 +247,15 @@ class MapContainer extends PureComponent {
         )
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        // console.log(window.google.map)
+    componentDidMount() {
+        console.log('map mounted')
+        this.props._loadPosition()
     }
 
-    componentDidMount() {
-        this.props._loadPosition()
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.coordsInvalid !== prevProps.coordsInvalid) {
+            this.setState({mapReady: true})
+        }
     }
 
     dragHandler = (e, val) => {
@@ -285,7 +288,8 @@ class MapContainer extends PureComponent {
     )
 
     render() {
-        return this.props.coordsInvalid ? null : this.mapRenderer()
+        console.log('map render', this.state.mapReady)
+        return this.state.mapReady ? this.mapRenderer() : null
     }
 } 
 
@@ -297,7 +301,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     _loadEventDetails: (e) => dispatch(loadEventDetails(e)),
-    _loadPosition: (e) => dispatch(loadPositional()),
+    _loadPosition: () => dispatch(loadPositional()),
 })
 
 export default GoogleApiWrapper({

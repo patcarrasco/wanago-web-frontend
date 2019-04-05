@@ -20,7 +20,9 @@ export const load_following = () => dispatch => {
 }
 
 export const loadPositional = () => dispatch => {
+    console.log('loading pos?')
     navigator.geolocation.getCurrentPosition(pos => {
+        console.log(pos)
         dispatch(loadPosition({lat: pos.coords.latitude, lon:pos.coords.longitude}))
     })
 }
