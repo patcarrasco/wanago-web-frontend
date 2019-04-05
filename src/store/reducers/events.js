@@ -16,12 +16,12 @@ const reducer = (state = initState, action) => {
                 spotlightEvents: action.payload.events
             }
         case LOAD_EVENTS_BY_LOCATION:
+            console.log(action.payload)
             return {
                 ...state,
                 eventsByLocation: action.payload.events._embedded.events.map(e => {
                     return {
                         key: e.id,
-                        id: e.id,
                         name: e.name,
                         dates: e.dates,
                         image: e.images.find(img => img.ratio === "16_9" && img.height > 600).url,

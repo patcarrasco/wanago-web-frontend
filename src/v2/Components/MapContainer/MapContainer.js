@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Map, GoogleApiWrapper, Marker} from 'google-maps-react'
 
 import { loadEventDetails } from '../../../store/actions/eventActions';
+import {loadPositional} from '../../../store/thunks/users' 
 
 import Navbar from '../Navbar/Navbar';
 import EventFeed from '../EventFeed/EventFeed';
@@ -225,7 +226,11 @@ const styles = [{
 const size = {width: '100%%', height:'100%'}
 
 class MapContainer extends PureComponent {
-    state={loaded: false}
+    constructor(props) {
+        super(props)
+        this.state = {mapReady: false}
+        this.mapCenter = false
+    }
 
     userMarker = () => {
         return (
@@ -242,63 +247,57 @@ class MapContainer extends PureComponent {
         )
     }
 
-    componentDidMount() {
-        this.setState({loaded:true})
-    }
-
-    componentWillMount() {
-        this.mapCenter = {}
-    }
-
     componentDidUpdate(prevProps, prevState) {
         // console.log(window.google.map)
+    }
+
+    componentDidMount() {
+        this.props._loadPosition()
     }
 
     dragHandler = (e, val) => {
         this.mapCenter = {lat: val.center.lat(), lng: val.center.lng()}
     }
 
-    render() {
-        console.log('MAP RENDER??')
-        return (
-            <>
-                {this.state.loaded ? 
-                    <Map 
-                        google={this.props.google}
-                        zoom={14}
-                        styles={styles}
-                        style={size}
-                        streetViewControl={false}
-                        fullscreenControl={false}
-                        mapTypeControl={false}                    
-                        center={{
-                            // Clicking on an event will center map on that event, by default it is the user's position
-                            lat: this.mapCenter.lat ? this.mapCenter.lat : this.props.lat, 
-                            lng: this.mapCenter.lng ? this.mapCenter.lng : this.props.long,
-                        }}
-                        onDragend={this.dragHandler}
-                    >  
-                        <Navbar />
-                        <EventFeed />
+    mapRenderer = () => (
+        <Map 
+            google={this.props.google}
+            zoom={14}
+            styles={styles}
+            style={size}
+            streetViewControl={false}
+            fullscreenControl={false}
+            mapTypeControl={false}   
+            initialCenter={{
+                lat: this.props.lat,
+                lng: this.props.lon
+            }}                 
+            center={{
+                // Clicking on an event will center map on that event, by default it is the user's position
+                lat: this.mapCenter.lat, 
+                lng: this.mapCenter.lng
+            }}
+            onDragend={this.dragHandler}
+        >  
+            <Navbar />
+            <EventFeed />
+        </Map>
+    )
 
-                    </Map>
-                    :
-                    console.log('map not rendered')
-                }
-            </>
-        )
+    render() {
+        return this.props.coordsInvalid ? null : this.mapRenderer()
     }
 } 
 
 const mapStateToProps = (state) => ({
-    // hangoutsUnchanged: (state.hangouts.myHangouts.length === this.props.hangouts),
     lat: state.users.lat,
-    long: state.users.lon,
-    loading: state.events.loading
+    lon: state.users.lon,
+    coordsInvalid: state.users.lat === 0 && state.users.lon === 0
 })
 
 const mapDispatchToProps = (dispatch) => ({
     _loadEventDetails: (e) => dispatch(loadEventDetails(e)),
+    _loadPosition: (e) => dispatch(loadPositional()),
 })
 
 export default GoogleApiWrapper({

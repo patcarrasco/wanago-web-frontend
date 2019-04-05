@@ -18,21 +18,15 @@ class EventSearch extends PureComponent {
     searchStartHandler = () => {
         // dispatch function that changes status to loading
         this.props._setLoadStatus(true)
-        console.log('event search started')
         const {searchLocation, searchCategory} = this.state
-        console.log('querying with', searchLocation)
         let geocoder = new window.google.maps.Geocoder()
         geocoder.geocode({'address': searchLocation}, (res, status) => {
-            console.log('starting geocode of inputed area')
             if (status.toUpperCase() === 'OK') {
                 const {lng, lat} = res[0].geometry.location;
-                // const geohash = Geohash.encode(lat(), lng())
                 const obj = {
                     queryCat: searchCategory === 'all' ? '' : searchCategory,
-                    // geohash: geohash,
                     latlong: `${lat()},${lng()}`
                 }
-                console.log('geocode success, with: ', obj)
                 this.props.getEventsByLocation(obj)
             } else {
                 alert('Geocode not succesfull:' + status)

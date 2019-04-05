@@ -5,7 +5,7 @@ const initState = {
     followers: [],
     users: [],
     lat:0,
-    long:0,
+    lon:0,
 }
 
 const reducer = (state = initState, action) => {
@@ -21,6 +21,7 @@ const reducer = (state = initState, action) => {
                 followers: action.payload
             }
         case LOAD_POSITION:
+        console.log(action.payload)
             return {
                 ...state,
                 lat: action.payload.lat,

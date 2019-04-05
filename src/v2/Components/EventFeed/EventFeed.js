@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Header, Card, Dimmer, Loader, Transition } from 'semantic-ui-react';
+import { Segment, Header, Card, Dimmer, Loader, Transition, Grid } from 'semantic-ui-react';
 
 import {connect} from 'react-redux'
 import {getEventsByLocation} from '../../../store/thunks/event'
@@ -7,7 +7,7 @@ import {getEventsByLocation} from '../../../store/thunks/event'
 import {EventCard} from '../EventCard/EventCard'
 
 class EventFeed extends PureComponent {
-    state={firstLoadComplete: false, localEventsSaved: false, visible:false}
+    state={localEventsSaved: false}
 
     welcomeFeed = () => {
         const {lat, lng} = this.props
@@ -17,27 +17,23 @@ class EventFeed extends PureComponent {
         }
         this.props.getEventsByLocation(obj)
     }
-    
+
     componentDidMount() {
-        this.setState({visible: true})
+        if (!!localStorage.getItem("localEvents")) {
+            this.setState({localEventsSaved: true})
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('Props recieved in Event Feed')
         if (!localStorage.getItem('localEvents')) {
-            if (prevProps.coordsPresent && !prevProps.eventsPresent && !prevState.firstLoadComplete) {
+            if (!this.props.eventsPresent) {
+                console.log('calling welcome feed')
                 this.welcomeFeed()
-                this.setState({firstLoadComplete: true})
-            }
-            console.log(prevProps.events)
-            console.log("localevents not present", prevState.localEventsSaved, prevProps.eventsPresent)
-            if (prevProps.eventsPresent && !prevState.localEventsSaved) {
-                console.log('EVENTS PRESENT IN PROPS')
+            } else if (this.props.eventsPresent && !prevState.localEventsSaved) {
+                console.log('saving to local storage')
                 this.setState({localEventsSaved: true})
-                localStorage.setItem("localEvents", JSON.stringify(prevProps.events))
-                localStorage.setItem("test", "this is a test")
-            }
-            console.log('done saving local events')
+                localStorage.setItem("localEvents", JSON.stringify(this.props.events))
+            } 
         }
     }
     
@@ -50,25 +46,28 @@ class EventFeed extends PureComponent {
     }
 
     feedContent = () => {
-        if (localStorage.getItem("localEvents") && this.state.visible) {
+        if (this.state.localEventsSaved && this.props.feedVisible) {
             return this.localFeedCards()
         }
     }
+
+    feed = () => (
+        <Segment padded style={{maxWidth: "50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto'}}>
+            <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
+            <Grid columns={3}>
+                {this.feedContent()}
+            </Grid>
+            <Dimmer active={!!!localStorage.getItem("localEvents")}>
+                <Loader indeterminate size='massive'></Loader>
+            </Dimmer>
+        </Segment>
+    )
     
     render() {
-        return(
-            <Transition visible={this.props.feedVisible} animation="fade" >
-                <Segment padded style={{maxWidth: "40%", maxHeight:"81.5%", minHeight:"40%", overflow:'auto'}}>
-                    <Header as='h2'style={{}}>Happening Near You</Header>
-                    <Card.Group>
-                        {this.feedContent()}
-                    </Card.Group>
-                    <Dimmer active={!!!localStorage.getItem("localEvents")}>
-                        <Loader indeterminate size='massive'> Searching... </Loader>
-                    </Dimmer>
-                </Segment>
-            </Transition>
-        )
+        console.log('render feed')
+        return this.props.feedVisible ? this.feed() : null
+            // <Transition visible={this.props.feedVisible} animation="fade" >
+            // </Transition>  
     }
 }
 
@@ -76,7 +75,6 @@ const mapStateToProps = (state) => ({
     feedVisible: state.navbar.showFeed,
     events: state.events.eventsByLocation,
     eventsPresent: state.events.eventsByLocation.length > 0,
-    coordsPresent: !!state.users.lat && !! state.users.lon,
     lat: state.users.lat,
     lng: state.users.lon,
 })
