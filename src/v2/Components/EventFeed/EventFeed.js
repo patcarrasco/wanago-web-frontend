@@ -64,6 +64,8 @@ class EventFeed extends PureComponent {
     )
     
     render() {
+        console.log(localStorage.getItem('localEvents'))
+
         return this.props.feedVisible ? this.feed() : null
     }
 }
