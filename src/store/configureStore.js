@@ -6,12 +6,14 @@ import navbar from './reducers/navbar'
 import events from './reducers/events'
 import users from './reducers/users'
 import hangouts from './reducers/hangouts'
+import map from './reducers/map'
 
 const rootReducer = combineReducers({
     navbar: navbar,
     events: events,
     users: users,
     hangouts: hangouts,
+    map: map
 })
 
 const configureStore = () => (

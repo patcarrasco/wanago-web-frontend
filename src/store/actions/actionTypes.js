@@ -29,3 +29,6 @@ export const LOAD_HANGOUTS = 'LOAD_HANGOUTS'
 export const LOAD_ALL_HANGOUTS = 'LOAD_ALL_HANGOUTS'
 export const CREATE_HANGOUT = 'CREATE_HANGOUT'
 export const ADD_HANGOUT = 'ADD_HANGOUT'
+
+// map actions
+export const FEED_VENUE_CLICK = 'FEED_VENUE_CLICK'

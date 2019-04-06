@@ -7,6 +7,7 @@ import {loadPositional} from '../../../store/thunks/users'
 
 import Navbar from '../Navbar/Navbar';
 import EventFeed from '../EventFeed/EventFeed';
+import EventMarkers from '../EventMarkers/EventMarkers';
 
 const styles = [{
         "elementType": "geometry",
@@ -223,29 +224,30 @@ const styles = [{
     }
 ]
     
-const size = {width: '100%%', height:'100%'}
+const size = {width: '100%', height:'100%'}
 
 class MapContainer extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {mapReady: false}
         this.mapCenter = false
+        this._map = React.createRef()
     }
 
-    userMarker = () => {
-        return (
-            <Marker 
-                key={'marker-user'}
-                title={'my location'}
-                position={
-                    {
-                        lat: this.props.lat,
-                        lng: this.props.lon,
-                    }
-                }
-            />
-        )
-    }
+    // userMarker = () => {
+    //     return (
+    //         <Marker 
+    //             key={'marker-user'}
+    //             title={'my location'}
+    //             position={
+    //                 {
+    //                     lat: this.props.lat,
+    //                     lng: this.props.lon,
+    //                 }
+    //             }
+    //         />
+    //     )
+    // }
 
     componentDidMount() {
         const {lat, lon} = this.props
@@ -256,8 +258,8 @@ class MapContainer extends PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.lat === 0 && prevProps.lon === 0 && !prevState.mapReady) {
+    componentDidUpdate(prevProps) {
+        if (prevProps.lat !== this.props.lat && this.props.eventsReady !== prevProps.eventsReady) {
             this.setState({mapReady: true})
         }
     }
@@ -266,34 +268,47 @@ class MapContainer extends PureComponent {
         this.mapCenter = {lat: val.center.lat(), lng: val.center.lng()}
     }
 
-    mapRenderer = () => (
-        <Map 
-            google={this.props.google}
-            zoom={14}
-            styles={styles}
-            style={size}
-            streetViewControl={false}
-            fullscreenControl={false}
-            mapTypeControl={false}   
-            initialCenter={{
-                lat: this.props.lat,
-                lng: this.props.lon
-            }}                 
-            center={{
-                // Clicking on an event will center map on that event, by default it is the user's position
-                lat: this.mapCenter.lat,
-                lng: this.mapCenter.lng
-            }}
-            onDragend={this.dragHandler}
-        >  
-            {this.userMarker()}
-            <Navbar />
-            <EventFeed />
+    localEventMarkers = () => {
+        console.log(localStorage.getItem('localEvents'))
+    }
+
+    mapRenderer = () => {
+        console.log('MAP LOADED')
+        return (
+            <Map   
+                google={this.props.google}
+                zoom={14}
+                styles={styles}
+                style={size}
+                streetViewControl={false}
+                fullscreenControl={false}
+                mapTypeControl={false}   
+                center={
+                    {
+                        lat: this.props.lat,
+                        lng: this.props.lon
+                    }
+                }                 
+                // center={
+                //     {
+                //         // Clicking on an event will center map on that event, by default it is the user's position
+                //         lat: this.mapCenter.lat,
+                //         lng: this.mapCenter.lng
+                //     }
+                // }
+                onDragend={this.dragHandler}
+            >  
+            {/* {this.userMarker()}
+            {this.localEventMarkers()} */}
         </Map>
-    )
+        )
+    }
+
 
     render() {
-        return this.state.mapReady ? this.mapRenderer() : 'this is loading...'
+        console.log('Rendering Map Component')
+        // return this.state.mapReady ? this.mapRenderer() : 'this is loading...'
+        return this.mapRenderer()
     }
 } 
 
@@ -303,7 +318,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _loadEventDetails: (e) => dispatch(loadEventDetails(e)),
     _loadPosition: () => dispatch(loadPositional()),
 })
 

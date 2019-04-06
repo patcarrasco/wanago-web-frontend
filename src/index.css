@@ -1,3 +1,7 @@
+/* html {
+  min-height: 100vh;
+} */
+
 body {
   margin: 0;
   padding: 0;
@@ -12,3 +16,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.navbar {
+  font-size: 18px;
+  background-color:"white";
+  border: 2px solid orange;
+  padding-bottom: 10px;
+  height:8vh;
+}
+
+.main-nav {
+  list-style-type: none;
+  margin-left: 1em;
+}
+
+
+@media screen and (min-width: 768px) {
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0;
+    height: 8vh;
+    /* align-items:center; */
+  }
+  
+  .main-nav {
+    display: flex;
+    margin-right: 30px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .main-nav li {
+    margin: 0;
+  }
+}
+
+
