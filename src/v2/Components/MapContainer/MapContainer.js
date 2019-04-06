@@ -240,7 +240,7 @@ class MapContainer extends PureComponent {
                 position={
                     {
                         lat: this.props.lat,
-                        lng: this.props.long,
+                        lng: this.props.lon,
                     }
                 }
             />
@@ -281,18 +281,19 @@ class MapContainer extends PureComponent {
             }}                 
             center={{
                 // Clicking on an event will center map on that event, by default it is the user's position
-                lat: this.mapCenter.lat, 
+                lat: this.mapCenter.lat,
                 lng: this.mapCenter.lng
             }}
             onDragend={this.dragHandler}
         >  
+            {this.userMarker()}
             <Navbar />
             <EventFeed />
         </Map>
     )
 
     render() {
-        return this.state.mapReady ? this.mapRenderer() : null
+        return this.state.mapReady ? this.mapRenderer() : 'this is loading...'
     }
 } 
 

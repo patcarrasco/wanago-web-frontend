@@ -64,10 +64,7 @@ class EventFeed extends PureComponent {
     )
     
     render() {
-        console.log('render feed')
         return this.props.feedVisible ? this.feed() : null
-            // <Transition visible={this.props.feedVisible} animation="fade" >
-            // </Transition>  
     }
 }
 

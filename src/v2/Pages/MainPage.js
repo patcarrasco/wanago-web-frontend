@@ -1,16 +1,9 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import MapContainer from '../Components/MapContainer/MapContainer';
 
 
-class MainPage extends PureComponent {
-
-    render() {
-        return (
-            <>
-                <MapContainer />    
-            </>
-        )
-    }
+function MainPage(props) {
+        return <MapContainer />    
 }
 
 export default MainPage
