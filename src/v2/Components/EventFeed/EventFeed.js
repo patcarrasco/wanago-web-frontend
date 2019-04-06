@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Header, Card, Dimmer, Loader, Transition, Grid } from 'semantic-ui-react';
+import { Segment, Header, Dimmer, Loader, Grid } from 'semantic-ui-react';
 
 import {connect} from 'react-redux'
 import {getEventsByLocation} from '../../../store/thunks/event'

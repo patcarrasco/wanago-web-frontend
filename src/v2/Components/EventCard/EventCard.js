@@ -1,10 +1,10 @@
 import React from 'react'
-import { Card, Image, Grid, Button } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 import Moment from 'react-moment'
 import 'moment-timezone'
 
 export function EventCard(props) {
-    let {name, image, attractions, venues, dates} = props
+    let {name, venues, dates} = props // {image, attractions}
     // const attractionNames = !!attractions ? attractions.map(att => att.name).join(', ') : ''
     let venueNames = !!venues ? venues.map(ven => ven.name).join(', ') : ''
     let date = dates.start.dateTime
@@ -34,13 +34,3 @@ export function EventCard(props) {
         </Grid.Row>
     )
 }
-
-
-            // <Card.Content>
-            //     {/* <Image size='tiny' floated='left' src={image}/> */}
-            //     <Card.Header as="h6">{name}</Card.Header>
-            //     <Card.Meta>{attractionNames}</Card.Meta>
-            // </Card.Content>
-            // <Card.Content extra>
-            //     {venueNames}
-            // </Card.Content>

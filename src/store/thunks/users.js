@@ -20,10 +20,13 @@ export const load_following = () => dispatch => {
 }
 
 export const loadPositional = () => dispatch => {
-    console.log('loading pos?')
     navigator.geolocation.getCurrentPosition(pos => {
-        console.log(pos)
         dispatch(loadPosition({lat: pos.coords.latitude, lon:pos.coords.longitude}))
+    }, (err) => console.log('There was an error grabing user location:', err),
+    {
+        enableHighAccuracy: false,
+        timeout: 5000,
+        maximumAge: 0
     })
 }
 

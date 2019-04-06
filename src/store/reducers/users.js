@@ -21,7 +21,6 @@ const reducer = (state = initState, action) => {
                 followers: action.payload
             }
         case LOAD_POSITION:
-        console.log(action.payload)
             return {
                 ...state,
                 lat: action.payload.lat,

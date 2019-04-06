@@ -248,7 +248,6 @@ class MapContainer extends PureComponent {
     }
 
     componentDidMount() {
-        console.log('checking lat and lon', this.props.lat,this.props.lon) 
         const {lat, lon} = this.props
         if (lat !== 0 && lon !== 0) {
             this.setState({mapReady: true})
@@ -293,7 +292,6 @@ class MapContainer extends PureComponent {
     )
 
     render() {
-        console.log('map render', this.state.mapReady)
         return this.state.mapReady ? this.mapRenderer() : null
     }
 } 
