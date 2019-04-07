@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Segment, Header, Dimmer, Loader, Grid } from 'semantic-ui-react';
+import { Segment, Header, Dimmer, Loader, Grid, Responsive } from 'semantic-ui-react';
 import moment from 'moment'
 
 import {connect} from 'react-redux'
@@ -57,15 +57,30 @@ class EventFeed extends PureComponent {
     }
 
     feed = () => (
-        <Segment padded style={{maxWidth: "50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed'}}>
-            <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
-            <Grid columns={3}>
-                {this.feedContent()}
-            </Grid>
-            <Dimmer active={!!!localStorage.getItem("localEvents")}>
-                <Loader indeterminate size='massive'></Loader>
-            </Dimmer>
-        </Segment>
+        <>
+            <Responsive minWidth={1000}>
+                <Segment style={{maxWidth: "50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+                    <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
+                    <Grid columns={3}>
+                        {this.feedContent()}
+                    </Grid>
+                    <Dimmer active={!!!localStorage.getItem("localEvents")}>
+                        <Loader indeterminate size='massive'></Loader>
+                    </Dimmer>
+                </Segment>
+            </Responsive>
+            <Responsive maxWidth={999}>
+                <Segment style={{maxWidth: "100%", maxHeight:'30.5%', minHeight:"25%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}>
+                    <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
+                    <Grid columns={3}>
+                        {this.feedContent()}
+                    </Grid>
+                    <Dimmer active={!!!localStorage.getItem("localEvents")}>
+                        <Loader indeterminate size='massive'></Loader>
+                    </Dimmer>
+                </Segment>
+            </Responsive>
+        </>
     )
     
     render() {

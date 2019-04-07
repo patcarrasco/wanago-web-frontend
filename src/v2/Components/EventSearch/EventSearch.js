@@ -54,7 +54,7 @@ class EventSearch extends PureComponent {
         return (
             <>
                 <Menu.Item style={{position:'static', padding:'1'}}>
-                    <Dropdown selection name='searchCategory' value={this.state.searchCategory} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
+                    <Dropdown selection name='searchCategory' style={{borderRadius:'unset'}} value={this.state.searchCategory} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
                 </Menu.Item>
                 <Menu.Item style={{position: 'static', padding:'0'}}>
                     {/* AUTOCOMPLETE SEARCH FUNCTIONALITY IN PROGRESS.....
@@ -65,12 +65,10 @@ class EventSearch extends PureComponent {
                         placeholder={"New York, New York"}
                     /> */}
 
-                    <Input 
-                        name='searchLocation'
-                        onChange={this.onChangeHandler}
-                        value={this.state.searchLocation}
-                        placeholder = {'city/address/location'} 
-                    />
+                    <Input name='searchLocation' onChange={this.onChangeHandler} value={this.state.searchLocation} placeholder="search........" >
+                        <input style={{ borderStyle:'none', borderRadius:'unset' ,borderBottom: 'solid 2px #b4c5e4'}}/>
+                    </Input>
+
                 </Menu.Item>
                 <Menu.Item>
                     <Button size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5"}} onClick={this.searchStartHandler}>SEARCH</Button>

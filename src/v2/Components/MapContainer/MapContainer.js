@@ -224,7 +224,7 @@ const styles = [{
     }
 ]
     
-const size = {width: '100%', height:'100%'}
+const size = {height:'100%', width:'100%', position: 'relative', padding:'0', margin:'0'}
 
 class MapContainer extends PureComponent {
     constructor(props) {

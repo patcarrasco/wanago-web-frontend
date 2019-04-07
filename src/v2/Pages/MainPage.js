@@ -8,20 +8,13 @@ import { Container, Segment, Responsive, Header } from 'semantic-ui-react';
 function MainPage(props) {
         return (
                 <>
-                <Responsive minWidth="866">
-                        <Navbar/>
-                </Responsive>
-                <Responsive maxWidth="865">
-                        <Segment>
-                                <Header>
-                                        Mobile Navbar
-                                </Header>
-                        </Segment>
-                </Responsive>
-                <div style={{backgroundColor:'red', height:'91vh', position: 'relative'}}>
-                        <MapContainer/>  
-                        <EventFeed />
-                </div>
+                        <div style={{height:'100%', backgroundColor:'white'}}>
+                                <MapContainer/>  
+                        </div>
+                        <div style={{position:'fixed', width:'100%'}}>
+                                <Navbar/>
+                                <EventFeed />
+                        </div>
                 </>
         )  
 }
