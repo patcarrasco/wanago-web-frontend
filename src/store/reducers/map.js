@@ -1,7 +1,8 @@
-import {FEED_VENUE_CLICK} from '../actions/actionTypes'
+import {FEED_VENUE_CLICK, LOAD_LOCAL_VENUES} from '../actions/actionTypes'
 
 const initState = {
-    coords: {}
+    coords: {},
+    localVenues: []
 }
 
 const reducer = (state = initState, action) => {
@@ -10,6 +11,20 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 coords: action.payload
+            }
+        case LOAD_LOCAL_VENUES:
+            return {
+                ...state,
+                localVenues: action.payload.venues._embedded.venues.map(ven => (
+                {
+                    city: ven.city.name,
+                    address: ven.address,
+                    name: ven.name,
+                    upcomingEvents: ven.upcomingEvents,
+                    url: ven.url,
+                    location: ven.location,
+                    distance: ven.distance
+                }))
             }
         default:
             return state;

@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
-import {Map, GoogleApiWrapper, Marker} from 'google-maps-react'
+import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
 
-import { loadEventDetails } from '../../../store/actions/eventActions';
 import {loadPositional} from '../../../store/thunks/users' 
+import {getVenuesByLocation} from '../../../store/thunks/map'
 
 import Navbar from '../Navbar/Navbar';
 import EventFeed from '../EventFeed/EventFeed';
@@ -231,49 +231,58 @@ class MapContainer extends PureComponent {
         super(props)
         this.state = {mapReady: false}
         this.mapCenter = false
-        this._map = React.createRef()
     }
-
-    // userMarker = () => {
-    //     return (
-    //         <Marker 
-    //             key={'marker-user'}
-    //             title={'my location'}
-    //             position={
-    //                 {
-    //                     lat: this.props.lat,
-    //                     lng: this.props.lon,
-    //                 }
-    //             }
-    //         />
-    //     )
-    // }
 
     componentDidMount() {
         const {lat, lon} = this.props
-        if (lat !== 0 && lon !== 0) {
+        if (!lat && !lon && localStorage.getItem('localEvents')) {
             this.setState({mapReady: true})
         } else {
             this.props._loadPosition()
+            console.log('gps position load called')
         }
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.lat !== this.props.lat && this.props.eventsReady !== prevProps.eventsReady) {
-            this.setState({mapReady: true})
-        }
+    componentDidUpdate(prevProps, prevState) {
+
+        const {lat, lon} = this.props
+
+        if (!!lat && !!lon ) {
+            if (prevProps.localEvents !== this.props.localEvents) {
+                localStorage.setItem("localEvents", JSON.stringify(this.props.localEvents))
+                console.log('set local storage, events')
+            } 
+            
+            if (prevProps.localVenues !== this.props.localVenues) {
+                localStorage.setItem("localVenues", JSON.stringify(this.props.localVenues))
+                console.log('set local storage, venues')
+            }
+            console.log(!!localStorage.getItem('localEvents'), !!localStorage.getItem('localVenues'))
+            if (!!localStorage.getItem('localEvents') && !!localStorage.getItem('localVenues') && !prevState.mapReady) {
+                this.setState({mapReady: true})
+                console.log('set map ready = true')
+            }
+        } 
+        
+        
     }
 
     dragHandler = (e, val) => {
         this.mapCenter = {lat: val.center.lat(), lng: val.center.lng()}
     }
 
-    localEventMarkers = () => {
-        console.log(localStorage.getItem('localEvents'))
+    localVenues = () => {
+        return JSON.parse(localStorage.getItem("localVenues")).map(venue => {
+            return (
+                <Marker>
+
+                </Marker>
+            )
+        })
     }
 
+
     mapRenderer = () => {
-        console.log('MAP LOADED')
         return (
             <Map   
                 google={this.props.google}
@@ -289,32 +298,25 @@ class MapContainer extends PureComponent {
                         lng: this.props.lon
                     }
                 }                 
-                // center={
-                //     {
-                //         // Clicking on an event will center map on that event, by default it is the user's position
-                //         lat: this.mapCenter.lat,
-                //         lng: this.mapCenter.lng
-                //     }
-                // }
                 onDragend={this.dragHandler}
             >  
-            {/* {this.userMarker()}
-            {this.localEventMarkers()} */}
         </Map>
         )
     }
 
 
     render() {
-        console.log('Rendering Map Component')
-        // return this.state.mapReady ? this.mapRenderer() : 'this is loading...'
-        return this.mapRenderer()
+        console.log(this.props.lat, this.props.lon)
+        return this.state.mapReady ? this.mapRenderer() : 'this is loading...'
+        // return this.mapRenderer()
     }
 } 
 
 const mapStateToProps = (state) => ({
     lat: state.users.lat,
     lon: state.users.lon,
+    localVenues: state.map.localVenues,
+    localEvents: state.events.eventsByLocation
 })
 
 const mapDispatchToProps = (dispatch) => ({

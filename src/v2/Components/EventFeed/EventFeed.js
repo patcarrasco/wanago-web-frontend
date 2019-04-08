@@ -3,25 +3,11 @@ import { Segment, Header, Dimmer, Loader, Grid, Responsive } from 'semantic-ui-r
 import moment from 'moment'
 
 import {connect} from 'react-redux'
-import {getEventsByLocation} from '../../../store/thunks/event'
 
 import EventCard from '../EventCard/EventCard'
 
 class EventFeed extends PureComponent {
     state={localEventsSaved: false}
-
-    welcomeFeed = () => {
-        let start = moment()
-        let end = start.clone().add(2, "week")
-        const {lat, lng} = this.props
-        const obj = {
-            queryCat: '',
-            latlong: `${lat},${lng}`,
-            startDate: start.format(),
-            endDate: end.format()
-        }
-        this.props.getEventsByLocation(obj)
-    }
 
     componentDidMount() {
         if (!!localStorage.getItem("localEvents")) {
@@ -30,16 +16,14 @@ class EventFeed extends PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (!localStorage.getItem('localEvents')) {
-            if (!this.props.eventsPresent) {
-                console.log('calling welcome feed')
-                this.welcomeFeed()
-            } else if (this.props.eventsPresent && !prevState.localEventsSaved) {
-                console.log('saving to local storage')
-                this.setState({localEventsSaved: true})
-                localStorage.setItem("localEvents", JSON.stringify(this.props.events))
-            } 
-        }
+        // if (!localStorage.getItem('localEvents')) {
+        //     if (!this.props.eventsPresent) {
+        //         // this.welcomeFeed()
+        //     } else if (this.props.eventsPresent && !prevState.localEventsSaved) {
+        //         this.setState({localEventsSaved: true})
+        //         localStorage.setItem("localEvents", JSON.stringify(this.props.events))
+        //     } 
+        // }
     }
     
     componentWillUnmount() {
@@ -84,7 +68,6 @@ class EventFeed extends PureComponent {
     )
     
     render() {
-        console.log('Render EventFeed')
         return this.props.feedVisible ? this.feed() : null
     }
 }
@@ -97,8 +80,4 @@ const mapStateToProps = (state) => ({
     lng: state.users.lon,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    getEventsByLocation: (query) => dispatch(getEventsByLocation(query)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(EventFeed)
+export default connect(mapStateToProps)(EventFeed)

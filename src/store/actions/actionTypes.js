@@ -32,3 +32,4 @@ export const ADD_HANGOUT = 'ADD_HANGOUT'
 
 // map actions
 export const FEED_VENUE_CLICK = 'FEED_VENUE_CLICK'
+export const LOAD_LOCAL_VENUES = 'LOAD_LOCAL_VENUES'

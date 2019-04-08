@@ -16,7 +16,6 @@ const reducer = (state = initState, action) => {
                 spotlightEvents: action.payload.events
             }
         case LOAD_EVENTS_BY_LOCATION:
-            console.log(action.payload)
             return {
                 ...state,
                 eventsByLocation: action.payload.events._embedded.events.map(e => {

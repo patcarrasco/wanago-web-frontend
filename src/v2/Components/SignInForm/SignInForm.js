@@ -7,6 +7,8 @@ import {connect} from 'react-redux'
 import {showLogin, showSignup} from '../../../store/actions/navbarActions'
 import {_signIn} from '../../../store/thunks/auth'
 import {loadPositional} from '../../../store/thunks/users'
+import {getVenuesByLocation} from '../../../store/thunks/map'
+
 
 
 class SignInForm extends PureComponent {
@@ -109,7 +111,7 @@ const mapDispatchToProps = (dispatch) => ({
     signIn: (creds) => dispatch(_signIn(creds)),
     showLogin: (bool) => dispatch(showLogin(bool)),
     showSignup: (bool) => dispatch(showSignup(bool)),
-    _loadPositional: () => dispatch(loadPositional())
+    _loadPositional: () => dispatch(loadPositional()),
 }) 
 
 export default withRouter(connect(null, mapDispatchToProps)(SignInForm))
