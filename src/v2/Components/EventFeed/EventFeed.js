@@ -10,25 +10,19 @@ class EventFeed extends PureComponent {
     state={localEventsSaved: false}
 
     componentDidMount() {
+        console.log('Mounting feed', localStorage.getItem('localEvents'))
         if (!!localStorage.getItem("localEvents")) {
             this.setState({localEventsSaved: true})
+            console.log('local events found')
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // if (!localStorage.getItem('localEvents')) {
-        //     if (!this.props.eventsPresent) {
-        //         // this.welcomeFeed()
-        //     } else if (this.props.eventsPresent && !prevState.localEventsSaved) {
-        //         this.setState({localEventsSaved: true})
-        //         localStorage.setItem("localEvents", JSON.stringify(this.props.events))
-        //     } 
-        // }
+        if (!!localStorage.getItem('localEvents') && !this.state.localEventsSaved) {
+            this.setState({localEventsSaved: true})
+        }
     }
     
-    componentWillUnmount() {
-        this.setState({firstLoadComplete: false})
-    }
 
     localFeedCards() {
         return JSON.parse(localStorage.getItem("localEvents")).map(event => <EventCard key={event.key} {...event}/>)

@@ -235,7 +235,7 @@ class MapContainer extends PureComponent {
 
     componentDidMount() {
         const {lat, lon} = this.props
-        if (!lat && !lon && localStorage.getItem('localEvents')) {
+        if (!!lat && !!lon && localStorage.getItem('localEvents') && localStorage.getItem('localVenues')) {
             this.setState({mapReady: true})
         } else {
             this.props._loadPosition()
@@ -245,9 +245,9 @@ class MapContainer extends PureComponent {
 
     componentDidUpdate(prevProps, prevState) {
 
+    
         const {lat, lon} = this.props
-
-        if (!!lat && !!lon ) {
+        if (!!lat && !!lon && !this.state.mapReady) {
             if (prevProps.localEvents !== this.props.localEvents) {
                 localStorage.setItem("localEvents", JSON.stringify(this.props.localEvents))
                 console.log('set local storage, events')
@@ -257,8 +257,7 @@ class MapContainer extends PureComponent {
                 localStorage.setItem("localVenues", JSON.stringify(this.props.localVenues))
                 console.log('set local storage, venues')
             }
-            console.log(!!localStorage.getItem('localEvents'), !!localStorage.getItem('localVenues'))
-            if (!!localStorage.getItem('localEvents') && !!localStorage.getItem('localVenues') && !prevState.mapReady) {
+            if (!!localStorage.getItem('localEvents') && !!localStorage.getItem('localVenues')) {
                 this.setState({mapReady: true})
                 console.log('set map ready = true')
             }
@@ -268,7 +267,7 @@ class MapContainer extends PureComponent {
     }
 
     dragHandler = (e, val) => {
-        this.mapCenter = {lat: val.center.lat(), lng: val.center.lng()}
+        this.mapCenter = {lat: val.center.lat(), lon: val.center.lng()}
     }
 
     localVenues = () => {
@@ -292,7 +291,7 @@ class MapContainer extends PureComponent {
                 streetViewControl={false}
                 fullscreenControl={false}
                 mapTypeControl={false}   
-                center={
+                initialCenter={
                     {
                         lat: this.props.lat,
                         lng: this.props.lon
@@ -304,11 +303,11 @@ class MapContainer extends PureComponent {
         )
     }
 
+    // Currently, map is not centering on gps coordinates recieved......
+
 
     render() {
-        console.log(this.props.lat, this.props.lon)
         return this.state.mapReady ? this.mapRenderer() : 'this is loading...'
-        // return this.mapRenderer()
     }
 } 
 
