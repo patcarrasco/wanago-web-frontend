@@ -4,6 +4,7 @@ export const SHOW_SIGNUP = 'SHOW_SIGNUP'
 export const LOAD_POSITION = 'LOAD_POSITION'
 export const RESET_SEARCH = 'RESET_SEARCH'
 export const TOGGLE_FEED = 'TOGGLE_FEED'
+export const TOGGLE_VENUE_INFO = 'TOGGLE_VENUE_INFO'
 
 // event actions
 export const LOAD_SPOTLIGHT_EVENTS = 'LOAD_SPOTLIGHT_EVENTS'

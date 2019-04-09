@@ -13,10 +13,12 @@ const reducer = (state = initState, action) => {
                 coords: action.payload
             }
         case LOAD_LOCAL_VENUES:
+            let venues = action.payload.venues._embedded.venues.filter(ven => ven.upcomingEvents._total !== 0)
             return {
                 ...state,
-                localVenues: action.payload.venues._embedded.venues.map(ven => (
+                localVenues: venues.map(ven => (
                 {
+                    key: ven.id,
                     city: ven.city.name,
                     address: ven.address,
                     name: ven.name,

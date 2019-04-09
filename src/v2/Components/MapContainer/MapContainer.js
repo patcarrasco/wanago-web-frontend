@@ -8,221 +8,8 @@ import {getVenuesByLocation} from '../../../store/thunks/map'
 import Navbar from '../Navbar/Navbar';
 import EventFeed from '../EventFeed/EventFeed';
 import EventMarkers from '../EventMarkers/EventMarkers';
+import {styles} from '../../assets/map/styles'
 
-const styles = [{
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#1d2c4d"
-        }]
-    },
-    {
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#8ec3b9"
-        }]
-    },
-    {
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-            "color": "#1a3646"
-        }]
-    },
-    {
-        "featureType": "administrative.country",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-            "color": "#4b6878"
-        }]
-    },
-    {
-        "featureType": "administrative.land_parcel",
-        "elementType": "labels",
-        "stylers": [{
-            "visibility": "off"
-        }]
-    },
-    {
-        "featureType": "administrative.land_parcel",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#64779e"
-        }]
-    },
-    {
-        "featureType": "administrative.province",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-            "color": "#4b6878"
-        }]
-    },
-    {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-            "color": "#334e87"
-        }]
-    },
-    {
-        "featureType": "landscape.natural",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#023e58"
-        }]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#283d6a"
-        }]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "labels.text",
-        "stylers": [{
-            "visibility": "off"
-        }]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#6f9ba5"
-        }]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-            "color": "#1d2c4d"
-        }]
-    },
-    {
-        "featureType": "poi.business",
-        "stylers": [{
-            "visibility": "off"
-        }]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [{
-            "color": "#023e58"
-        }]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "labels.text",
-        "stylers": [{
-            "visibility": "off"
-        }]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#3C7680"
-        }]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#304a7d"
-        }]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#98a5be"
-        }]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-            "color": "#1d2c4d"
-        }]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#2c6675"
-        }]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-            "color": "#255763"
-        }]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#b0d5ce"
-        }]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-            "color": "#023e58"
-        }]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "labels",
-        "stylers": [{
-            "visibility": "off"
-        }]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#98a5be"
-        }]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-            "color": "#1d2c4d"
-        }]
-    },
-    {
-        "featureType": "transit.line",
-        "elementType": "geometry.fill",
-        "stylers": [{
-            "color": "#283d6a"
-        }]
-    },
-    {
-        "featureType": "transit.station",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#3a4762"
-        }]
-    },
-    {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#0e1626"
-        }]
-    },
-    {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#4e6d70"
-        }]
-    }
-]
     
 const size = {height:'100%', width:'100%', position: 'relative', padding:'0', margin:'0'}
 
@@ -231,39 +18,38 @@ class MapContainer extends PureComponent {
         super(props)
         this.state = {mapReady: false}
         this.mapCenter = false
+        this.showInfoWindow = false
+        this.activeMarker = null
     }
 
     componentDidMount() {
+        console.log('mount map')
         const {lat, lon} = this.props
         if (!!lat && !!lon && localStorage.getItem('localEvents') && localStorage.getItem('localVenues')) {
             this.setState({mapReady: true})
         } else {
             this.props._loadPosition()
-            console.log('gps position load called')
+            console.log('position loading')
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-
-    
         const {lat, lon} = this.props
         if (!!lat && !!lon && !this.state.mapReady) {
             if (prevProps.localEvents !== this.props.localEvents) {
+                console.log('setting events to local storage')
                 localStorage.setItem("localEvents", JSON.stringify(this.props.localEvents))
-                console.log('set local storage, events')
             } 
             
             if (prevProps.localVenues !== this.props.localVenues) {
+                console.log('setting venues to local storage')
                 localStorage.setItem("localVenues", JSON.stringify(this.props.localVenues))
-                console.log('set local storage, venues')
             }
             if (!!localStorage.getItem('localEvents') && !!localStorage.getItem('localVenues')) {
+                console.log('map ready')
                 this.setState({mapReady: true})
-                console.log('set map ready = true')
             }
-        } 
-        
-        
+        }   
     }
 
     dragHandler = (e, val) => {
@@ -272,9 +58,15 @@ class MapContainer extends PureComponent {
 
     localVenues = () => {
         return JSON.parse(localStorage.getItem("localVenues")).map(venue => {
+            const {key, name, location} = venue
+            // console.log(venue)
             return (
-                <Marker>
-
+                <Marker
+                    key={key}
+                    title={name}
+                    position={{lat:location.latitude, lng:location.longitude}}
+                    onClick={this.handleMarkerClick}
+                >
                 </Marker>
             )
         })
@@ -298,13 +90,12 @@ class MapContainer extends PureComponent {
                     }
                 }                 
                 onDragend={this.dragHandler}
+                onClick={this.onMapClick}
             >  
+            {this.localVenues()}
         </Map>
         )
     }
-
-    // Currently, map is not centering on gps coordinates recieved......
-
 
     render() {
         return this.state.mapReady ? this.mapRenderer() : 'this is loading...'

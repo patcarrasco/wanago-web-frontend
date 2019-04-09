@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
 import { setLoadStatus, resetSearch} from '../../../store/actions/eventActions';
-import {toggleFeed} from '../../../store/actions/navbarActions'
+import {toggleFeed, toggleVenue} from '../../../store/actions/navbarActions'
 
 import { Header, Menu, Button, Responsive, Segment } from 'semantic-ui-react';
 
@@ -12,6 +12,7 @@ import EventSearch from '../EventSearch/EventSearch';
 
 const NavBar = (props) => {
     let showFeed = props.showFeed
+    let showVenue = props.showVenue
     const handleLogout = () => {
         localStorage.clear()
         props.history.push('/')
@@ -29,7 +30,7 @@ const NavBar = (props) => {
                             <Menu.Item> 
                                 <div style={{display:'flex', alignItems:'center', justifyContent:"center", marginLeft:'1em'}}>
                                     <Button circular icon = "user" style={{color: false ? '#feffff' : `#3c3744`, backgroundColor: false ? '#3d52d5':'#B4C5E4'}} />
-                                    <Button circular icon = "comment alternate" style={{color: false ? '#feffff' : `#3c3744`, backgroundColor: false ? '#3d52d5':'#B4C5E4'}} />
+                                    <Button circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={() => props._toggleVenue()} />
                                     <Button circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={() => props._toggleFeed()}/>
                                 </div>
                             </Menu.Item>
@@ -70,6 +71,7 @@ const NavBar = (props) => {
 
 const mapStateToProps = state => ({
     showFeed: state.navbar.showFeed,
+    showVenue: state.navbar.showVenue,
     eventSelected: !!state.events.selectedEvent,
     eventsPresent: !!state.events.eventsByLocation._embedded,
 })
@@ -77,7 +79,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
     _setLoadStatus: (bool) => dispatch(setLoadStatus(bool)), 
     _resetSearch: () => dispatch(resetSearch()),
-    _toggleFeed: () => dispatch(toggleFeed())
+    _toggleFeed: () => dispatch(toggleFeed()),
+    _toggleVenue: () => dispatch(toggleVenue())
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))

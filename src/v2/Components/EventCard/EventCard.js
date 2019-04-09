@@ -1,9 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
-import {feedVenueClick} from '../../../store/actions/mapActions'
-
-import { Grid, Button } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 import Moment from 'react-moment'
 import 'moment-timezone'
@@ -12,7 +9,6 @@ import 'moment-timezone'
 function EventCard(props) {
     let {name, venues, dates} = props // {image, attractions}
     // const attractionNames = !!attractions ? attractions.map(att => att.name).join(', ') : ''
-    let venueLoc = !! venues ? venues[0].location : {}
     let date = dates.start.dateTime
     let venueName = !!venues ? venues[0].name : ""
     if (venueName.length > 30) {
@@ -34,16 +30,10 @@ function EventCard(props) {
                 {name}
             </Grid.Column>
             <Grid.Column width={6} style={{fontSize:"16px", color:"#3c3744", alignItems:'center'}}>
-                <Button fluid onClick={() => props._mapCenter(venueLoc)}>
-                    {venueName}
-                </Button>
+                {venueName}
             </Grid.Column>
         </Grid.Row>
     )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    _mapCenter: coords => dispatch(feedVenueClick(coords))
-})
-
-export default connect(null, mapDispatchToProps)(EventCard)
+export default EventCard
