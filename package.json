@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^5.8.4",
+    "firebase": "^5.9.3",
     "google-maps-react": "^2.0.2",
     "latlon-geohash": "^1.1.0",
     "moment": "^2.24.0",

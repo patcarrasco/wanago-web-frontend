@@ -4,6 +4,7 @@ import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
 
 import {loadPositional} from '../../../store/thunks/users' 
 import {getVenuesByLocation} from '../../../store/thunks/map'
+import {saveMap} from '../../../store/actions/mapActions'
 
 import Navbar from '../Navbar/Navbar';
 import EventFeed from '../EventFeed/EventFeed';
@@ -59,7 +60,6 @@ class MapContainer extends PureComponent {
     localVenues = () => {
         return JSON.parse(localStorage.getItem("localVenues")).map(venue => {
             const {key, name, location} = venue
-            // console.log(venue)
             return (
                 <Marker
                     key={key}
@@ -74,8 +74,10 @@ class MapContainer extends PureComponent {
 
 
     mapRenderer = () => {
+        console.log('MAP RENDERING')
         return (
-            <Map   
+            <Map 
+                ref={map => this.props._saveMap(map)}  
                 google={this.props.google}
                 zoom={14}
                 styles={styles}
@@ -111,6 +113,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     _loadPosition: () => dispatch(loadPositional()),
+    _saveMap: (map) => dispatch(saveMap(map))
 })
 
 export default GoogleApiWrapper({

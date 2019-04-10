@@ -6,7 +6,7 @@ import Moment from 'react-moment'
 import 'moment-timezone'
 
 
-function EventCard(props) {
+function VenueInfoEventCard(props) {
     let {name, venues, dates} = props // {image, attractions}
     // const attractionNames = !!attractions ? attractions.map(att => att.name).join(', ') : ''
     let date = dates.start.dateTime
@@ -20,22 +20,21 @@ function EventCard(props) {
     }
 
     return (
-        <Grid.Row columns={3} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>
-            <Grid.Column width={3}>
+        <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>
+            <Grid.Column>
                 <div style={{fontWeight:"bold", fontSize:"18px", color:"#3c3744"}}>
                     <Moment tz="America/New_York" format="MMM DD">{date}</Moment>
                     {!!endDate && <Moment tz="America/New_York" format="-MMM DD">{endDate}</Moment>}
                 </div>
                 <Moment tz="America/New_York" format="ddd h:mma">{date}</Moment>
             </Grid.Column>
-            <Grid.Column width={7} style={{fontSize:"16px", color:"#3c3744"}}>
+            <Grid.Column style={{fontSize:"16px", color:"#3c3744"}}>
                 {name}
-            </Grid.Column>
-            <Grid.Column width={6} style={{fontSize:"16px", color:"#3c3744", alignItems:'center'}}>
-                {venueName}
             </Grid.Column>
         </Grid.Row>
     )
 }
 
-export default EventCard
+export default VenueInfoEventCard
+
+

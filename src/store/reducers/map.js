@@ -1,8 +1,9 @@
-import {FEED_VENUE_CLICK, LOAD_LOCAL_VENUES} from '../actions/actionTypes'
+import {FEED_VENUE_CLICK, LOAD_LOCAL_VENUES, SAVE_MAP_OBJECT} from '../actions/actionTypes'
 
 const initState = {
     coords: {},
-    localVenues: []
+    localVenues: [],
+    map: null,
 }
 
 const reducer = (state = initState, action) => {
@@ -19,6 +20,7 @@ const reducer = (state = initState, action) => {
                 localVenues: venues.map(ven => (
                 {
                     key: ven.id,
+                    id: ven.id,
                     city: ven.city.name,
                     address: ven.address,
                     name: ven.name,
@@ -27,6 +29,11 @@ const reducer = (state = initState, action) => {
                     location: ven.location,
                     distance: ven.distance
                 }))
+            }
+        case SAVE_MAP_OBJECT:
+            return {
+                ...state,
+                map: action.payload
             }
         default:
             return state;
