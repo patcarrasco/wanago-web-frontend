@@ -115,7 +115,10 @@ class VenueFeed extends PureComponent {
 
 
     render() {
-        if (this.props.venueSelected) {return this.venueFromMap()}
+        if (this.props.venueSelected && !this.props.showVenue) {
+            console.log('render map venues')
+            return this.venueFromMap()
+        }
         return this.props.showVenue ? this.feed() : null
     }
 }
