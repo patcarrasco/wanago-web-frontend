@@ -7,7 +7,6 @@ import {connect} from 'react-redux'
 import {showLogin, showSignup} from '../../../store/actions/navbarActions'
 import {_signIn} from '../../../store/thunks/auth'
 import {loadPositional} from '../../../store/thunks/users'
-import {getVenuesByLocation} from '../../../store/thunks/map'
 
 
 

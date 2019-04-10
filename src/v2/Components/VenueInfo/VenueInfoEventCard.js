@@ -7,8 +7,9 @@ import 'moment-timezone'
 
 
 function VenueInfoEventCard(props) {
+
+
     let {name, venues, dates, priceRanges} = props // {image, attractions}
-    // const attractionNames = !!attractions ? attractions.map(att => att.name).join(', ') : ''
     let date = dates.start.dateTime
     let endDate = !!dates.end ? dates.end.dateTime : false
     let venueName = !!venues ? venues[0].name : ""
@@ -31,7 +32,6 @@ function VenueInfoEventCard(props) {
         }
     }
 
-    console.log(props.priceRanges)
 
     return (
         <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>

@@ -1,36 +1,38 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Button, Header, Grid, Loader, Segment } from 'semantic-ui-react';
+import { Button, Grid, Loader } from 'semantic-ui-react';
 import VenueInfoEventCard from './VenueInfoEventCard';
 
 
-function VenueInfo(props) {
+class VenueInfo extends React.PureComponent {
 
-    function events() {
-        return props.events.map(event => <VenueInfoEventCard key={event.id} {...event} />)
+    events = () => {
+        return this.props.events.map(event => <VenueInfoEventCard key={event.id} {...event} />)
     }
 
-    const content = () => (
+    content = () => (
         <Grid>
-            {events()}
+            {this.events()}
         </Grid>
     )
 
-    return (  
-            <>
-                <div style={{display:'flex', flexDirection:'row', marginBottom: '10px'}}>
+    render() {
+        return (  
+                <>
+                    <div style={{display:'flex', flexDirection:'row', marginBottom: '10px'}}>
+                        <div>
+                            <Button circular icon='angle left' onClick={this.props.closeVenueInfoHandler} />
+                        </div>
+                        <div style={{flex: 'auto', textAlign: 'center'}}>
+                            <h3 style={{fontWeight: 'bold'}}>Upcoming at {this.props.venue.name}</h3>
+                        </div>
+                    </div>
                     <div>
-                        <Button circular icon="arrow left" onClick={props.closeVenueInfoHandler} />
+                        {!!this.props.events ? this.content() : <Loader active>Loading...</Loader>}
                     </div>
-                    <div style={{flex: 'auto', textAlign: 'center'}}>
-                        <h3 style={{fontWeight: 'bold'}}>Upcoming at {props.venue.name}</h3>
-                    </div>
-                </div>
-                <div>
-                    {!!props.events ? content() : <Loader active>Loading...</Loader>}
-                </div>
-            </>
-    )
+                </>
+        )
+    }
 }
 
 const mapStateToProps = (state) => ({

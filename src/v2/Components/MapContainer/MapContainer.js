@@ -18,20 +18,18 @@ const size = {height:'100%', width:'100%', position: 'relative', padding:'0', ma
 class MapContainer extends PureComponent {
     constructor(props) {
         super(props)
-        this.state = {mapReady: false}
+        this.state = {mapReady: false, markerClicked: false}
         this.mapCenter = false
         this.showInfoWindow = false
         this.activeMarker = null
     }
 
     componentDidMount() {
-        console.log('mount map')
         const {lat, lon} = this.props
         if (!!lat && !!lon && localStorage.getItem('localEvents') && localStorage.getItem('localVenues')) {
             this.setState({mapReady: true})
         } else {
             this.props._loadPosition()
-            console.log('position loading')
         }
     }
 
@@ -39,16 +37,13 @@ class MapContainer extends PureComponent {
         const {lat, lon} = this.props
         if (!!lat && !!lon && !this.state.mapReady) {
             if (prevProps.localEvents !== this.props.localEvents) {
-                console.log('setting events to local storage')
                 localStorage.setItem("localEvents", JSON.stringify(this.props.localEvents))
             } 
             
             if (prevProps.localVenues !== this.props.localVenues) {
-                console.log('setting venues to local storage')
                 localStorage.setItem("localVenues", JSON.stringify(this.props.localVenues))
             }
             if (!!localStorage.getItem('localEvents') && !!localStorage.getItem('localVenues')) {
-                console.log('map ready')
                 this.setState({mapReady: true})
             }
         }   
@@ -59,10 +54,16 @@ class MapContainer extends PureComponent {
     }
 
     handleMarkerClick = (venue) => {
-        console.log(venue)
-        this.props._toggleVenue(true)
-        this.props._loadVenueEvents(venue.id)
-        this.props._selectVenue(venue)
+        if (this.activeMarker === venue.key) {
+            this.props._toggleVenue(false)
+            this.props._selectVenue(false)
+            this.activeMarker = null
+        } else {
+            this.props._toggleVenue(true)
+            this.props._loadVenueEvents(venue.id)
+            this.props._selectVenue(venue)
+            this.activeMarker = venue.key
+        }
     }
 
     localVenues = () => {
@@ -116,7 +117,7 @@ const mapStateToProps = (state) => ({
     lat: state.users.lat,
     lon: state.users.lon,
     localVenues: state.map.localVenues,
-    localEvents: state.events.eventsByLocation
+    localEvents: state.events.eventsByLocation,
 })
 
 const mapDispatchToProps = (dispatch) => ({

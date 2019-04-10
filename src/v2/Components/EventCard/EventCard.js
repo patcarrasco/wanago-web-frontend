@@ -7,8 +7,7 @@ import 'moment-timezone'
 
 
 function EventCard(props) {
-    let {name, venues, dates} = props // {image, attractions}
-    // const attractionNames = !!attractions ? attractions.map(att => att.name).join(', ') : ''
+    let {name, venues, dates, priceRanges} = props // {image, attractions}
     let date = dates.start.dateTime
     let endDate = !!dates.end ? dates.end.dateTime : false
     let venueName = !!venues ? venues[0].name : ""
@@ -17,6 +16,19 @@ function EventCard(props) {
     }
     if (name.length > 55) {
         name = name.slice(0,55) + "..."
+    }
+
+    let max = null
+    let min = null
+    if (!!priceRanges) {
+        for (let i = 0; i < priceRanges.length; i++) {
+            if (min === null || priceRanges[i].min < min) {
+                min = priceRanges[i].min
+            }
+            if (max === null || priceRanges[i].max > max) {
+                max = priceRanges[i].max
+            }
+        }
     }
 
     return (
@@ -33,6 +45,12 @@ function EventCard(props) {
             </Grid.Column>
             <Grid.Column width={6} style={{fontSize:"16px", color:"#3c3744", alignItems:'center'}}>
                 {venueName}
+                <div style={{ fontSize:'16px'}}>
+                    {(!!max && !!min) ? `$${min} - $${max}` : 'prices not available'}
+                </div>
+                <div>
+                    {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank">buy tickets</a> : ''}
+                </div>
             </Grid.Column>
         </Grid.Row>
     )

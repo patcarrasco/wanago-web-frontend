@@ -2,7 +2,6 @@ import React from 'react'
 import MapContainer from '../Components/MapContainer/MapContainer';
 import Navbar from '../Components/Navbar/Navbar';
 import EventFeed from '../Components/EventFeed/EventFeed';
-import { Container, Segment, Responsive, Header } from 'semantic-ui-react';
 import VenueFeed from '../Components/VenueFeed/VenueFeed';
 
 

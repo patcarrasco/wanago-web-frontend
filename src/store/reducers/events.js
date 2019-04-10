@@ -23,9 +23,10 @@ const reducer = (state = initState, action) => {
                         key: e.id,
                         name: e.name,
                         dates: e.dates,
-                        image: e.images.find(img => img.ratio === "16_9" && img.height > 600).url,
                         venues: e._embedded.venues,
-                        attractions: e._embedded.attractions
+                        attractions: e._embedded.attractions,
+                        priceRanges: e.priceRanges,
+                        url: e.url
                     }
                 })
             }

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { Segment, Header, Dimmer, Loader, Grid, Responsive } from 'semantic-ui-react';
-import moment from 'moment'
 
 import {connect} from 'react-redux'
 

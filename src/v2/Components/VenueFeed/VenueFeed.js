@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {selectVenue} from '../../../store/actions/venueActions'
 
-import { Segment, Header, Grid, Dimmer, Loader, Responsive, Button} from 'semantic-ui-react';
+import { Segment, Header, Grid, Dimmer, Loader, Responsive} from 'semantic-ui-react';
 import VenueCard from '../VenueCard/VenueCard';
 import VenueInfo from '../VenueInfo/VenueInfo';
 
@@ -12,7 +12,6 @@ class VenueFeed extends PureComponent {
     state={localVenuesSaved: false, showVenueInfo: false, scrollResetPos: null}
 
     componentDidMount(){
-        console.log('venue list mounting')
         if (!!localStorage.getItem('localVenues')) {
             this.setState({localVenuesSaved: true})
         }
@@ -23,6 +22,14 @@ class VenueFeed extends PureComponent {
         if (prevProps.showVenue !== this.props.showVenue) {
             this.setState({localVenuesSaved: true})
         }
+
+        if (this.props.showVenue === false) {
+            this.setState({showVenueInfo: false})
+        }
+    }
+    
+    componentWillUnmount() {
+        console.log('unmounting feed')
     }
 
     localVenueCards() {
