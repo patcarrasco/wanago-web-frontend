@@ -12,15 +12,23 @@ function VenueCard(props) {
         props._selectVenue(props)
         props._loadVenueEvents(props.id)
         props.map.map.panTo(latlng)
+        props.map.map.panBy(-225, 0)
         props.showVenueInfoHandler()
     }
 
-    let {name} = props
-    if (name.length > 30) {
-        name = name.slice(0,30) + "..."
+    const buttonContent = () => {
+        if (props.upcomingEvents._total > 1) {
+            return `${props.upcomingEvents._total} upcoming events`
+        } else {
+            return `1 upcoming event`
+        }
     }
 
-    // console.log(props.map.map.panTo)
+    let {name} = props
+    if (name.length > 40) {
+        name = name.slice(0,40) + "..."
+    }
+
     return (
         <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>
             <Grid.Column style={{fontSize:"16px", color:"#3c3744"}}>
@@ -28,16 +36,14 @@ function VenueCard(props) {
                 {name}
             </div>
             <div>
-                {props.distance} miles away
+                {props.city} - {props.distance} miles away
             </div>
             </Grid.Column>
-            <Grid.Column style={{fontSize:"16px", color:"#3c3744", alignItems:'center'}}>
+            <Grid.Column>
                 <div>
-                    Upcoming Events: {props.upcomingEvents._total}
+                    <Button size="large" style={{backgroundColor:'#b4c5e4'}} className={"show-venue-info"}fluid onClick={() => venueClickHandler()}> {buttonContent()} </Button>
                 </div>
-                <div>
-                    <Button className={"show-venue-info"}fluid onClick={() => venueClickHandler()}>Scheduled Events</Button>
-                </div>
+
             </Grid.Column>
         </Grid.Row>
     )

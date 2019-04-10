@@ -28,7 +28,7 @@ const reducer = (state = initState, action) => {
         case TOGGLE_VENUE_INFO:
             return {
                 ...state,
-                showVenue: !state.showVenue,
+                showVenue: action.payload,
                 showFeed: false
             }
         default:

@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
-import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
+import {Map, GoogleApiWrapper, Marker} from 'google-maps-react'
 
-import {loadPositional} from '../../../store/thunks/users' 
-import {getVenuesByLocation} from '../../../store/thunks/map'
+import {loadPositional} from '../../../store/thunks/users'
 import {saveMap} from '../../../store/actions/mapActions'
+import {getVenueInformation} from '../../../store/thunks/venue'
+import {selectVenue} from '../../../store/actions/venueActions'
+import {toggleVenue} from '../../../store/actions/navbarActions'
 
-import Navbar from '../Navbar/Navbar';
-import EventFeed from '../EventFeed/EventFeed';
-import EventMarkers from '../EventMarkers/EventMarkers';
-import {styles} from '../../assets/map/styles'
+
+// import {styles} from '../../assets/map/styles'
+import {styles} from '../../assets/map/dayStyles'
 
     
 const size = {height:'100%', width:'100%', position: 'relative', padding:'0', margin:'0'}
@@ -57,6 +58,13 @@ class MapContainer extends PureComponent {
         this.mapCenter = {lat: val.center.lat(), lon: val.center.lng()}
     }
 
+    handleMarkerClick = (venue) => {
+        console.log(venue)
+        this.props._toggleVenue(true)
+        this.props._loadVenueEvents(venue.id)
+        this.props._selectVenue(venue)
+    }
+
     localVenues = () => {
         return JSON.parse(localStorage.getItem("localVenues")).map(venue => {
             const {key, name, location} = venue
@@ -65,7 +73,7 @@ class MapContainer extends PureComponent {
                     key={key}
                     title={name}
                     position={{lat:location.latitude, lng:location.longitude}}
-                    onClick={this.handleMarkerClick}
+                    onClick={() => this.handleMarkerClick(venue)}
                 >
                 </Marker>
             )
@@ -113,7 +121,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     _loadPosition: () => dispatch(loadPositional()),
-    _saveMap: (map) => dispatch(saveMap(map))
+    _saveMap: (map) => dispatch(saveMap(map)),
+    _selectVenue: (venue) => dispatch(selectVenue(venue)),
+    _loadVenueEvents: (id) => dispatch(getVenueInformation(id)),
+    _toggleVenue: () => dispatch(toggleVenue())
+
 })
 
 export default GoogleApiWrapper({

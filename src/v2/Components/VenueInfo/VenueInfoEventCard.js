@@ -7,7 +7,7 @@ import 'moment-timezone'
 
 
 function VenueInfoEventCard(props) {
-    let {name, venues, dates} = props // {image, attractions}
+    let {name, venues, dates, priceRanges} = props // {image, attractions}
     // const attractionNames = !!attractions ? attractions.map(att => att.name).join(', ') : ''
     let date = dates.start.dateTime
     let endDate = !!dates.end ? dates.end.dateTime : false
@@ -18,18 +18,42 @@ function VenueInfoEventCard(props) {
     if (name.length > 55) {
         name = name.slice(0,55) + "..."
     }
+    let max = null
+    let min = null
+    if (!!priceRanges) {
+        for (let i = 0; i < priceRanges.length; i++) {
+            if (min === null || priceRanges[i].min < min) {
+                min = priceRanges[i].min
+            }
+            if (max === null || priceRanges[i].max > max) {
+                max = priceRanges[i].max
+            }
+        }
+    }
+
+    console.log(props.priceRanges)
 
     return (
         <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>
-            <Grid.Column>
+            <Grid.Column width={4}>
                 <div style={{fontWeight:"bold", fontSize:"18px", color:"#3c3744"}}>
                     <Moment tz="America/New_York" format="MMM DD">{date}</Moment>
                     {!!endDate && <Moment tz="America/New_York" format="-MMM DD">{endDate}</Moment>}
                 </div>
                 <Moment tz="America/New_York" format="ddd h:mma">{date}</Moment>
             </Grid.Column>
-            <Grid.Column style={{fontSize:"16px", color:"#3c3744"}}>
-                {name}
+            <Grid.Column style={{ color:"#3c3744"}} width={8}>
+                <div style={{fontSize:"20px", fontWeight:'bold'}}>
+                    {name}
+                </div>
+            </Grid.Column>
+            <Grid.Column width={4}>
+                <div style={{ fontSize:'16px'}}>
+                    {(!!max && !!min) ? `$${min} - $${max}` : 'prices not available'}
+                </div>
+                <div>
+                    {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank">buy tickets</a> : ''}
+                </div>
             </Grid.Column>
         </Grid.Row>
     )

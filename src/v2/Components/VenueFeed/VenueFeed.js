@@ -51,7 +51,7 @@ class VenueFeed extends PureComponent {
                 !this.state.showVenueInfo ?
                 <>
                     <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
-                    <Grid columns={3}>
+                    <Grid columns={2}>
                     {this.venues()}
                     </Grid>
                     <Dimmer active={!!!localStorage.getItem("localVenues")}>
@@ -66,12 +66,12 @@ class VenueFeed extends PureComponent {
     )
 
     desktopView = () => (
-        <Segment className={'content-box'} style={{maxWidth: "50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
+        <Segment className={'content-box'} style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
             {
                 !this.state.showVenueInfo ?
                 <>
                     <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
-                    <Grid columns={3}>
+                    <Grid columns={2} >
                     {this.venues()}
                     </Grid>
                     <Dimmer active={!!!localStorage.getItem("localVenues")}>
@@ -95,14 +95,27 @@ class VenueFeed extends PureComponent {
         </>
     )
 
+    closeVenueFromMapHandler = () => {
+        this.props._deselectVenue()
+        this.setState({showVenueInfo: false})
+    }
+
+    venueFromMap = () => (
+        <Segment style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+            <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
+        </Segment>
+    )
+
 
     render() {
+        if (this.props.venueSelected) {return this.venueFromMap()}
         return this.props.showVenue ? this.feed() : null
     }
 }
 
 const mapStateToProps = (state) => ({
     showVenue: state.navbar.showVenue,
+    venueSelected: !!state.venue.selectedVenue
 })
 
 const mapDispatchToProps = (dispatch) => ({

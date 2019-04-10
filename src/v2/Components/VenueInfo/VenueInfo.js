@@ -18,11 +18,11 @@ function VenueInfo(props) {
 
     return (  
             <>
-                <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                <div style={{display:'flex', flexDirection:'row', marginBottom: '10px'}}>
                     <div>
                         <Button circular icon="arrow left" onClick={props.closeVenueInfoHandler} />
                     </div>
-                    <div style={{flex: 'auto'}}>
+                    <div style={{flex: 'auto', textAlign: 'center'}}>
                         <h3 style={{fontWeight: 'bold'}}>Upcoming at {props.venue.name}</h3>
                     </div>
                 </div>

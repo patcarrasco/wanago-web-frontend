@@ -30,7 +30,7 @@ const NavBar = (props) => {
                             <Menu.Item> 
                                 <div style={{display:'flex', alignItems:'center', justifyContent:"center", marginLeft:'1em'}}>
                                     <Button circular icon = "user" style={{color: false ? '#feffff' : `#3c3744`, backgroundColor: false ? '#3d52d5':'#B4C5E4'}} />
-                                    <Button circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={() => props._toggleVenue()} />
+                                    <Button circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={() => props._toggleVenue(!showVenue)} />
                                     <Button circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={() => props._toggleFeed()}/>
                                 </div>
                             </Menu.Item>
@@ -80,7 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
     _setLoadStatus: (bool) => dispatch(setLoadStatus(bool)), 
     _resetSearch: () => dispatch(resetSearch()),
     _toggleFeed: () => dispatch(toggleFeed()),
-    _toggleVenue: () => dispatch(toggleVenue())
+    _toggleVenue: (bool) => dispatch(toggleVenue(bool))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
