@@ -48,6 +48,7 @@ export const loadPositional = () => dispatch => {
             const obj = {
                 latlong: `${lat},${lon}`,
             }
+            console.log(lat, lon)
             setTimeout(() => dispatch(getVenuesByLocation(obj)), 500)
             localVenues = true
         }

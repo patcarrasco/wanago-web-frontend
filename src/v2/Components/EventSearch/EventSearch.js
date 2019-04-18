@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 
 import { setLoadStatus } from '../../../store/actions/eventActions';
 import {getEventsByLocation} from '../../../store/thunks/event'
+import Autocomplete from '../Autocomplete/Autocomplete';
 
 
 
@@ -57,18 +58,7 @@ class EventSearch extends PureComponent {
                     <Dropdown selection name='searchCategory' style={{borderRadius:'unset'}} value={this.state.searchCategory} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
                 </Menu.Item>
                 <Menu.Item style={{position: 'static', padding:'0'}}>
-                    {/* AUTOCOMPLETE SEARCH FUNCTIONALITY IN PROGRESS.....
-                    <Dropdown
-                        // fluid
-                        selection
-                        search
-                        placeholder={"New York, New York"}
-                    /> */}
-
-                    <Input name='searchLocation' onChange={this.onChangeHandler} value={this.state.searchLocation} placeholder="search........" >
-                        <input style={{ borderStyle:'none', borderRadius:'unset' ,borderBottom: 'solid 2px #b4c5e4'}}/>
-                    </Input>
-
+                    <Autocomplete />
                 </Menu.Item>
                 <Menu.Item>
                     <Button size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5"}} onClick={this.searchStartHandler}>SEARCH</Button>
