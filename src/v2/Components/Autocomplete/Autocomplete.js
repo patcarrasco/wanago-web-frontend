@@ -9,7 +9,7 @@ class Autocomplete extends PureComponent {
         this.cities = data.map(cities => cities.title)
         this.state = {
             suggest: [],
-            value: ""
+            value: "",
         }
     }
 
@@ -22,6 +22,7 @@ class Autocomplete extends PureComponent {
             suggest = this.cities.sort().filter(c => regex.test(c))
         }
         this.setState({suggest, value, activeItem: ''})
+        this.props.locationInput(value)
     }
 
     renderSuggest() {
@@ -48,10 +49,10 @@ class Autocomplete extends PureComponent {
             >
                 {suggest.map((city, idx) => {
                     return (
-                        <li key={`${city}-${idx}`} style={
+                        <li key={`${city}-${idx}`} tabIndex="1" style={
                                 {
                                     padding: '10px 5px',
-                                    backgroundColor: this.state.activeItem === city ? 'cyan' : ''
+                                    backgroundColor: this.state.activeItem === city ? '#b4c5e4' : ''
                                 }
                             } 
                             onClick={()=> this.selectSuggestion(city)} 
@@ -71,41 +72,22 @@ class Autocomplete extends PureComponent {
         this.setState({activeItem: city})
     }
 
-    selectSuggestion(value) {
-        this.setState({value: value, suggest: []})
-    }
-
-    cityNotFound = () => {
-        return (
-            <div style={{position:'absolute'}}>
-                city not found
-            </div>
-        )
+    selectSuggestion(city) {
+        this.setState({value: city, suggest: []})
+        this.props.locationInput(city)
     }
 
     render() {
-        console.log('activeitem', this.state.activeItem)
         return (
-            < div style = {
-                {
-                    width: '100%',
-                    borderBottom: '1px solid red',
-                    fontFamily: 'Roboto, sans-serif',
-                    lineHeight: '1em',
-                    minWidth: '14em',
-                    minHeight: '2.71428571em',
-                    display: 'block',
-                }
-            } >
+            <>
                 <input 
-                    placeholder="city"
+                    placeholder="city, state"
                     style={{width:'inherit', border:'none', fontFamily: 'Roboto, sans-serif', outline: 'none', minHeight:'inherit'}}  
                     value={this.state.value} 
                     onChange={this.onTextChange} type="text" 
                 />
                 {this.renderSuggest()}
-                {/* {this.state.activeItem ? this.cityNotFound()} */}
-            </div>
+            </>
         )
     }
 }

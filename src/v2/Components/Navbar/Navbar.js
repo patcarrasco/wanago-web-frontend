@@ -45,7 +45,7 @@ function NavBar(props) {
                                     <Button circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={handleFeedClick}/>
                                 </div>
                             </Menu.Item>
-                            <Menu.Menu>
+                            <Menu.Menu >
                                 {/* POSSIBLE ADDITIONAL SEARCH TERM, MAYBE BY EVENT TYPE??? */}
                                 <EventSearch />
                             </Menu.Menu>

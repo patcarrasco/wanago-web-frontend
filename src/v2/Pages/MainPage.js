@@ -3,6 +3,7 @@ import MapContainer from '../Components/MapContainer/MapContainer';
 import Navbar from '../Components/Navbar/Navbar';
 import EventFeed from '../Components/EventFeed/EventFeed';
 import VenueFeed from '../Components/VenueFeed/VenueFeed';
+import SearchResultBox from '../Components/SearchResultBox/SearchResultBox';
 
 
 function MainPage(props) {
@@ -15,6 +16,7 @@ function MainPage(props) {
                                 <Navbar/>
                                 <EventFeed />
                                 <VenueFeed />
+                                <SearchResultBox />
                         </div>
                 </>
         )  

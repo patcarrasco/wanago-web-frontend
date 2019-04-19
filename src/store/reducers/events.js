@@ -1,7 +1,7 @@
-import {LOAD_SPOTLIGHT_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS, RESET_SEARCH, SET_LOAD_STATUS} from '../actions/actionTypes'
+import {LOAD_SEARCH_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS, RESET_SEARCH, SET_LOAD_STATUS} from '../actions/actionTypes'
 
 const initState = {
-    spotlightEvents: [],
+    searchedEvents: [],
     eventsByLocation: [],
     selectedEvent: null,
     savedEvents: [],
@@ -10,10 +10,20 @@ const initState = {
 
 const reducer = (state = initState, action) => {
     switch(action.type) {
-        case LOAD_SPOTLIGHT_EVENTS:
+        case LOAD_SEARCH_EVENTS:
             return {
                 ...state,
-                spotlightEvents: action.payload.events
+                searchedEvents: action.payload.events._embedded.events.map(e => {
+                    return {
+                        key: e.id,
+                        name: e.name,
+                        dates: e.dates,
+                        venues: e._embedded.venues,
+                        attractions: e._embedded.attractions,
+                        priceRanges: e.priceRanges,
+                        url: e.url
+                    }
+                })
             }
         case LOAD_EVENTS_BY_LOCATION:
             return {
