@@ -4,8 +4,8 @@ const initState = {
     following: [],
     followers: [],
     users: [],
-    lat:0,
-    long:0,
+    lat:false,
+    lon:false,
 }
 
 const reducer = (state = initState, action) => {

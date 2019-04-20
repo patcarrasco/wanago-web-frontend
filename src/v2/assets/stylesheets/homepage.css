@@ -1,0 +1,42 @@
+:local(.headerImg) {
+    background-color: rgb(8,8,8);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 10%;
+    width: 100%;
+    padding: 10px;
+    /* display: inline-block; */
+    -webkit-animation: fadein 1s;
+    animation: fadein 1s;
+}
+
+:local(.mapSegment) {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    border-color: blueviolet;
+    background-color: rgb(29, 29, 29);
+}
+
+:local(.Nav) {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    /* justify-content: space-between; */
+    height: 8vh;
+    background-color: orange
+}
+:local(.page) {
+    background-color: rgb(29,29,29);
+    width: 100vw;
+    height: 100vh;
+    background-color: #242424
+}
+
+:local(.pageContent) {
+    background-color: crimson;
+    /* width: 100vw; */
+    height: 92vh;
+}
+
