@@ -1,5 +1,4 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
-import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 // import reducers here
 import navbar from './reducers/navbar'
@@ -19,7 +18,7 @@ const rootReducer = combineReducers({
 })
 
 const configureStore = () => (
-    createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+    createStore(rootReducer, applyMiddleware(thunk))
 )
 
 export default configureStore
