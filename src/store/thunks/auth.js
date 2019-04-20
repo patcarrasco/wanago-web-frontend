@@ -1,3 +1,4 @@
+
 const ROOT_URL = process.env.REACT_APP_ROOT_URL
 
 export const _signIn = (credentials) => dispatch => {
@@ -19,11 +20,17 @@ export const _signIn = (credentials) => dispatch => {
         })
         .then(res => res.json())
         .then(data => {
-            const {auth_token, uuid, id } = data
-            localStorage.setItem('token', auth_token)
-            localStorage.setItem('uuid', uuid)
-            localStorage.setItem('id', id)
-        }).catch(e => console.log('Error!', e))
+            // console.log('response', data)
+            if (data.message === 'login failed') {
+                return false
+            } else {
+                const {auth_token, uuid, id } = data
+                localStorage.setItem('token', auth_token)
+                localStorage.setItem('uuid', uuid)
+                localStorage.setItem('id', id)
+                return true
+            }
+        }).catch(e => console.log(e))
 }
 
 export const _signUp = (credentials) => dispatch => {
@@ -45,11 +52,18 @@ export const _signUp = (credentials) => dispatch => {
         })
         .then(res => res.json())
         .then(data => {
-            const {auth_token, uuid, id} = data
-            localStorage.setItem('token', auth_token)
-            localStorage.setItem('uuid', uuid)
-            localStorage.setItem('id', id)
+            console.log(data)
+            if (data.message) {
+                return {status: false, message: data.message}
+            } else {
+                const {auth_token, uuid, id} = data
+                localStorage.setItem('token', auth_token)
+                localStorage.setItem('uuid', uuid)
+                localStorage.setItem('id', id)
+                return {status: true}
+            }
         })
+        .catch(console.warn)
 }
 
 

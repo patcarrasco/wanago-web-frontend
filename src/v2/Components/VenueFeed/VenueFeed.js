@@ -53,7 +53,7 @@ class VenueFeed extends PureComponent {
     } 
 
     mobileView = () => (
-        <Segment className={'content-box'} style={{maxWidth: "100%", maxHeight:'30.5%', minHeight:"25%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}  >
+        <Segment className={'content-box'} style={{maxWidth: "100%", maxHeight:'85.5%', minHeight: '30%', overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}  >
             {
                 !this.state.showVenueInfo ?
                 <>
@@ -61,9 +61,9 @@ class VenueFeed extends PureComponent {
                     <Grid columns={2}>
                     {this.venues()}
                     </Grid>
-                    <Dimmer active={!!!localStorage.getItem("localVenues")}>
-                        <Loader indeterminate size='massive'></Loader>
-                    </Dimmer>
+                        <Dimmer active={!!!localStorage.getItem("localVenues")}>
+                            <Loader indeterminate size='mini'></Loader>
+                        </Dimmer>
                 </>
                     :
                     <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>
@@ -108,9 +108,18 @@ class VenueFeed extends PureComponent {
     }
 
     venueFromMap = () => (
-        <Segment style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
-            <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
-        </Segment>
+        <>
+            <Responsive minWidth={1000}>
+                <Segment style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+                    <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
+                </Segment>
+            </Responsive>
+            <Responsive maxWidth={999}>
+                <Segment style={{maxHeight:"85.5%", minHeight: "85.5%", minWidth:'93%', overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}>
+                    <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
+                </Segment>
+            </Responsive>
+        </>
     )
 
 

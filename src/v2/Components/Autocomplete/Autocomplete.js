@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import {data} from '../../assets/usCities/usaCities'
-import { Input } from 'semantic-ui-react';
+import {} from 'semantic-ui-react';
 
 
 class Autocomplete extends PureComponent {
@@ -81,7 +81,7 @@ class Autocomplete extends PureComponent {
         return (
             <>
                 <input 
-                    placeholder="city, state"
+                    placeholder="address, city, state"
                     style={{width:'inherit', border:'none', fontFamily: 'Roboto, sans-serif', outline: 'none', minHeight:'inherit'}}  
                     value={this.state.value} 
                     onChange={this.onTextChange} type="text" 

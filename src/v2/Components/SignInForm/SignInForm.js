@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import {Form, Input} from 'semantic-ui-react'
+import {Form, Input, Message} from 'semantic-ui-react'
 import firebase from '../../../Firebase'
 import {withRouter} from 'react-router-dom'
 
@@ -11,10 +11,10 @@ import {loadPositional} from '../../../store/thunks/users'
 
 
 class SignInForm extends PureComponent {
-    state = {username:'', password:'', active: false}
+    state = {username:'', password:'', active: false, error: false, errorMessage: ""}
 
     handleInputChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({[e.target.name]: e.target.value, error: false})
     }
 
     handleSignUpClick = (e) => {
@@ -22,17 +22,20 @@ class SignInForm extends PureComponent {
     }
 
     handleSubmit = () => {
-        this.props.signIn(this.state).then(() => {
-            firebase
-                .auth()
-                .signInWithCustomToken(localStorage.getItem('token'))
-                .then(() => {
-                    this.props._loadPositional()
-                    this.props.showLogin(false)
-                    this.props.history.push('/home')
-                })
-        })
-        .catch((err) => console.log('There was an ERROR: ', err))
+        this.props.signIn(this.state).then((status) => {
+            if (status) {
+                firebase
+                    .auth()
+                    .signInWithCustomToken(localStorage.getItem('token'))
+                    .then(() => {
+                        this.props._loadPositional()
+                        this.props.showLogin(false)
+                        this.props.history.push('/home')
+                    })
+            } else {
+                this.setState({errorMessage: "username / password does not match our records", error: true})
+            }
+        }).catch((err) => console.log('There was an ERROR: ', err))
     }
 
     handleMouse = () => {
@@ -47,36 +50,45 @@ class SignInForm extends PureComponent {
                     <Form className="big">
                         <Form.Field>
                             <Input icon="user" placeholder = "username" name='username' value={this.state.username} onChange={this.handleInputChange}
+                                style={{borderRadius:'unset'}}
                             />
                         </Form.Field>
                         <Form.Field>
                             <Input 
                                 type='password' icon="key" placeholder = "password" name='password' value={this.state.password} onChange={this.handleInputChange} 
                                 style={{
-                                    borderRadius:"0",
-                                    backgroundColor:"transparent"
+                                    borderRadius:'unset',
+                                    // backgroundColor:"transparent"
                                 }}
                             />
                         </Form.Field>
                         <Form.Field>
-                            <button
-                                name='logIn'  
-                                onClick={this.handleSubmit}
-                                style={{
-                                    borderRadius:"3px",
-                                    borderColor: "#b4c5e4",
-                                    backgroundColor: "#b4c5e4",
-                                    color: "#3c3744",
-                                    width: "100%",
-                                    height: "40px",
-                                    fontFamily:"Roboto, sans-serif"
-                                }} 
-                            > 
-                                LOG IN
-                            </button>
+                            {
+                                this.state.error
+                            ?
+                                <Message negative>
+                                    {this.state.errorMessage}
+                                </Message>
+                            :
+                                <button
+                                    name='logIn'  
+                                    onClick={this.handleSubmit}
+                                    style={{
+                                        // borderRadius:"3px",
+                                        borderColor: "#b4c5e4",
+                                        backgroundColor: "#b4c5e4",
+                                        color: "#3c3744",
+                                        width: "100%",
+                                        height: "40px",
+                                        fontFamily:"Roboto, sans-serif"
+                                    }} 
+                                > 
+                                    LOG IN
+                                </button>
+                            }
                         </Form.Field>
-                        <Form.Field style={{color: '#fbfff1', fontFamily: "Roboto, sans-serif"}}>
-                            Don't have an account?
+                        <Form.Field style={{color: '#fbfff1', fontFamily: "Roboto, sans-serif", textAlign:'center'}}>
+                            No account?
                             <button 
                                 name='signUp' 
                                 onClick={this.handleSignUpClick}
@@ -95,7 +107,6 @@ class SignInForm extends PureComponent {
                             >
                                 Sign up
                             </button>
-
                         </Form.Field>
                     </Form>
 

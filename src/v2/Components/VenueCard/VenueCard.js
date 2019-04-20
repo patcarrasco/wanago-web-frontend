@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid, Button, Responsive } from 'semantic-ui-react';
 
 import {getVenueInformation} from '../../../store/thunks/venue'
 import {selectVenue} from '../../../store/actions/venueActions'
@@ -13,6 +13,15 @@ function VenueCard(props) {
         props._loadVenueEvents(props.id)
         props.map.map.panTo(latlng)
         props.map.map.panBy(-225, 0)
+        props.showVenueInfoHandler()
+    }
+
+    const venueClickHandlerMobile = () => {
+        let latlng = new window.google.maps.LatLng(props.location.latitude, props.location.longitude)
+        props._selectVenue(props)
+        props._loadVenueEvents(props.id)
+        props.map.map.panTo(latlng)
+        props.map.map.panBy(0, 0)
         props.showVenueInfoHandler()
     }
 
@@ -41,7 +50,12 @@ function VenueCard(props) {
             </Grid.Column>
             <Grid.Column>
                 <div>
-                    <Button size="large" style={{backgroundColor:'#b4c5e4'}} className={"show-venue-info"}fluid onClick={() => venueClickHandler()}> {buttonContent()} </Button>
+                    <Responsive minWidth={1000}>
+                        <Button size="large" style={{backgroundColor:'#b4c5e4', borderRadius:'unset'}} className={"show-venue-info"}fluid onClick={() => venueClickHandler()}> {buttonContent()} </Button>
+                    </Responsive>
+                    <Responsive maxWidth={999}>
+                        <Button size="large" style={{backgroundColor:'#b4c5e4', borderRadius:'unset'}} className={"show-venue-info"}fluid onClick={() => venueClickHandlerMobile()}> {buttonContent()} </Button>
+                    </Responsive>
                 </div>
 
             </Grid.Column>

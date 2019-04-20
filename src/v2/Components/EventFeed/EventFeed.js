@@ -31,7 +31,7 @@ class EventFeed extends PureComponent {
     }
 
     mobileView = () => (
-        <Segment style={{maxWidth: "100%", maxHeight:'30.5%', minHeight:"25%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}>
+        <Segment style={{maxWidth: "100%", maxHeight:'85.5%', overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}>
             <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
             <Grid columns={3}>
                 {this.feedContent()}

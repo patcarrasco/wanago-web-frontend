@@ -9,8 +9,9 @@ import {selectVenue} from '../../../store/actions/venueActions'
 import {toggleVenue} from '../../../store/actions/navbarActions'
 
 
-// import {styles} from '../../assets/map/styles'
-import {styles} from '../../assets/map/dayStyles'
+import {styles} from '../../assets/map/styles'
+import { Loader } from 'semantic-ui-react';
+// import {styles} from '../../assets/map/dayStyles'
 
     
 const size = {height:'100%', width:'100%', position: 'relative', padding:'0', margin:'0'}
@@ -109,7 +110,7 @@ class MapContainer extends PureComponent {
     }
 
     render() {
-        return this.state.mapReady ? this.mapRenderer() : 'this is loading...'
+        return this.state.mapReady ? this.mapRenderer() : <Loader size="massive" active></Loader>
     }
 } 
 

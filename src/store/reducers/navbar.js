@@ -1,10 +1,11 @@
-import {SHOW_LOGIN, SHOW_SIGNUP, TOGGLE_FEED, TOGGLE_VENUE_INFO} from '../actions/actionTypes'
+import {TOGGLE_SAVED, SHOW_LOGIN, SHOW_SIGNUP, TOGGLE_FEED, TOGGLE_VENUE_INFO} from '../actions/actionTypes'
 
 const initState = {
     showSignup: false,
     showLogin: false,
     showFeed: false,
-    showVenue: false
+    showVenue: false,
+    showSaved: false
 }
 
 const reducer = (state = initState, action) => {
@@ -23,13 +24,23 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 showFeed: !state.showFeed,
-                showVenue: false
+                showVenue: false,
+                showSaved: false
             }
         case TOGGLE_VENUE_INFO:
             return {
                 ...state,
                 showVenue: action.payload,
-                showFeed: false
+                showFeed: false,
+                showSaved: false,
+
+            }
+        case TOGGLE_SAVED:
+            return {
+                ...state,
+                showSaved: !state.showSaved,
+                showFeed: false,
+                showVenue: false
             }
         default:
             return state;

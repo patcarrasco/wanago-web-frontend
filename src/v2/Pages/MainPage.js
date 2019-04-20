@@ -4,6 +4,7 @@ import Navbar from '../Components/Navbar/Navbar';
 import EventFeed from '../Components/EventFeed/EventFeed';
 import VenueFeed from '../Components/VenueFeed/VenueFeed';
 import SearchResultBox from '../Components/SearchResultBox/SearchResultBox';
+import SavedEvents from '../Components/SavedEvents/SavedEvents';
 
 
 function MainPage(props) {
@@ -17,6 +18,7 @@ function MainPage(props) {
                                 <EventFeed />
                                 <VenueFeed />
                                 <SearchResultBox />
+                                <SavedEvents />
                         </div>
                 </>
         )  

@@ -5,14 +5,17 @@ export const LOAD_POSITION = 'LOAD_POSITION'
 export const RESET_SEARCH = 'RESET_SEARCH'
 export const TOGGLE_FEED = 'TOGGLE_FEED'
 export const TOGGLE_VENUE_INFO = 'TOGGLE_VENUE_INFO'
+export const TOGGLE_SAVED = 'TOGGLE_SAVED'
 
 // event actions
 export const LOAD_SEARCH_EVENTS = 'LOAD_SEARCH_EVENTS'
 export const LOAD_EVENTS_BY_LOCATION = 'LOAD_EVENTS_BY_LOCATION'
 export const LOAD_EVENT_DETAILS = 'LOAD_EVENT_DETAILS'
 export const LOAD_SAVED_EVENTS = 'LOAD_SAVED_EVENTS'
-export const SAVE_EVENT = 'SAVE_EVENT'
+
+// search / event actions
 export const SET_LOAD_STATUS = 'SET_LOAD_STATUS'
+export const SHOW_SEARCH_RESULTS = 'SHOW_SEARCH_RESULTS'
 
 // auth actions
 export const SIGN_IN = 'SIGN_IN'

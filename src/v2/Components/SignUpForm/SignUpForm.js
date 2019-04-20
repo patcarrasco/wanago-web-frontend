@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import {Form, Icon, Modal, Button, Divider, Item, Container} from 'semantic-ui-react'
+import {Form, Icon, Modal, Button, Divider, Item, Container, Message} from 'semantic-ui-react'
 import firebase from '../../../Firebase'
 import {withRouter} from 'react-router-dom'
 
@@ -10,10 +10,10 @@ import {loadPositional} from '../../../store/thunks/users'
 
 
 class SignUpForm extends PureComponent {
-    state = {username:'', password:'', showForm: false}
+    state = {username:'', password:'', showForm: false, error: false, errorMessage: ""}
 
     handleInputChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({[e.target.name]: e.target.value, error: false})
     }
 
     toggleSignUpForm = () => {
@@ -25,17 +25,26 @@ class SignUpForm extends PureComponent {
     }
 
     createUser = () => {
-        this.props.createUser(this.state).then(() => {
-                firebase
-                    .auth()
-                    .signInWithCustomToken(localStorage.getItem('token'))
-                    .then(() => {
-                        this.props._loadPosition()
-                        this.props.showSignup(false)
-                        this.props.history.push('/home')
-                    })
-            })
-            .catch((err) => console.log('There was an ERROR: ', err))
+        if (this.state.password.length < 4) {
+            this.setState({error: true, errorMessage: ["Password must be atleast 4 characters"]})
+        } else {
+            this.props.createUser(this.state).then((e) => {
+                if (e.status) {
+                    firebase
+                        .auth()
+                        .signInWithCustomToken(localStorage.getItem('token'))
+                        .then(() => {
+                            this.props._loadPosition()
+                            this.props.showSignup(false)
+                            this.props.history.push('/home')
+                        })
+                } else {
+                    console.log(e.message)
+                    this.setState({error: true, errorMessage:e.message})
+                }
+                })
+                .catch((err) => console.log('There was an ERROR: ', err))
+        }
     }
 
 
@@ -43,12 +52,12 @@ class SignUpForm extends PureComponent {
         <>
             <Item.Group>
                 <Item>
-                    <Button size='large' fluid color='facebook' disabled>
+                    <Button size='large' fluid color='facebook' disabled style={{borderRadius:'unset'}}>
                         <Icon name='facebook'/> Continue with facebook
                     </Button>
                 </Item>
                 <Item>
-                    <Button size='large' fluid disabled>
+                    <Button size='large' fluid disabled style={{borderRadius:'unset'}}>
                         <Icon name='google' /> Continue with google
                     </Button>
                 </Item>
@@ -57,7 +66,7 @@ class SignUpForm extends PureComponent {
             
             <Divider horizontal> Or </Divider>
 
-            <Button size='large' fluid color='purple' onClick={this.toggleSignUpForm}>
+            <Button size='large' fluid color='purple' onClick={this.toggleSignUpForm} style={{borderRadius:'unset', backgroundColor:'#3d52d5'}}>
                 Create an Account
             </Button>
         </>
@@ -92,9 +101,19 @@ class SignUpForm extends PureComponent {
                         onChange={this.handleInputChange}
                     />
                 </Form.Field>
-                <Button fluid size='large' color='purple' onClick={this.createUser}>
-                    Sign up
-                </Button>
+                {
+                    this.state.error 
+                    ?
+                    <Message
+                        negative
+                        header="Error:"
+                        list={this.state.errorMessage}
+                    />              
+                    :
+                    <Button fluid size='large' color='purple' onClick={this.createUser} style={{borderRadius: 'unset', backgroundColor:'#3d52d5'}}>
+                        Sign up
+                    </Button>
+                }
             </Form>
             <Divider/>
             <Container textAlign='center'>
@@ -120,7 +139,7 @@ class SignUpForm extends PureComponent {
     render() {
         return(
             <Modal open={true} size='tiny' dimmer={'blurring'} >
-                <Modal.Content>
+                <Modal.Content style={{borderRadius: 'unset'}}>
                     <Item.Group>
                         <Button circular icon='x' onClick={this.handleExit}/>
                     </Item.Group>

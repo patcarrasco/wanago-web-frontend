@@ -3657,7 +3657,7 @@ export const data = [
   {'title': 'New Ulm, Minnesota'},
   {'title': 'New Windsor, New York'},
   {'title': 'New Windsor, New York'},
-  {'title': 'New York, New York'},
+  {'title': 'New York City, New York'},
   {'title': 'Newark, New Jersey'},
   {'title': 'Newark, New York'},
   {'title': 'Newark, Ohio'},

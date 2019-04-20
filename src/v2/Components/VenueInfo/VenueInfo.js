@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Button, Grid, Loader } from 'semantic-ui-react';
+import { Button, Grid, Loader, Responsive, Dimmer } from 'semantic-ui-react';
 import VenueInfoEventCard from './VenueInfoEventCard';
 
 
@@ -28,7 +28,7 @@ class VenueInfo extends React.PureComponent {
                         </div>
                     </div>
                     <div>
-                        {!!this.props.events ? this.content() : <Loader active>Loading...</Loader>}
+                        {!!this.props.events ? this.content() : <Dimmer active> <Loader size='massive'/> </Dimmer>}
                     </div>
                 </>
         )
