@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MapContainer from '../Components/MapContainer/MapContainer';
 import Navbar from '../Components/Navbar/Navbar';
 import EventFeed from '../Components/EventFeed/EventFeed';
@@ -8,13 +8,17 @@ import SavedEvents from '../Components/SavedEvents/SavedEvents';
 
 
 function MainPage(props) {
+        let [mapReady, setMapReady] = useState(false)
+
+        const mapMounted = () => setMapReady(true)
+
         return (
                 <>
                         <div style={{height:'100%', backgroundColor:'white'}}>
-                                <MapContainer/>  
+                                <MapContainer mapMounted={mapMounted} />  
                         </div>
                         <div style={{position:'fixed', width:'100%'}}>
-                                <Navbar/>
+                                <Navbar mapReady={mapReady}/>
                                 <EventFeed />
                                 <VenueFeed />
                                 <SearchResultBox />

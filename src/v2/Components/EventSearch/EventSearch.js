@@ -108,7 +108,7 @@ class EventSearch extends PureComponent {
                             </div>
                     </Menu.Item>
                     <Menu.Item>
-                        <Button size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius:'unset'}} onClick={this.searchStartHandler}>SEARCH</Button>
+                        <Button disabled={!this.props.mapReady} size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius:'unset'}} onClick={this.searchStartHandler}>SEARCH</Button>
                     </Menu.Item>
                 </Responsive>
                 <Responsive maxWidth={900}>
@@ -136,7 +136,7 @@ class EventSearch extends PureComponent {
                             </div>
                         </Form.Field>
                         <Form.Field>
-                            <Button fluid size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius:'unset'}} onClick={this.searchStartHandler}>SEARCH</Button>
+                            <Button disabled={!this.props.mapReady} fluid size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius:'unset'}} onClick={this.searchStartHandler}>SEARCH</Button>
                         </Form.Field>
                     </Form>
                 </Responsive>

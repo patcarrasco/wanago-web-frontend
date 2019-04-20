@@ -29,6 +29,7 @@ class MapContainer extends PureComponent {
         const {lat, lon} = this.props
         if (!!lat && !!lon && localStorage.getItem('localEvents') && localStorage.getItem('localVenues')) {
             this.setState({mapReady: true})
+            this.props.mapMounted()
         } else {
             this.props._loadPosition()
         }
@@ -46,6 +47,7 @@ class MapContainer extends PureComponent {
             }
             if (!!localStorage.getItem('localEvents') && !!localStorage.getItem('localVenues')) {
                 this.setState({mapReady: true})
+                this.props.mapMounted()
             }
         }   
     }

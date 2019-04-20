@@ -28,6 +28,10 @@ function NavBar(props) {
     }
 
     const handleLogout = () => {
+        props._clearVenue()
+        props._toggleVenue(false)
+        props._closeSearchResults()
+        showSearch && setShowSearch(false)
         localStorage.clear()
         props.history.push('/')
     }
@@ -48,7 +52,7 @@ function NavBar(props) {
     }
 
     const handleSavedEventsClick = () => {
-        props._toggleSaved()
+        props._toggleSaved(!props.showSaved)
         props._clearVenue()
         props._closeSearchResults()
         showSearch && setShowSearch(false)
@@ -66,18 +70,18 @@ function NavBar(props) {
                             </Menu.Item>
                             <Menu.Item> 
                                 <div style={{display:'flex', alignItems:'center', justifyContent:"center", marginLeft:'1em'}}>
-                                    <Button circular icon = "heart outline" style={{color: showSaved ? '#feffff' : `#3c3744`, backgroundColor: showSaved ? '#3d52d5':'#B4C5E4'}} onClick={handleSavedEventsClick} />
-                                    <Button circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
-                                    <Button circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={handleFeedClick}/>
+                                    <Button disabled={!props.mapReady} circular icon = "heart outline" style={{color: showSaved ? '#feffff' : `#3c3744`, backgroundColor: showSaved ? '#3d52d5':'#B4C5E4'}} onClick={handleSavedEventsClick} />
+                                    <Button disabled={!props.mapReady} circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
+                                    <Button disabled={!props.mapReady} circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={handleFeedClick}/>
                                 </div>
                             </Menu.Item>
                             <Menu.Menu >
                                 {/* POSSIBLE ADDITIONAL SEARCH TERM, MAYBE BY EVENT TYPE??? */}
-                                <EventSearch />
+                                <EventSearch mapReady={props.mapReady} />
                             </Menu.Menu>
                             <Menu.Menu position="right">
                                 <Menu.Item>
-                                    <Button onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius: 'unset'}}>LOGOUT</Button>
+                                    <Button disabled={!props.mapReady} onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius: 'unset'}}>LOGOUT</Button>
                                 </Menu.Item>
                             </Menu.Menu>
                         </Menu>
@@ -94,11 +98,11 @@ function NavBar(props) {
 
                             <Menu.Menu position='right'>
                                      <div style={{display:'flex', alignItems:'center', justifyContent:"center", marginRight:'14px'}}>
-                                        <Button circular icon = 'search' style={{color: showSearch ? '#feffff' : `#3c3744`, backgroundColor: showSearch ? '#3d52d5':'#B4C5E4'}} onClick={handleShowSearch}></Button>
-                                        <Button circular icon = "heart outline" style={{color: showSaved ? '#feffff' : `#3c3744`, backgroundColor: showSaved ? '#3d52d5':'#B4C5E4'}} onClick={handleSavedEventsClick} />
-                                        <Button circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
-                                        <Button circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={handleFeedClick}/>
-                                        <Button circular icon = 'power off' onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}></Button>
+                                        <Button disabled={!props.mapReady} circular icon = 'search' style={{color: showSearch ? '#feffff' : `#3c3744`, backgroundColor: showSearch ? '#3d52d5':'#B4C5E4'}} onClick={handleShowSearch}></Button>
+                                        <Button disabled={!props.mapReady} circular icon = "heart outline" style={{color: showSaved ? '#feffff' : `#3c3744`, backgroundColor: showSaved ? '#3d52d5':'#B4C5E4'}} onClick={handleSavedEventsClick} />
+                                        <Button disabled={!props.mapReady} circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
+                                        <Button disabled={!props.mapReady} circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={handleFeedClick}/>
+                                        <Button disabled={!props.mapReady} circular icon = 'power off' onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}></Button>
                                     </div>
                             </Menu.Menu>
                         </Menu>
@@ -107,7 +111,7 @@ function NavBar(props) {
                         ? 
                         <Segment style={{backgroundColor:'transparent', boxShadow:'none', borderStyle:'none', padding: '0px 0px 0px 0px'}} >
                             <div style={{backgroundColor: 'white', marginLeft: '14px', marginRight: '14px'}}>
-                                <EventSearch />
+                                <EventSearch mapReady={props.mapReady} />
                             </div>
                         </Segment>
                         :
