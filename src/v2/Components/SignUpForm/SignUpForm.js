@@ -39,11 +39,10 @@ class SignUpForm extends PureComponent {
                             this.props.history.push('/home')
                         })
                 } else {
-                    console.log(e.message)
                     this.setState({error: true, errorMessage:e.message})
                 }
                 })
-                .catch((err) => console.log('There was an ERROR: ', err))
+                .catch((err) => console.error('There was an ERROR: ', err))
         }
     }
 

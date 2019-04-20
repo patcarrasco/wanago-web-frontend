@@ -22,7 +22,7 @@ export const searchForEvents = (query) => dispatch => {
         dispatch(setLoadStatus(false))
         dispatch(loadSearchEvents(r))
     })
-    .catch(e => console.log("ERROR: ", e))
+    .catch(console.error)
 }
 
 export const getEventsByLocation = (query) => dispatch => {
@@ -44,7 +44,7 @@ export const getEventsByLocation = (query) => dispatch => {
     .then(r => {
         dispatch(loadEventsByLocation(r))
     })
-    .catch(e => console.log("ERROR: ", e))
+    .catch(console.error)
 }
 
 export const getSavedEvents = () => dispatch => {
@@ -54,9 +54,9 @@ export const getSavedEvents = () => dispatch => {
     return fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             dispatch(loadSavedEvents(data.events))
         })
+        .catch(console.error)
 } 
 
 export const addEvent = (params) => dispatch => {
@@ -86,6 +86,7 @@ export const addEvent = (params) => dispatch => {
             dispatch(getSavedEvents())
         }
     })
+    .catch(console.error)
 }
 
 export const deleteEvent = (id) => dispatch => {
@@ -107,6 +108,7 @@ export const deleteEvent = (id) => dispatch => {
         },
         body: JSON.stringify(obj)
     }).then(res=> res.json()).then(()=>dispatch(getSavedEvents()))
+    .catch(console.error)
 }
 
 

@@ -10,6 +10,7 @@ export const loadHangouts = () => dispatch => {
         .then(feed => {
             dispatch(saveHangouts(feed))
         })
+        .catch(console.error)
 }
 
 export const loadAllHangouts = () => dispatch => {
@@ -17,9 +18,9 @@ export const loadAllHangouts = () => dispatch => {
     return fetch(url)
         .then(res => res.json())
         .then(feed => {
-            console.log('redux: loadAllHangouts, response succesfull')
             dispatch(loadFullHangouts(feed))
         })
+        .catch(console.error)
 }
 
 export const createHangout = (eventInfo) => dispatch => {
@@ -36,6 +37,7 @@ export const createHangout = (eventInfo) => dispatch => {
     })
         .then(res => res.json())
         .then(data => dispatch(createHang(data.created)))
+        .catch(console.error)
 }
 
 export const addHangout = (hangoutInfo) => dispatch => {
@@ -50,6 +52,7 @@ export const addHangout = (hangoutInfo) => dispatch => {
         },
         body: JSON.stringify({data: {hangout_id: hangoutInfo}})
     })
+    .catch(console.error)
 }
 
 

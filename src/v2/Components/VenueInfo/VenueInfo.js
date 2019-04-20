@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Button, Grid, Loader, Responsive, Dimmer } from 'semantic-ui-react';
+import { Button, Grid, Loader, Dimmer } from 'semantic-ui-react';
 import VenueInfoEventCard from './VenueInfoEventCard';
 
 

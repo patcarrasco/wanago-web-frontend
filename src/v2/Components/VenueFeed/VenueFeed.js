@@ -28,9 +28,6 @@ class VenueFeed extends PureComponent {
         }
     }
     
-    componentWillUnmount() {
-        console.log('unmounting feed')
-    }
 
     localVenueCards() {
         return JSON.parse(localStorage.getItem("localVenues")).map(ven => <VenueCard key={ven.key} {...ven} showVenueInfoHandler={this.showVenueInfoHandler}/>)
@@ -125,7 +122,6 @@ class VenueFeed extends PureComponent {
 
     render() {
         if (this.props.venueSelected && !this.props.showVenue) {
-            console.log('render map venues')
             return this.venueFromMap()
         }
         return this.props.showVenue ? this.feed() : null

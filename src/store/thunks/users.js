@@ -15,12 +15,13 @@ export const load_followers = () => dispatch => {
             dispatch(loadFollowList(data.followers))
         }
     )
+    .catch(console.error)
 }
 
 export const load_following = () => dispatch => {
     const id = localStorage.getItem('id')
     const url = ROOT_URL + `/users/${id}/following`
-    return fetch(url).then(res => res.json()).then(data => dispatch(loadFollowingList(data.following)))
+    return fetch(url).then(res => res.json()).then(data => dispatch(loadFollowingList(data.following))).catch(console.error)
 }
 
 // Used to limit api calls for these evens to 1
@@ -48,12 +49,11 @@ export const loadPositional = () => dispatch => {
             const obj = {
                 latlong: `${lat},${lon}`,
             }
-            console.log(lat, lon)
             setTimeout(() => dispatch(getVenuesByLocation(obj)), 500)
             localVenues = true
         }
 
-    }, (err) => console.log('There was an error grabing user location:', err),
+    }, (err) => console.error('There was an error grabing user location:', err),
     {
         enableHighAccuracy: false,
         timeout: 5000,
@@ -63,7 +63,7 @@ export const loadPositional = () => dispatch => {
 
 export const loadUsers = () => dispatch => {
     const url = ROOT_URL + '/users'
-    return fetch(url).then(res => res.json()).then(data => dispatch(loadUserList(data)))
+    return fetch(url).then(res => res.json()).then(data => dispatch(loadUserList(data))).catch(console.error)
 }
 
 export const followAUser = (uuid) => dispatch => {
@@ -76,5 +76,5 @@ export const followAUser = (uuid) => dispatch => {
             Accept: 'application/json'
         },
         body: JSON.stringify({data: {uuid: uuid}})
-    })
+    }).catch(console.error)
 }

@@ -30,7 +30,7 @@ export const _signIn = (credentials) => dispatch => {
                 localStorage.setItem('id', id)
                 return true
             }
-        }).catch(e => console.log(e))
+        }).catch(console.error)
 }
 
 export const _signUp = (credentials) => dispatch => {
@@ -52,7 +52,6 @@ export const _signUp = (credentials) => dispatch => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             if (data.message) {
                 return {status: false, message: data.message}
             } else {
@@ -63,7 +62,7 @@ export const _signUp = (credentials) => dispatch => {
                 return {status: true}
             }
         })
-        .catch(console.warn)
+        .catch(console.error)
 }
 
 

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import {Menu, Dropdown, Button, Input, Label, Message, Responsive, Segment, Form} from 'semantic-ui-react'
+import {Menu, Dropdown, Button, Label, Responsive, Form} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
 
@@ -67,8 +67,6 @@ class EventSearch extends PureComponent {
             </div>
         )
     }
-
-    componentDidMount() {console.log('Event Search Mounted')}
 
     render() {
         const searchOptions = [

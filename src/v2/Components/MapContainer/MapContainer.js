@@ -86,7 +86,6 @@ class MapContainer extends PureComponent {
 
 
     mapRenderer = () => {
-        console.log('MAP RENDERING')
         return (
             <Map 
                 ref={map => this.props._saveMap(map)}  

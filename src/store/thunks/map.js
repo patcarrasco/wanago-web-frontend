@@ -5,7 +5,6 @@ const ROOT_URL = process.env.REACT_APP_ROOT_URL
 export const getVenuesByLocation = (query) => dispatch => {
     const url = ROOT_URL + '/venues/by_location'
     const params = {
-        // parameters for spotlight search (will be universal)
         uuid: localStorage.getItem('uuid'),
         query: query
     }
@@ -21,5 +20,5 @@ export const getVenuesByLocation = (query) => dispatch => {
     .then(r => {
         dispatch(loadLocalVenues(r))
     })
-    .catch(e => console.log("ERROR: ", e))
+    .catch(console.error)
 }

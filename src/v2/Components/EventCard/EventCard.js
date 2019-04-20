@@ -11,7 +11,6 @@ import { addEvent } from '../../../store/thunks/event';
 function EventCard(props) {
 
     function clickHandler(props) {
-        // console.log(props)
         props._addEvent(props)
     }
 

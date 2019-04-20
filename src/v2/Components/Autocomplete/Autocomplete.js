@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react'
 import {data} from '../../assets/usCities/usaCities'
-import {} from 'semantic-ui-react';
-
 
 class Autocomplete extends PureComponent {
     constructor(props) {

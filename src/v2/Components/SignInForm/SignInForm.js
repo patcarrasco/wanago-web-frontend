@@ -35,7 +35,7 @@ class SignInForm extends PureComponent {
             } else {
                 this.setState({errorMessage: "username / password does not match our records", error: true})
             }
-        }).catch((err) => console.log('There was an ERROR: ', err))
+        }).catch((err) => console.error('There was an ERROR: ', err))
     }
 
     handleMouse = () => {

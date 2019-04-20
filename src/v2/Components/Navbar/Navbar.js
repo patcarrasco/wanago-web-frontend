@@ -14,8 +14,6 @@ import EventSearch from '../EventSearch/EventSearch';
 function NavBar(props) {
     const [showSearch, setShowSearch] = useState(false)
 
-    // let showFeed = props.showFeed
-    // let showVenue = props.showVenue
     let {showFeed, showVenue, showSaved} = props
 
     const handleShowSearch = () => {

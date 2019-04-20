@@ -8,7 +8,6 @@ import { deleteEvent } from '../../../store/thunks/event';
 function SavedEventItem(props) {
 
     function clickHandler() {
-        console.log('clicked to remove!', props.id)
         props.removeEvent(props.id)
     }
 
