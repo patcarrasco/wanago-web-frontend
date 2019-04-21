@@ -18,7 +18,5 @@ Created with:
 * Ticketmaster
 * Redux
 
-
-
 # Screenshots
 
