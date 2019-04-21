@@ -75,11 +75,11 @@ const LandingPageMainBackground = () => {
         < div style = {
             {
                 width: "auto",
-                height: "100vh",
-                minHeight: "100vh",
-                backgroundColor: '#3c3744',
-                backgroundImage: `-webkit-linear-gradient(20deg, #b4c5e4 10%, transparent)`,
-                backgroundSize: 'contain',
+                height: "100%",
+                minHeight: "100%",
+                // backgroundColor: '#3c3744',
+                // backgroundImage: `-webkit-linear-gradient(20deg, #b4c5e4 10%, transparent)`,
+                // backgroundSize: 'contain',
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
