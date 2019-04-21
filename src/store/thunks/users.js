@@ -28,6 +28,7 @@ export const load_following = () => dispatch => {
 let localVenues = false, localEvents = false
 
 function verifyLocalstorage(dispatch, lat, lon) {
+    dispatch(loadPosition({lat: lat, lon:lon}))
     if (!!!localStorage.getItem('localEvents') && !localEvents) {
         let start = moment()
         let end = start.clone().add(2, "week")
@@ -53,7 +54,6 @@ export const loadPositional = () => dispatch => {
     navigator.geolocation.getCurrentPosition(pos => {
         const lat = pos.coords.latitude
         const lon = pos.coords.longitude
-        dispatch(loadPosition({lat: lat, lon:lon}))
 
         verifyLocalstorage(dispatch, lat, lon)
 
