@@ -1,8 +1,8 @@
 # Wanago - Frontend
 
-An interactive concert and sporting event discovery tool created with Rails, React, Google Maps and Firebase. The aim was to approach event discovery in an alternate manner, where users can find events by discovering nearby event venues, with an additional option to search for upcoming events traditionally. Try the demo [here](https://wanago.herokuapp.com/).
+An interactive concert and sporting event discovery tool created with Rails, React, Google Maps and Firebase. The aim was to approach event discovery in an alternate manner, where users can find events by discovering nearby event venues, with an additional option to search for upcoming events traditionally. Try the demo [here](https://wanago.herokuapp.com/)
 
-Check out the backend [here](https://github.com/patcarrasco/wanago-backend).
+Check out the backend code [here](https://github.com/patcarrasco/wanago-backend)
 
 ## Table of contents
 * [Technologies](#technologies)
