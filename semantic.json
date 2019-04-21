@@ -1,5 +1,5 @@
 {
-  "base": "src/semantic/",
+  "base": "src/semantic",
   "paths": {
     "source": {
       "config": "src/theme.config",
@@ -18,6 +18,5 @@
   "permission": false,
   "autoInstall": false,
   "rtl": false,
-  "components": ["button", "container", "divider", "flag", "header", "icon", "image", "input", "label", "list", "loader", "placeholder", "segment", "form", "grid", "menu", "table", "card", "item", "dimmer", "dropdown", "modal", "nag", "sidebar", "form", "state", "visibility"],
   "version": "2.4.2"
 }
