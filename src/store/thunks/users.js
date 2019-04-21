@@ -68,6 +68,7 @@ export const loadPositional = () => dispatch => {
                 console.error("There was an error loading user position: ", err)
                 break
         }
+        dispatch(loadPosition({lat: 40.7128, lon:74.0060}))
     },
     {
         enableHighAccuracy: true,
