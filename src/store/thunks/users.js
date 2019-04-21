@@ -53,10 +53,25 @@ export const loadPositional = () => dispatch => {
             localVenues = true
         }
 
-    }, (err) => console.error('There was an error grabing user location:', err),
+    }, (err) => {
+        switch(err) {
+            case err.PERMISSION_DENIED:
+                alert('You must enable Location Services to use this app')
+                break
+            case err.POSITION_UNAVAILABLE:
+                alert('Cannot access your location, please try again later')
+                break
+            case err.TIMEOUT:
+                console.warn('Request for location timed out')
+                break
+            default:
+                console.error("There was an error loading user position: ", err)
+                break
+        }
+    },
     {
         enableHighAccuracy: false,
-        timeout: 5000,
+        timeout: 10000,
         maximumAge: 0
     })
 }
