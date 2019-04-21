@@ -30,6 +30,7 @@ class SignUpForm extends PureComponent {
         } else {
             this.props.createUser(this.state).then((e) => {
                 if (e.status) {
+                    console.log(e, firebase)
                     firebase
                         .auth()
                         .signInWithCustomToken(localStorage.getItem('token'))

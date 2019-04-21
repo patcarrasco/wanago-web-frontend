@@ -24,6 +24,7 @@ class SignInForm extends PureComponent {
     handleSubmit = () => {
         this.props.signIn(this.state).then((status) => {
             if (status) {
+                console.log(status, firebase)
                 firebase
                     .auth()
                     .signInWithCustomToken(localStorage.getItem('token'))
