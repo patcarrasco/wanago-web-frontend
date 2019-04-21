@@ -60,7 +60,7 @@ export const loadPositional = () => dispatch => {
     }, (err) => {
         const obj = {
             lat: 40.7128, 
-            lon: 74.0060 
+            lon: -74.0060 
         }
 
         verifyLocalstorage(dispatch, obj.lat, obj.lon)
