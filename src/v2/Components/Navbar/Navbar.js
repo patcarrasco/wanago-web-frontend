@@ -7,7 +7,7 @@ import { setLoadStatus, resetSearch, showSearchResults} from '../../../store/act
 import {toggleFeed, toggleVenue, toggleSaved} from '../../../store/actions/navbarActions'
 import {selectVenue} from '../../../store/actions/venueActions'
 
-import { Header, Menu, Button, Responsive, Segment, Dropdown, Container } from 'semantic-ui-react';
+import { Header, Menu, Button, Responsive, Segment} from 'semantic-ui-react';
 
 import EventSearch from '../EventSearch/EventSearch';
 

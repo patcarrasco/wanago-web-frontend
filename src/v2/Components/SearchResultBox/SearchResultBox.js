@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {showSearchResults} from '../../../store/actions/eventActions'
 
-import { Segment, Header, Button, Loader, Grid, Responsive, Dimmer } from 'semantic-ui-react';
+import { Segment, Button, Loader, Grid, Responsive, Dimmer } from 'semantic-ui-react';
 import EventCard from '../EventCard/EventCard';
 
 class SearchResultBox extends PureComponent {

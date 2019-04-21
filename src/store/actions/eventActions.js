@@ -1,6 +1,6 @@
 // event action creator
 
-import {LOAD_SEARCH_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS, RESET_SEARCH, SET_LOAD_STATUS, SHOW_SEARCH_RESULTS, SAVE_EVENT} from './actionTypes'
+import {LOAD_SEARCH_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SAVED_EVENTS, RESET_SEARCH, SET_LOAD_STATUS, SHOW_SEARCH_RESULTS} from './actionTypes'
 
 export const loadSearchEvents = (events) => ({type: LOAD_SEARCH_EVENTS, payload: events})
 export const loadEventsByLocation = (events) => ({type: LOAD_EVENTS_BY_LOCATION, payload: events})
