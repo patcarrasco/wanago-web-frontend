@@ -56,13 +56,13 @@ export const loadPositional = () => dispatch => {
     }, (err) => {
         switch(err) {
             case err.PERMISSION_DENIED:
-                alert('You must enable Location Services to use this app')
+                console.error('You must enable Location Services to use this app', err)
                 break
             case err.POSITION_UNAVAILABLE:
-                alert('Cannot access your location, please try again later')
+                console.error('Cannot access your location, please try again later', err)
                 break
             case err.TIMEOUT:
-                console.warn('Request for location timed out')
+                console.warn('Request for location timed out', err)
                 break
             default:
                 console.error("There was an error loading user position: ", err)
@@ -70,9 +70,9 @@ export const loadPositional = () => dispatch => {
         }
     },
     {
-        enableHighAccuracy: false,
-        timeout: 10000,
-        maximumAge: 0
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 60000,
     })
 }
 
