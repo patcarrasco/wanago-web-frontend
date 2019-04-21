@@ -62,35 +62,15 @@ export const loadPositional = () => dispatch => {
         switch(err) {
             case err.PERMISSION_DENIED:
                 console.error('You must enable Location Services to use this app', err)
-                dispatch(loadPosition({ lat: 40.7128, lon: 74.0060 }))
-                dispatch(getEventsByLocation(obj))
-                dispatch(getVenuesByLocation(obj))
-                localVenues = true
-                localEvents = true
                 break
             case err.POSITION_UNAVAILABLE:
                 console.error('Cannot access your location, please try again later', err)
-                dispatch(loadPosition({ lat: 40.7128, lon: 74.0060 }))
-                dispatch(getEventsByLocation(obj))
-                dispatch(getVenuesByLocation(obj))
-                localVenues = true
-                localEvents = true
                 break
             case err.TIMEOUT:
                 console.warn('Request for location timed out', err)
-                dispatch(loadPosition({ lat: 40.7128, lon: 74.0060 }))
-                dispatch(getEventsByLocation(obj))
-                dispatch(getVenuesByLocation(obj))
-                localVenues = true
-                localEvents = true
                 break
             default:
                 console.error("There was an error loading user position: ", err)
-                dispatch(loadPosition({lat: 40.7128, lon:74.0060}))
-                dispatch(getEventsByLocation(obj))
-                dispatch(getVenuesByLocation(obj))
-                localVenues = true
-                localEvents = true
                 break
         }
     },
