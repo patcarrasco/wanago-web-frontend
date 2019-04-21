@@ -35,6 +35,17 @@ class VenueFeed extends PureComponent {
 
     venues = () => {
         if (this.state.localVenuesSaved && this.props.showVenue) {
+            if (this.localVenueCards().length < 1) {
+                return <div style={
+                    {
+                        fontSize: '22px'
+                    }
+                }>      
+                    <br/>             
+                    < p > We couldn't find any venues nearby :( <br/> <span style={{fontSize:'14px'}}>Search for events in a nearby city!</span></p>
+                    <br/>
+                </div>
+            } 
             return this.localVenueCards()
         }
     }
@@ -50,9 +61,26 @@ class VenueFeed extends PureComponent {
     } 
 
     mobileView = () => (
-        <Segment className={'content-box'} style={{maxWidth: "100%", maxHeight:'85.5%', minHeight: '30%', overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}  >
-            {
-                !this.state.showVenueInfo ?
+        < Segment className = {
+            'content-box'
+        }
+            style = 
+                {
+                    {
+                        maxHeight: '-webkit-fill-available',
+                        minHeight: '25%',
+                        minWidth: "-webkit-fill-available",
+                        maxWidth: '-webkit-fill-available',
+                        overflow:'auto', 
+                        borderRadius:'unset', 
+                        marginLeft:'14px', 
+                        marginRight:'14px'
+                    }
+                }
+        >
+            {   
+                !this.state.showVenueInfo 
+            ?
                 <>
                     <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
                     <Grid columns={2}>
@@ -62,15 +90,14 @@ class VenueFeed extends PureComponent {
                             <Loader indeterminate size='mini'></Loader>
                         </Dimmer>
                 </>
-                    :
-                    <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>
-
+            :
+                <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>
             }
         </Segment>
     )
 
     desktopView = () => (
-        <Segment className={'content-box'} style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
+        <Segment className={'content-box'} style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
             {
                 !this.state.showVenueInfo ?
                 <>

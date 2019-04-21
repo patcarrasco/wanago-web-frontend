@@ -26,12 +26,35 @@ class EventFeed extends PureComponent {
 
     feedContent = () => {
         if (this.state.localEventsSaved && this.props.feedVisible) {
+            if (this.localFeedCards().length < 1) {
+                return <div style={
+                    {
+                        fontSize: '22px'
+                    }
+                }>    
+                    <br/>               
+                    < p > We couldn't find any nearby events :( <br/> <span style={{fontSize:'14px'}}>Search for events in a nearby city!</span></p>
+                    <br/>
+                </div>
+            }
+
             return this.localFeedCards()
         }
     }
 
     mobileView = () => (
-        <Segment style={{maxWidth: "100%", maxHeight:'85.5%', overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}>
+        < Segment style = {
+            {
+                minHeight: '25%',
+                minWidth: '-webkit-fill-available',
+                maxHeight: '-webkit-fill-available',
+                maxWidth: '-webkit-fill-available',
+                overflow: 'auto',
+                borderRadius: 'unset',
+                marginLeft: '14px',
+                marginRight: '14px'
+            }
+        } >
             <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
             <Grid columns={3}>
                 {this.feedContent()}
@@ -43,7 +66,7 @@ class EventFeed extends PureComponent {
     )
 
     desktopView = () => (
-        <Segment style={{maxWidth: "50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+        <Segment style={{minWidth: "50%", maxWidth: "50%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
             <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
             <Grid columns={3}>
                 {this.feedContent()}

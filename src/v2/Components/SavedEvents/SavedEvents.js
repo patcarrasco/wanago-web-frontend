@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 
-import { Segment, Grid, Responsive } from 'semantic-ui-react';
+import { Segment, Grid, Responsive, Header } from 'semantic-ui-react';
 import { getSavedEvents } from '../../../store/thunks/event';
 import SavedEventItem from './SavedEventItem';
 
@@ -25,13 +25,10 @@ class SavedEvents extends PureComponent {
     createSavedEventsList = () => {
         if (this.props.myEvents.length < 1) {
             return (
-                <div style={
-                    {
-                        display: 'flex', alignItems:'center', justifyContent: 'center', width: '100%', height: '100%',
-                        position: 'absolute', fontSize: '2em'
-                    }
-                }>                   
-                    There's nothing here ;(
+                <div style={{fontSize: '22px'}}>    
+                    <br/>               
+                    < p > You haven't saved any events :( </p>
+                    <br/>
                 </div>
             )
         }
@@ -42,16 +39,30 @@ class SavedEvents extends PureComponent {
 
     desktop = () => {
         return (
-            <Segment className={'content-box'} style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
-                {this.state.safeMount ? <Grid>{this.createSavedEventsList()}</Grid>: null}
+            <Segment className={'content-box'} style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", overflow:'auto', borderRadius:'unset', marginLeft:'14px', marginRight: '14px'}}  >
+                {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
             </Segment>
         )
     }
 
     mobile = () => {
         return (
-            <Segment className={'content-box'} style={{minWidth: "93%", minHeight: "20%", maxHeight:"85.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}  >
-                {this.state.safeMount ? <Grid>{this.createSavedEventsList()}</Grid>: null}
+            < Segment className = {
+                'content-box'
+            }
+            style = {
+                {
+                    minHeight: '25%',
+                    minWidth: "-webkit-fill-available",
+                    maxHeight: '-webkit-fill-available',
+                    maxWidth: '-webkit-fill-available',
+                    overflow: 'auto',
+                    borderRadius: 'unset',
+                    marginRight: '14px',
+                    marginLeft: '14px'
+                }
+            } >
+                {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
             </Segment>
         )
     }

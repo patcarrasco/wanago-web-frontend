@@ -2,7 +2,7 @@ import {FEED_VENUE_CLICK, LOAD_LOCAL_VENUES, SAVE_MAP_OBJECT} from '../actions/a
 
 const initState = {
     coords: {},
-    localVenues: [],
+    localVenues: false,
     map: null,
 }
 
@@ -14,6 +14,11 @@ const reducer = (state = initState, action) => {
                 coords: action.payload
             }
         case LOAD_LOCAL_VENUES:
+            console.log('in map reducer,', action.payload)
+            if (action.payload.venues.page.totalElements < 1) {
+                return {...state, localVenues: []}
+            }
+
             let venues = action.payload.venues._embedded.venues.filter(ven => ven.upcomingEvents._total !== 0)
             return {
                 ...state,

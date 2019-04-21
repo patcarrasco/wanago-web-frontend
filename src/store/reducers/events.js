@@ -2,7 +2,7 @@ import {LOAD_SEARCH_EVENTS, LOAD_EVENTS_BY_LOCATION, LOAD_EVENT_DETAILS, LOAD_SA
 
 const initState = {
     searchedEvents: [],
-    eventsByLocation: [],
+    eventsByLocation: false,
     selectedEvent: null,
     savedEvents: false,
     loading: false,
@@ -28,6 +28,10 @@ const reducer = (state = initState, action) => {
                 })
             }
         case LOAD_EVENTS_BY_LOCATION:
+            console.log('in events reducer,', action.payload)
+            if (action.payload.events.page.totalElements < 1) {
+                return {...state, eventsByLocation: []}
+            }
             return {
                 ...state,
                 eventsByLocation: action.payload.events._embedded.events.map(e => {
