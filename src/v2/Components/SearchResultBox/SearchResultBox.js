@@ -52,7 +52,7 @@ class SearchResultBox extends PureComponent {
             )
         } else {
             return (
-                <div style={{backgroundColor: 'white', borderRadius: 'unset', maxHeight: '60%', overflow:'auto', position:'fixed', padding: '14px', marginRight:'14px'}}>
+                <div style={{backgroundColor: 'white', borderRadius: 'unset', maxHeight: '47%', overflow:'auto', position:'fixed', padding: '14px', marginRight:'14px'}}>
                     <Grid>
                         {this.createFeed()}
                     </Grid>
