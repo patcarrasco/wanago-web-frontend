@@ -41,7 +41,7 @@ const LandingPageMainBackground = () => {
             < div style = {
                 {
                     width: "max-content",
-                    height: "75%",
+                    height: "20%",
                     justifySelf: "center",
                     display:"flex",
                     alignItems:"center",
