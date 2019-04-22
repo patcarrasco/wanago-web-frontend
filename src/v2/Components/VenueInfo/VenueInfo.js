@@ -27,7 +27,7 @@ class VenueInfo extends React.PureComponent {
                             <h3 style={{fontWeight: 'bold'}}>Upcoming at {this.props.venue.name}</h3>
                         </div>
                     </div>
-                    <div>
+                    <div style={{width:'inherit', minHeight:'160px'}}>
                         {!!this.props.events ? this.content() : <Dimmer active> <Loader size='massive'/> </Dimmer>}
                     </div>
                 </>

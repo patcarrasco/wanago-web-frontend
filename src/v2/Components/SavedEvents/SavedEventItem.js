@@ -23,8 +23,7 @@ function SavedEventItem(props) {
                 {props.name}
             </Grid.Column>
             <Grid.Column width={2}>
-                <Button onClick={clickHandler} basic size="medium" circular icon="trash">
-                </Button>
+                <Button onClick={clickHandler} size="medium" circular icon="trash" style={{backgroundColor: "#b4c5e4", color:""}}/>
             </Grid.Column>
         </Grid.Row>
     )

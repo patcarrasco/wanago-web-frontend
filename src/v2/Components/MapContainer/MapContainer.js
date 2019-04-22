@@ -10,7 +10,7 @@ import {toggleVenue} from '../../../store/actions/navbarActions'
 
 
 import {styles} from '../../assets/map/styles'
-import { Loader } from 'semantic-ui-react';
+import { Loader, Dimmer } from 'semantic-ui-react';
 // import {styles} from '../../assets/map/dayStyles'
 
     
@@ -112,7 +112,7 @@ class MapContainer extends PureComponent {
     }
 
     render() {
-        return this.state.mapReady ? this.mapRenderer() : <Loader size="massive" active></Loader>
+        return this.state.mapReady ? this.mapRenderer() : <Dimmer active><Loader size="massive"></Loader></Dimmer>
     }
 } 
 
