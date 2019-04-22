@@ -19,7 +19,6 @@ export const getVenueInformation = (venueId) => dispatch => {
     })
     .then(res => res.json())
     .then(ven => {
-        console.log('saving data to reducer....')
         dispatch(saveSelectedVenueInfo(ven))
     })
     .catch(console.error)

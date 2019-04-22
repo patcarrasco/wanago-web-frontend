@@ -37,17 +37,13 @@ class MapContainer extends PureComponent {
 
     componentDidUpdate(prevProps, prevState) {
         const {lat, lon} = this.props
-        console.log('props updated in map container...')
         if (!!lat && !!lon && !this.state.mapReady) {
 
-            console.log('in within update, map not ready')
             if (prevProps.localEvents !== this.props.localEvents) {
-                console.log('setting local events....')
                 localStorage.setItem("localEvents", JSON.stringify(this.props.localEvents))
             } 
             
             if (prevProps.localVenues !== this.props.localVenues) {
-                console.log('setting local venues')
                 localStorage.setItem("localVenues", JSON.stringify(this.props.localVenues))
             }
             if (!!localStorage.getItem('localEvents') && !!localStorage.getItem('localVenues')) {

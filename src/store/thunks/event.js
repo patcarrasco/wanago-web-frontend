@@ -48,7 +48,6 @@ export const getEventsByLocation = (query) => dispatch => {
 }
 
 export const getSavedEvents = () => dispatch => {
-    console.log('getting events....')
     const id = localStorage.getItem("id")
     const url = ROOT_URL + `/users/${id}/events`
     return fetch(url)

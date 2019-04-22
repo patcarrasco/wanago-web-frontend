@@ -66,7 +66,7 @@ class EventFeed extends PureComponent {
     )
 
     desktopView = () => (
-        <Segment style={{minWidth: "50%", maxWidth: "50%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+        <Segment style={{minWidth: "40%", maxWidth: "40%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
             <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
             <Grid columns={3}>
                 {this.feedContent()}
@@ -79,16 +79,17 @@ class EventFeed extends PureComponent {
 
     feed = () => (
         <>
-            <Responsive minWidth={1000}>
+            <Responsive minWidth={879}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive maxWidth={999}>
+            <Responsive maxWidth={878}>
                 {this.mobileView()}
             </Responsive>
         </>
     )
     
     render() {
+        console.log('render event feed....')
         return this.props.feedVisible ? this.feed() : null
     }
 }

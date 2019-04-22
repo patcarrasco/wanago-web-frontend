@@ -85,9 +85,9 @@ class EventSearch extends PureComponent {
         ]
         return (
             <>
-                <Responsive minWidth={1000} style={{display: "flex"}}>
+                <Responsive minWidth={879} style={{display: "flex", backgroundColor:'#fbfff1', borderRadius:'16px'}}>
                     <Menu.Item style={{position:'static', padding:'1'}}>
-                        <Dropdown selection name='searchCategory' style={{borderRadius:'unset'}} value={this.state.searchCategory} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
+                        <Dropdown selection name='searchCategory' style={{borderRadius:'16px'}} value={this.state.searchCategory} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
                     </Menu.Item>
                     <Menu.Item style={{position: 'static', padding:'0'}}>
                             < div style = {
@@ -106,10 +106,10 @@ class EventSearch extends PureComponent {
                             </div>
                     </Menu.Item>
                     <Menu.Item>
-                        <Button disabled={!this.props.mapReady} size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius:'unset'}} onClick={this.searchStartHandler}>SEARCH</Button>
+                        <Button disabled={!this.props.mapReady} icon="search" circular size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5"}} onClick={this.searchStartHandler}></Button>
                     </Menu.Item>
                 </Responsive>
-                <Responsive maxWidth={900}>
+                <Responsive maxWidth={878} style={{backgroundColor:'#fbfff1', borderRadius: '16px'}}>
                     <Form style={{padding: '14px'}}>
                         <Form.Field>
                             Find events by city

@@ -27,9 +27,9 @@ function VenueCard(props) {
 
     const buttonContent = () => {
         if (props.upcomingEvents._total > 1) {
-            return `${props.upcomingEvents._total} upcoming events`
+            return `${props.upcomingEvents._total} events`
         } else {
-            return `1 upcoming event`
+            return `1 event`
         }
     }
 
@@ -40,7 +40,7 @@ function VenueCard(props) {
 
     return (
         <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>
-            <Grid.Column style={{fontSize:"16px", color:"#3c3744"}}>
+            <Grid.Column width={10} style={{fontSize:"14px", color:"#3c3744"}}>
             <div style={{fontWeight:"bold", fontSize:"18px", color:"#3c3744"}}>
                 {name}
             </div>
@@ -48,13 +48,13 @@ function VenueCard(props) {
                 {props.city} - {props.distance} miles away
             </div>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width={6}>
                 <div>
                     <Responsive minWidth={1000}>
-                        <Button size="large" style={{backgroundColor:'#b4c5e4', borderRadius:'unset'}} className={"show-venue-info"}fluid onClick={() => venueClickHandler()}> {buttonContent()} </Button>
+                        <Button size="small" content={buttonContent()} icon="map marker" style={{backgroundColor:'#b4c5e4', borderRadius:'16px'}} className={"show-venue-info"}fluid onClick={() => venueClickHandler()}/>
                     </Responsive>
                     <Responsive maxWidth={999}>
-                        <Button size="large" style={{backgroundColor:'#b4c5e4', borderRadius:'unset'}} className={"show-venue-info"}fluid onClick={() => venueClickHandlerMobile()}> {buttonContent()} </Button>
+                        <Button size="small" content={buttonContent()} icon="map marker" style={{backgroundColor:'#b4c5e4', borderRadius:'16px'}} className={"show-venue-info"}fluid onClick={() => venueClickHandlerMobile()}/> 
                     </Responsive>
                 </div>
 

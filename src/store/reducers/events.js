@@ -5,6 +5,7 @@ const initState = {
     eventsByLocation: false,
     selectedEvent: null,
     savedEvents: false,
+    savedEventIds: [],
     loading: false,
     showSearchResults: false,
 }
@@ -28,7 +29,6 @@ const reducer = (state = initState, action) => {
                 })
             }
         case LOAD_EVENTS_BY_LOCATION:
-            console.log('in events reducer,', action.payload)
             if (action.payload.events.page.totalElements < 1) {
                 return {...state, eventsByLocation: []}
             }
@@ -55,7 +55,8 @@ const reducer = (state = initState, action) => {
         case LOAD_SAVED_EVENTS:
             return {
                 ...state,
-                savedEvents: action.payload
+                savedEvents: action.payload,
+                savedEventIds: action.payload.map(e=> e.identifier)
             }
         case RESET_SEARCH:
             return {

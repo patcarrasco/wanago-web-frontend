@@ -97,7 +97,7 @@ class VenueFeed extends PureComponent {
     )
 
     desktopView = () => (
-        <Segment className={'content-box'} style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
+        <Segment className={'content-box'} style={{maxWidth: "40%", minWidth:"40%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
             {
                 !this.state.showVenueInfo ?
                 <>
@@ -117,10 +117,10 @@ class VenueFeed extends PureComponent {
 
     feed = () => (
         <>
-            <Responsive minWidth={1000}>
+            <Responsive minWidth={879}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive maxWidth={999}>
+            <Responsive maxWidth={878}>
                 {this.mobileView()}
             </Responsive>
         </>
@@ -133,12 +133,12 @@ class VenueFeed extends PureComponent {
 
     venueFromMap = () => (
         <>
-            <Responsive minWidth={1000}>
+            <Responsive minWidth={879}>
                 <Segment style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
                     <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
                 </Segment>
             </Responsive>
-            <Responsive maxWidth={999}>
+            <Responsive maxWidth={878}>
                 <Segment style={{maxHeight:"85.5%", minHeight: "85.5%", minWidth:'93%', overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}>
                     <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
                 </Segment>

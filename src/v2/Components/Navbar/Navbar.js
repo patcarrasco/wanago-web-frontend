@@ -58,11 +58,11 @@ function NavBar(props) {
 
     return (
             <>
-                <Responsive minWidth={1000}>
+                <Responsive minWidth={879}>
                     <Segment style={{backgroundColor:'transparent', boxShadow:'none', borderStyle:'none'}}>
-                        < Menu fluid style = {{backgroundColor: '#feffff', borderRadius:'unset'}} >
+                        < Menu fluid style = {{backgroundColor: '#3c3744', borderRadius:'unset'}} >
                             <Menu.Item style={{justifyContent:'flex-start'}}>
-                                < Header as='h1'style = {{fontFamily: "Roboto, sans-serif",fontWeight: "300",color: "#3c3744",}} > 
+                                < Header as='h1'style = {{fontFamily: "Roboto, sans-serif",fontWeight: "300",color: "#b4c5e4",}} > 
                                     wanago 
                                 </Header>
                             </Menu.Item>
@@ -79,17 +79,17 @@ function NavBar(props) {
                             </Menu.Menu>
                             <Menu.Menu position="right">
                                 <Menu.Item>
-                                    <Button disabled={!props.mapReady} onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius: 'unset'}}>LOGOUT</Button>
+                                    <Button disabled={!props.mapReady} onClick={handleLogout} icon="power off" circular style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}></Button>
                                 </Menu.Item>
                             </Menu.Menu>
                         </Menu>
                     </Segment>
                 </Responsive>
-                <Responsive maxWidth={999}>
+                <Responsive maxWidth={878}>
                     <Segment style={{backgroundColor:'transparent', boxShadow:'none', borderStyle:'none'}}>
-                        < Menu fluid style = {{backgroundColor: '#feffff', borderRadius:'unset', display: 'flex', flexDirection:'row'}} >
+                        < Menu fluid style = {{backgroundColor: '#3c3744', borderRadius:'unset', display: 'flex', flexDirection:'row'}} >
                             <Menu.Item style={{justifyContent:'flex-start'}}>
-                                < Header as='h1'style = {{fontFamily: "Roboto, sans-serif",fontWeight: "300",color: "#3c3744",}} > 
+                                < Header as='h1'style = {{fontFamily: "Roboto, sans-serif",fontWeight: "300",color: "#b4c5e4",}} > 
                                     wanago 
                                 </Header>
                             </Menu.Item>

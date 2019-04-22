@@ -39,7 +39,7 @@ class SavedEvents extends PureComponent {
 
     desktop = () => {
         return (
-            <Segment className={'content-box'} style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", overflow:'auto', borderRadius:'unset', marginLeft:'14px', marginRight: '14px'}}  >
+            <Segment className={'content-box'} style={{maxWidth: "40%", minWidth:"40%", maxHeight:"81.5%", overflow:'auto', borderRadius:'unset', marginLeft:'14px', marginRight: '14px'}}  >
                 {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
             </Segment>
         )
@@ -69,10 +69,10 @@ class SavedEvents extends PureComponent {
 
     content = () => (
         <>
-            <Responsive minWidth={1000}>
+            <Responsive minWidth={879}>
                 {this.desktop()}
             </Responsive>
-            <Responsive maxWidth={999}>
+            <Responsive maxWidth={878}>
                 {this.mobile()}
             </Responsive>
         </>

@@ -12,18 +12,18 @@ function SavedEventItem(props) {
     }
 
     return (
-        <Grid.Row key={props.identifier} style = {{borderBottom: 'solid 1px #b4c5e4'}}>
-            <Grid.Column width={8}>
-                {props.name}
-            </Grid.Column>
+        <Grid.Row key={props.identifier} style = {{borderBottom: 'solid 1px #b4c5e4', padding: '14px 14px'}}>
             <Grid.Column width={6} style={{padding: '0px 0px 0px 0px'}}>
                 <div style={{fontWeight:"bold", fontSize:"16px", color:"#3c3744"}}>
                     <Moment tz="America/New_York" format="ddd, MMM h:mma">{props.date}</Moment>
                 </div>
-                <a href={props.url} rel="noopener noreferrer" target="_blank"> more information </a>
+                <a href={props.url} rel="noopener noreferrer" target="_blank"> Ticket Information </a>
+            </Grid.Column>
+            <Grid.Column width={8}>
+                {props.name}
             </Grid.Column>
             <Grid.Column width={2}>
-                <Button onClick={clickHandler} color="red" basic size="mini" circular icon="trash">
+                <Button onClick={clickHandler} basic size="medium" circular icon="trash">
                 </Button>
             </Grid.Column>
         </Grid.Row>
