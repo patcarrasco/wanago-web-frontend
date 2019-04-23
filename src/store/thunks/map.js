@@ -3,7 +3,6 @@ import {loadLocalVenues} from '../actions/mapActions'
 const ROOT_URL = process.env.REACT_APP_ROOT_URL
 
 export const getVenuesByLocation = (query) => dispatch => {
-    console.log('fire get venue by location')
     const url = ROOT_URL + '/venues/by_location'
     const params = {
         uuid: localStorage.getItem('uuid'),

@@ -129,7 +129,6 @@ class MapContainer extends PureComponent {
 
 
     render() {
-        console.log('mapready',this.state.mapReady)
         return this.state.mapReady ? this.mapRenderer() : <Dimmer active><Loader size="massive"></Loader></Dimmer>
     }
 } 

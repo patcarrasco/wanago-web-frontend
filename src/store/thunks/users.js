@@ -27,7 +27,6 @@ export const load_following = () => dispatch => {
 // Used to limit api calls for these events to 1
 
 function verifyLocalstorage(dispatch, lat, lon) {
-    console.log('verify local storage')
     dispatch(loadPosition({lat: lat, lon:lon}))
     if (!!!localStorage.getItem('localEvents')) {
         let start = moment()
@@ -49,7 +48,6 @@ function verifyLocalstorage(dispatch, lat, lon) {
 }
 
 export const loadPositional = () => dispatch => {
-    console.log('load position')
     navigator.geolocation.getCurrentPosition(pos => {
         const lat = pos.coords.latitude
         const lon = pos.coords.longitude
