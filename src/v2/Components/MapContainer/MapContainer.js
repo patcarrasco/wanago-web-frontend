@@ -119,6 +119,11 @@ class MapContainer extends PureComponent {
         )
     }
 
+    componentWillUnmount() {
+        this.setState({mapReady: false})
+    }
+
+
     render() {
         return this.state.mapReady ? this.mapRenderer() : <Dimmer active><Loader size="massive"></Loader></Dimmer>
     }
