@@ -96,7 +96,7 @@ class SavedEvents extends PureComponent {
             <Responsive maxWidth={999} minWidth={480}>
                 {this.midView()}
             </Responsive>
-            <Responsive maxWidth={479}>
+            <Responsive maxWidth={479} style={{maxWidth: 'max-content'}}>
                 {this.mobileView()}
             </Responsive>
         </>
