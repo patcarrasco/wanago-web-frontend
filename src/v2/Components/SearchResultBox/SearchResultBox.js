@@ -99,45 +99,38 @@ class SearchResultBox extends PureComponent {
     }
 
     mobileView = () => {
-        if (this.props.loading) {
-            return (
-                <div style={{width:'100vw', minHeight:'100vh'}}>
-                    <Dimmer active>
-                        <Loader>Searching for Events...</Loader> 
-                    </Dimmer> 
-                </div>
-            )
-        } else {
-            return (
-                <div style={
-                    {
-                        backgroundColor: 'white', 
-                        borderRadius: 'unset', 
-                        maxHeight: '30vh', 
-                        overflow:'auto', 
-                        position:'fixed', 
-                        padding: '14px', 
-                        marginRight:'14px',
-                        marginLeft: '14px'
+        return (
+            <div style={
+                {
+                    backgroundColor: 'white', 
+                    borderRadius: 'unset', 
+                    maxHeight: '30vh', 
+                    overflow:'auto', 
+                    position:'fixed', 
+                    padding: '14px', 
+                    marginRight:'14px',
+                    marginLeft: '14px'
 
-                        }
                     }
-                >
-                    <div style={{display:'flex', flexDirection:'row', marginBottom: '14px'}}>
-                        <div>
-                            <Button circular icon='close' onClick={()=>this.props.close()}/>
-                        </div>
-                        <div style={{flex: 'auto', textAlign: 'center'}}>
-                            < Header as = "h3" > Results </Header>
-                        </div>
+                }
+            >
+                <Dimmer active={this.props.loading}>
+                    <Loader>Searching for Events...</Loader> 
+                </Dimmer> 
+                <div style={{display:'flex', flexDirection:'row', marginBottom: '14px'}}>
+                    <div>
+                        <Button circular icon='close' onClick={()=>this.props.close()}/>
                     </div>
-
-                    <Grid>
-                        {this.createFeed()}
-                    </Grid>
+                    <div style={{flex: 'auto', textAlign: 'center'}}>
+                        < Header as = "h3" > Results </Header>
+                    </div>
                 </div>
-            )
-        }
+
+                <Grid>
+                    {this.createFeed()}
+                </Grid>
+            </div>
+        )
     }
 
 
