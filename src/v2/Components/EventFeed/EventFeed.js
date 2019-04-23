@@ -121,13 +121,13 @@ class EventFeed extends PureComponent {
 
     feed = () => (
         <>
-            <Responsive minWidth={1000}>
+            <Responsive style={{position:'fixed'}} minWidth={1000}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive maxWidth={999} minWidth={480}>
+            <Responsive style={{position:'fixed'}} maxWidth={999} minWidth={480}>
                 {this.midView()}
             </Responsive>
-            <Responsive maxWidth={479}>
+            <Responsive style={{position:'fixed'}} maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>

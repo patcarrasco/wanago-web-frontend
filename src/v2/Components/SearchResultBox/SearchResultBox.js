@@ -43,72 +43,59 @@ class SearchResultBox extends PureComponent {
     }
 
     desktopView = () => {
-        if (this.props.loading) {
-            return (
-                <Segment style={{minWidth: '41%', maxWidth: "41%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
-                    <Dimmer active>
-                        <Loader>Searching for Events...</Loader> 
-                    </Dimmer>
-                </Segment>
-            )
-        } else {
-            return (
-                <Segment style={{minWidth: "41%", maxWidth: "41%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
-                    <div style={{display:'flex', flexDirection:'row', marginBottom: '14px'}}>
-                        <div>
-                            <Button circular icon='close' onClick={()=>this.props.close()}/>
-                        </div>
-                        <div style={{flex: 'auto', textAlign: 'center'}}>
-                            < Header as = "h3" > Results </Header>
-                        </div>
+        return (
+            <Segment style={{minWidth: "41%", maxWidth: "41%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+                <Dimmer active={this.props.loading}>
+                    <Loader>Searching for Events...</Loader> 
+                </Dimmer>
+                <div style={{display:'flex', flexDirection:'row', marginBottom: '14px'}}>
+                    <div>
+                        <Button circular icon='close' onClick={()=>this.props.close()}/>
                     </div>
-                    <Grid>
-                        {this.createFeed()}
-                    </Grid>
-                </Segment>
-            ) 
-        }
+                    <div style={{flex: 'auto', textAlign: 'center'}}>
+                        < Header as = "h3" > Results </Header>
+                    </div>
+                </div>
+                <Grid>
+                    {this.createFeed()}
+                </Grid>
+            </Segment>
+        ) 
+        
     }
 
     midView = () => {
-        if (this.props.loading) {
-            return (
-                <div style={{width:'100vw', minHeight:'100vh'}}>
-                    <Dimmer active>
-                        <Loader>Searching for Events...</Loader> 
-                    </Dimmer> 
+        return (
+                < div style = {
+                    {
+                        minHeight: '15vh',
+                        maxHeight: '30vh',
+                        maxWidth: '402px',
+                        minWidth: '402px',
+                        padding: '14px',
+                        overflow: 'auto',
+                        borderRadius: 'unset',
+                        marginLeft: '14px',
+                        marginRight: '14px',
+                        backgroundColor:'white'
+                    }
+                } >
+                <Dimmer active={this.props.loading}>
+                    <Loader>Searching for Events...</Loader> 
+                </Dimmer> 
+                <div style={{display:'flex', flexDirection:'row', marginBottom: '14px'}}>
+                    <div>
+                        <Button circular icon='close' onClick={()=>this.props.close()}/>
+                    </div>
+                    <div style={{flex: 'auto', textAlign: 'center'}}>
+                        < Header as = "h3" > Results </Header>
+                    </div>
                 </div>
-            )
-        } else {
-            return (
-                    < div style = {
-                        {
-                            minHeight: '15vh',
-                            maxHeight: '30vh',
-                            maxWidth: '402px',
-                            minWidth: '402px',
-                            padding: '14px',
-                            overflow: 'auto',
-                            borderRadius: 'unset',
-                            marginLeft: '14px',
-                            marginRight: '14px',
-                            backgroundColor:'white'
-                        }
-                    } >
-                    <div style={{display:'flex', flexDirection:'row', marginBottom: '14px'}}>
-                        <div>
-                            <Button circular icon='close' onClick={()=>this.props.close()}/>
-                        </div>
-                        <div style={{flex: 'auto', textAlign: 'center'}}>
-                            < Header as = "h3" > Results </Header>
-                        </div>
-                    </div>
-                        <Grid>
-                            {this.createFeed()}
-                        </Grid>
-                    </div>
-            )
-        }
+                    <Grid>
+                        {this.createFeed()}
+                    </Grid>
+                </div>
+        )
     }
 
     mobileView = () => {
@@ -156,13 +143,13 @@ class SearchResultBox extends PureComponent {
 
     content = () => (
         <>
-             <Responsive minWidth={1000}>
+             <Responsive style={{position:"fixed"}} minWidth={1000}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive maxWidth={999} minWidth={480}>
+            <Responsive style={{position:"fixed"}} maxWidth={999} minWidth={480}>
                 {this.midView()}
             </Responsive>
-            <Responsive maxWidth={479}>
+            <Responsive style={{position:"fixed"}} maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>

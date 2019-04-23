@@ -18,7 +18,6 @@ export const getVenuesByLocation = (query) => dispatch => {
     })
     .then(res => res.json())
     .then(r => {
-        console.log(r)
         dispatch(loadLocalVenues(r))
     })
     .catch(console.error)

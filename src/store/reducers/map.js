@@ -18,9 +18,7 @@ const reducer = (state = initState, action) => {
             if (action.payload.venues.page.totalElements < 1) {
                 return {...state, localVenues: []}
             }
-            console.log(action.payload.venues._embedded.venues.length)
             let venues = action.payload.venues._embedded.venues.filter(ven => ven.upcomingEvents._total !== 0)
-            console.log(venues.length)
             return {
                 ...state,
                 localVenues: venues.map(ven => (
