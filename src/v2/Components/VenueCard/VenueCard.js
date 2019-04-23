@@ -12,7 +12,7 @@ function VenueCard(props) {
         props._selectVenue(props)
         props._loadVenueEvents(props.id)
         props.map.map.panTo(latlng)
-        props.map.map.panBy(-225, 0)
+        props.map.map.panBy(0, 0)
         props.showVenueInfoHandler()
     }
 
