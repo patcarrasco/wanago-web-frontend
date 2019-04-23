@@ -56,14 +56,15 @@ class SavedEvents extends PureComponent {
                     maxHeight: '26vh',
                     minWidth: "-webkit-fill-available",
                     maxWidth: '-webkit-fill-available',
-                    overflow: 'auto',
+                    overflowY: 'scroll',
+                    overflowX: 'hidden',
                     borderRadius: 'unset',
                     marginRight: '14px',
                     marginLeft: '14px',
-                    padding: '7px 7px'
+                    padding: '14px'
                 }
             } >
-                {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid style={{padding:'0px 4px 0px 0px'}}>{this.createSavedEventsList()}</Grid></>: null}
+                {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
             </Segment>
         )
     }
