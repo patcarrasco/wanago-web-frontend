@@ -54,7 +54,6 @@ const LandingPageMainBackground = () => {
                 < h2 style = {
                     {
                         fontFamily: "Roboto, san-serif",
-                        fontWeight: "400",
                         fontSize: "50px",
                         color: "#fbfff1",
                     }
