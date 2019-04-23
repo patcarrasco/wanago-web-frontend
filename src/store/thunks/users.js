@@ -82,8 +82,8 @@ export const loadPositional = () => dispatch => {
     },
     {
         enableHighAccuracy: true,
-        timeout: 8000,
-        maximumAge: 60000,
+        timeout: 60000,
+        maximumAge: Infinity,
     })
 }
 
