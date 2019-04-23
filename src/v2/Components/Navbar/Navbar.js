@@ -13,6 +13,7 @@ import EventSearch from '../EventSearch/EventSearch';
 
 function NavBar(props) {
     const [showSearch, setShowSearch] = useState(false)
+    const [showLogout, setShowLogout] = useState(false)
 
     let {showFeed, showVenue, showSaved} = props
 
@@ -100,7 +101,7 @@ function NavBar(props) {
                                         <Button disabled={!props.mapReady} circular icon = "heart outline" style={{color: showSaved ? '#feffff' : `#3c3744`, backgroundColor: showSaved ? '#3d52d5':'#B4C5E4'}} onClick={handleSavedEventsClick} />
                                         <Button disabled={!props.mapReady} circular icon = "map marker" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
                                         <Button disabled={!props.mapReady} circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={handleFeedClick}/>
-                                        <Button disabled={!props.mapReady} circular icon = 'power off' onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}></Button>
+                                        <Button disabled={!props.mapReady} circular icon = 'power off' onClick={()=>setShowLogout(true)} style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}></Button>
                                     </div>
                             </Menu.Menu>
                         </Menu>
@@ -114,7 +115,15 @@ function NavBar(props) {
                             </Segment>
                         </Modal.Content>
                     </Modal>
-                    
+
+                    <Modal basic open={showLogout} onClose={()=> setShowLogout(false)} size="mini">
+                        <Modal.Header>
+                            You're about to logout, confirm?
+                        </Modal.Header>
+                        <Modal.Content>
+                            <Button onClick={handleLogout}>logout</Button>
+                        </Modal.Content>
+                    </Modal>
                 </Responsive>
             </>
     )
