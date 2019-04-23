@@ -11,7 +11,7 @@ const LandingPageMainBackground = () => {
                 width: "auto",
                 height: "100vh",
                 minHeight: "100vh",
-                backgroundColor: '#3d52d5',
+                backgroundColor: '#3c3744',
                 backgroundImage: `url(${treelights})`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
