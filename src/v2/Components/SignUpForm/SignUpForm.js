@@ -57,7 +57,7 @@ class SignUpForm extends PureComponent {
                             this.props.history.push('/home')
                         })
                 } else {
-                    this.setState({signInClicked:false, error: true, errorMessage:e.message})
+                    this.setState({signUpClicked:false, error: true, errorMessage:e.message})
                 }
                 })
                 .catch((err) => {
