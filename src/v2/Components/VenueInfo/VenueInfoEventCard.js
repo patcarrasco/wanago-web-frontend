@@ -42,34 +42,6 @@ function VenueInfoEventCard(props) {
         }
     }
 
-    const desktop = () => (
-        <Grid.Row columns={4} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>
-            <Grid.Column width={4}>
-                <div style={{fontWeight:"bold", fontSize:"16px", color:"#3c3744"}}>
-                    <Moment tz="America/New_York" format="MMM DD">{date}</Moment>
-                    {!!endDate && <Moment tz="America/New_York" format="-MMM DD">{endDate}</Moment>}
-                </div>
-                <div style={{fontSize:'12px'}}>
-                    <Moment tz="America/New_York" format="ddd h:mma">{date}</Moment>
-                </div>
-            </Grid.Column>
-            <Grid.Column width={6} style={{ color:"#3c3744", padding: '0px 14px 0px 0px',}} width={7}>
-                <div style={{fontSize:"16px"}}>
-                    {name}
-                </div>
-            </Grid.Column>
-            <Grid.Column width={2} style={{padding: '0px 0px'}}>
-                    Price:
-                <div style={{display: 'flex', alignItems: 'center', fontSize:'14px'}}>
-                    {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank"> ${min} - ${max}</a> : 'not available'}
-                </div>
-            </Grid.Column>
-            <Grid.Column width={2} style={{display: 'flex', alignItems:'center', justifyContent: 'center'}}>
-                <Button onClick={addToSaved} basic color="red" size="mini" icon="heart" style={{borderRadius:'unset'}}></Button>
-            </Grid.Column>
-        </Grid.Row>
-    )
-
     function formatTime(time) {
         return <Moment tx="America/New_York" format="h:mm a">{time}</Moment>
     }

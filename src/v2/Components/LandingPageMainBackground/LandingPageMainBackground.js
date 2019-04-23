@@ -11,8 +11,8 @@ const LandingPageMainBackground = () => {
                 width: "auto",
                 height: "100vh",
                 minHeight: "100vh",
-                backgroundColor: '#3c3744',
-                backgroundImage: `-webkit-linear-gradient(20deg, #b4c5e4 10%, transparent)`,
+                backgroundColor: '#3d52d5',
+                backgroundImage: `-webkit-linear-gradient(20deg, #b4c5e4 20%, #3c3744)`,
                 backgroundSize: 'contain',
                 display: "flex",
                 flexDirection: "column",
@@ -107,7 +107,7 @@ const LandingPageMainBackground = () => {
                 } > wanago </h1>
             </div>
 
-            <div>
+            <div style={{maxWidth:'min-content'}}>
                 <SignInForm />
             </div>
         </div>

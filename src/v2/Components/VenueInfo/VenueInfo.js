@@ -19,7 +19,7 @@ class VenueInfo extends React.PureComponent {
     render() {
         return (  
                 <>
-                    <div style={{display:'flex', flexDirection:'row', marginBottom: '10px'}}>
+                    <div className="venue-info-from-map" style={{display:'flex', flexDirection:'row', marginBottom: '10px'}}>
                         <div>
                             <Button circular icon='angle left' onClick={this.props.closeVenueInfoHandler} />
                         </div>

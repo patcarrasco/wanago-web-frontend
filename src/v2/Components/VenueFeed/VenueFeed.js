@@ -74,7 +74,6 @@ class VenueFeed extends PureComponent {
                         overflow:'auto', 
                         borderRadius:'unset', 
                         marginLeft:'14px', 
-                        marginRight:'14px'
                     }
                 }
         >
@@ -110,7 +109,6 @@ class VenueFeed extends PureComponent {
                         overflow:'auto', 
                         borderRadius:'unset', 
                         marginLeft:'14px', 
-                        marginRight:'14px'
                     }
                 }
         >
@@ -133,7 +131,7 @@ class VenueFeed extends PureComponent {
     )
 
     desktopView = () => (
-        <Segment className={'content-box'} style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
+        <Segment className={'content-box'} style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px'}}  >
             {
                 !this.state.showVenueInfo ?
                 <>
@@ -172,13 +170,18 @@ class VenueFeed extends PureComponent {
 
     venueFromMap = () => (
         <>
-            <Responsive minWidth={879}>
-                <Segment style={{maxWidth: "50%", minWidth:"50%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+            <Responsive minWidth={1000}>
+                <Segment style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px'}}>
                     <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
                 </Segment>
             </Responsive>
-            <Responsive maxWidth={878}>
-                <Segment style={{maxHeight:"85.5%", minHeight: "85.5%", minWidth:'93%', overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px', marginRight:'16px'}}>
+            <Responsive maxWidth={999} minWidth={480}>
+                <Segment style={{maxHeight:"30vh", minHeight: "15vh", minWidth:'402px', maxWidth:"402px", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px'}}>
+                    <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
+                </Segment>
+            </Responsive>
+            <Responsive maxWidth={479}>
+               <Segment style={{maxHeight:"26vh", minHeight: "26vh", minWidth:'-webkit-fill-available', maxWidth:'-webkit-fill-available', overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px', marginRight:'14px'}}>
                     <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
                 </Segment>
             </Responsive>

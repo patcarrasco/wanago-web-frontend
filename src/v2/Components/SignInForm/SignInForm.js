@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import {Form, Input, Message} from 'semantic-ui-react'
+import {Form, Input, Message, Button} from 'semantic-ui-react'
 import firebase from '../../../Firebase'
 import {withRouter} from 'react-router-dom'
 
@@ -11,7 +11,7 @@ import {loadPositional} from '../../../store/thunks/users'
 
 
 class SignInForm extends PureComponent {
-    state = {username:'', password:'', active: false, error: false, errorMessage: ""}
+    state = {username:'', password:'', active: false, error: false, errorMessage: "", signInClicked: false, herokuError: false}
 
     handleInputChange = (e) => {
         this.setState({[e.target.name]: e.target.value, error: false})
@@ -22,6 +22,8 @@ class SignInForm extends PureComponent {
     }
 
     handleSubmit = () => {
+        this.setState({signInClicked: true})
+        setTimeout(() => this.setState({herokuError:true, errorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."}), 20000)
         this.props.signIn(this.state).then((status) => {
             if (status) {
                 console.log(status, firebase)
@@ -57,10 +59,7 @@ class SignInForm extends PureComponent {
                         <Form.Field>
                             <Input 
                                 type='password' icon="key" placeholder = "password" name='password' value={this.state.password} onChange={this.handleInputChange} 
-                                style={{
-                                    borderRadius:'unset',
-                                    // backgroundColor:"transparent"
-                                }}
+                                style={{}}
                             />
                         </Form.Field>
                         <Form.Field>
@@ -71,12 +70,12 @@ class SignInForm extends PureComponent {
                                     {this.state.errorMessage}
                                 </Message>
                             :
-                                <button
+                                <Button
                                     name='logIn'  
                                     onClick={this.handleSubmit}
+                                    loading={this.state.signInClicked}
                                     style={{
-                                        // borderRadius:"3px",
-                                        borderColor: "#b4c5e4",
+                                        borderRadius:"0px",
                                         backgroundColor: "#b4c5e4",
                                         color: "#3c3744",
                                         width: "100%",
@@ -85,8 +84,9 @@ class SignInForm extends PureComponent {
                                     }} 
                                 > 
                                     LOG IN
-                                </button>
+                                </Button>
                             }
+                            {this.state.herokuError && <Message>{this.state.errorMessage}</Message>}
                         </Form.Field>
                         <Form.Field style={{color: '#fbfff1', fontFamily: "Roboto, sans-serif", textAlign:'center'}}>
                             No account?
@@ -101,7 +101,7 @@ class SignInForm extends PureComponent {
                                     borderColor: "transparent",
                                     backgroundColor: "transparent",
                                     color: `${this.state.active ? '#fbfff1' : '#b4c5e4'}`,
-                                    fontWeight: `${this.state.active ? '1000' : '400'}`
+                                    fontWeight: `${this.state.active ? 'bold' : ''}`
                                 //     width: "100%",
                                 //     height: "50px"
                                 }}

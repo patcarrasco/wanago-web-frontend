@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 
-import { Grid, Button, Loader } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 
 import Moment from 'react-moment'
 import 'moment-timezone'
 import { addEvent, deleteEvent } from '../../../store/thunks/event';
 
-import pin from '../../assets/images/pin.svg'
 import { setActiveMarker } from '../../../store/actions/mapActions';
 
+import pin from '../../assets/images/pin.svg'
 
 function EventCard(props) {
     const [initialized, setInitialized] = useState(false)
@@ -58,7 +58,12 @@ function EventCard(props) {
             position: latlng,
             map: props.map.map,
             icon:{
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                // size: new props.map.props.google.maps.Size(60, 30.26),
+                // anchor: new props.map.props.google.maps.Point(30, 30.26),
+                // url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/134893/pin-red.svg',
+                url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/134893/pin-red.svg',
+                anchor: new window.google.maps.Point(30, 34),
+                scaledSize: new window.google.maps.Size(100, 50)
             }
         })
     }
@@ -69,36 +74,7 @@ function EventCard(props) {
         props.map.map.setZoom(15)
         props.map.map.panTo(marker.position)
     }
-
-    const desktop = () => (
-        <Grid.Row columns={3} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>
-            <Grid.Column width={4}>
-                <div style={{fontWeight:"bold", fontSize:"18px", color:"#3c3744"}}>
-                    <Moment tz="America/New_York" format="MMM DD">{date}</Moment>
-                    {!!endDate && <Moment tz="America/New_York" format="-MMM DD">{endDate}</Moment>}
-                </div>
-                <Moment tz="America/New_York" format="ddd h:mma">{date}</Moment>
-            </Grid.Column>
-            <Grid.Column width={6} style={{fontSize:"16px", color:"#3c3744", padding: '0px 0px 0px 0px'}}>
-                {name}
-            </Grid.Column>
-            <Grid.Column width={6} style={{display:'flex', flexDirection: 'column', justifyContent:'space-between', color:"#3c3744", alignItems:'left'}}>
-                <div style={{ fontSize:'16px', fontWeight:'bold'}}>
-                    {venueName}
-                </div>
-                <div style={{display: 'flex', flexDirection:'row'}}>
-                    <div style={{display: 'flex', alignItems: 'center', width:'75%'}}>
-                        {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank"> ${min} - ${max}</a> : 'prices n/a'}
-                    </div>
-                    <div style={{width:'25%'}}>
-                        <Button onClick={addToSaved} basic color="red" size="mini" icon="heart" style={{borderRadius:'unset'}} ></Button>
-                    </div>
-                    {/* {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank">buy tickets</a> : ''} */}
-                </div>
-            </Grid.Column>
-        </Grid.Row>
-    )
-
+  
     function formatTime(time) {
         return <Moment tx="America/New_York" format="h:mm a">{time}</Moment>
     }

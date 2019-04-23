@@ -12,6 +12,7 @@ import {toggleVenue} from '../../../store/actions/navbarActions'
 import {styles} from '../../assets/map/styles'
 import { Loader, Dimmer } from 'semantic-ui-react';
 // import {styles} from '../../assets/map/dayStyles'
+import marker from '../../assets/images/hangoutpin.svg'
 
     
 const size = {height:'100%', width:'100%', position: 'relative', padding:'0', margin:'0'}
@@ -79,6 +80,11 @@ class MapContainer extends PureComponent {
                     title={name}
                     position={{lat:location.latitude, lng:location.longitude}}
                     onClick={() => this.handleMarkerClick(venue)}
+                    icon={{
+                        url: marker,
+                        anchor: new window.google.maps.Point(30, 34),
+                        scaledSize: new window.google.maps.Size(100, 50)
+                    }}
                 >
                 </Marker>
             )
