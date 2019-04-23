@@ -32,7 +32,7 @@ const LandingPageMainBackground = () => {
                 < h1 style = {
                     {
                         fontFamily: "Roboto, sans-serif",
-                        fontWeight: "bold",
+                        // fontWeight: "bold",
                         fontSize: "8em",
                         color: "#f45b69"
                     }
@@ -77,10 +77,10 @@ const LandingPageMainBackground = () => {
                 width: "auto",
                 maxHeight: "-webkit-fill-available",
                 minHeight: "-webkit-fill-available",
-                backgroundImage: `url(${treelights})`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition:'center',
+                // backgroundImage: `url(${treelights})`,
+                // backgroundSize: 'cover',
+                // backgroundRepeat: 'no-repeat',
+                // backgroundPosition:'center',
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -101,7 +101,7 @@ const LandingPageMainBackground = () => {
                 < h1 style = {
                     {
                         fontFamily: "Roboto, sans-serif",
-                        fontWeight: "bold",
+                        // fontWeight: "bold",
                         fontSize: "6em",
                         color: "#f45b69"
                     }

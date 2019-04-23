@@ -117,7 +117,9 @@ function NavBar(props) {
                     </Modal>
 
                     <Modal basic open={showLogout} onClose={()=> setShowLogout(false)} size="mini">
-                        <Button circlular icon="close" onClick={()=>setShowLogout(false)} />
+                        <Modal.Content>
+                            <Button circular icon="close" onClick={()=>setShowLogout(false)} />
+                        </Modal.Content>
                         <Modal.Header>
                             You're about to logout, are you sure?
                         </Modal.Header>
