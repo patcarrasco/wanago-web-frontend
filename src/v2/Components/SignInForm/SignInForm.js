@@ -45,7 +45,8 @@ class SignInForm extends PureComponent {
                         this.props.history.push('/home')
                     })
             } else {
-                this.setState({errorMessage: "username / password does not match our records", error: true})
+                
+                this.setState({signInClicked:false ,errorMessage: "username / password does not match our records", error: true})
             }
         }).catch((err) => {
             this.setState({signInClicked: false})
