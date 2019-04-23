@@ -32,7 +32,7 @@ const LandingPageMainBackground = () => {
                 < h1 style = {
                     {
                         fontFamily: "Roboto, sans-serif",
-                        // fontWeight: "bold",
+                        fontWeight: "normal",
                         fontSize: "8em",
                         color: "#f45b69"
                     }
@@ -101,7 +101,7 @@ const LandingPageMainBackground = () => {
                 < h1 style = {
                     {
                         fontFamily: "Roboto, sans-serif",
-                        // fontWeight: "bold",
+                        fontWeight: "normal",
                         fontSize: "6em",
                         color: "#f45b69"
                     }
