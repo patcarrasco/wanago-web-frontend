@@ -11,7 +11,17 @@ import {loadPositional} from '../../../store/thunks/users'
 
 
 class SignInForm extends PureComponent {
-    state = {username:'', password:'', active: false, error: false, errorMessage: "", signInClicked: false, herokuError: false, complete: false}
+    state = {
+        username:'', 
+        password:'', 
+        active: false, 
+        error: false, 
+        errorMessage: "", 
+        signInClicked: false, 
+        herokuError: false, 
+        complete: false, 
+        herokuErrorMessage: ""
+    }
 
     handleInputChange = (e) => {
         this.setState({[e.target.name]: e.target.value, error: false})
@@ -37,11 +47,14 @@ class SignInForm extends PureComponent {
             } else {
                 this.setState({errorMessage: "username / password does not match our records", error: true})
             }
-        }).catch((err) => console.error('There was an ERROR: ', err))
+        }).catch((err) => {
+            this.setState({signInClicked: false})
+            console.error('There was an ERROR: ', err)
+        })
 
         setTimeout(() => {
             if (!this.state.complete) {
-                this.setState({herokuError:true, errorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."})
+                this.setState({herokuError:true, herokuErrorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."})
             }
         }, 10000)
     }
@@ -91,7 +104,7 @@ class SignInForm extends PureComponent {
                                     LOG IN
                                 </Button>
                             }
-                            {this.state.herokuError && <Message>{this.state.errorMessage}</Message>}
+                            {this.state.herokuError && <Message>{this.state.herokuErrorMessage}</Message>}
                         </Form.Field>
                         <Form.Field style={{color: '#fbfff1', fontFamily: "Roboto, sans-serif", textAlign:'center'}}>
                             No account?

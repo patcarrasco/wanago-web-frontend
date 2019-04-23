@@ -10,7 +10,18 @@ import {loadPositional} from '../../../store/thunks/users'
 
 
 class SignUpForm extends PureComponent {
-    state = {username:'', password:'', showForm: false, error: false, errorMessage: "", active:false, signUpClicked: false, complete: false, herokuError: false}
+    state = {
+        username:'', 
+        password:'', 
+        showForm: false, 
+        error: false, 
+        errorMessage: "", 
+        active:false, 
+        signUpClicked: false, 
+        complete: false, 
+        herokuError: false, 
+        herokuErrorMessage: ""
+    }
 
     handleInputChange = (e) => {
         this.setState({[e.target.name]: e.target.value, error: false})
@@ -49,11 +60,14 @@ class SignUpForm extends PureComponent {
                     this.setState({error: true, errorMessage:e.message})
                 }
                 })
-                .catch((err) => console.error('There was an ERROR: ', err))
+                .catch((err) => {
+                    this.setState({signUpClicked: false})
+                    console.error('There was an ERROR: ', err)
+                })
             
             setTimeout(() => {
                 if (!this.state.complete) {
-                    this.setState({herokuError:true, errorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."})
+                    this.setState({herokuError:true, herokuErrorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."})
                 }
             }, 10000)
         }
@@ -122,7 +136,7 @@ class SignUpForm extends PureComponent {
                     </Button>
                 }
             </Form>
-            {this.state.herokuError && <Message>{this.state.errorMessage}</Message>}
+            {this.state.herokuError && <Message>{this.state.herokuErrorMessage}</Message>}
             <Divider/>
             <Container textAlign='center'>
                 Already Have an Account?

@@ -59,7 +59,8 @@ class SavedEvents extends PureComponent {
                     overflow: 'auto',
                     borderRadius: 'unset',
                     marginRight: '14px',
-                    marginLeft: '14px'
+                    marginLeft: '14px',
+                    padding: '7px 7px'
                 }
             } >
                 {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
