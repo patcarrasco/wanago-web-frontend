@@ -71,7 +71,7 @@ function EventCard(props) {
         props.addMarkerToRecord(marker)
         props.map.map.setZoom(15)
         props.map.map.panTo(marker.position)
-        props.map.map.panBy(0, 25)
+        props.map.map.panBy(0, 30)
     }
 
   
