@@ -27,7 +27,7 @@ class EventSearch extends PureComponent {
     }
 
     validateLocation(item) {
-        let regex = new RegExp("^[a-zA-Z0-9 ,'-]{6,}$", 'i')
+        let regex = new RegExp("^[a-zA-Z0-9 ,'-]{4,}$", 'i')
         return regex.test(item)
     }
     
