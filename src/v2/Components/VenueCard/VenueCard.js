@@ -11,6 +11,7 @@ function VenueCard(props) {
         let latlng = new window.google.maps.LatLng(props.location.latitude, props.location.longitude)
         props._selectVenue(props)
         props._loadVenueEvents(props.id)
+        props.map.map.setZoom(15)
         props.map.map.panTo(latlng)
         props.map.map.panBy(0, 0)
         props.showVenueInfoHandler()
@@ -21,7 +22,8 @@ function VenueCard(props) {
         props._selectVenue(props)
         props._loadVenueEvents(props.id)
         props.map.map.panTo(latlng)
-        props.map.map.panBy(0, 0)
+        props.map.map.setZoom(15)
+        props.map.map.panBy(0, 25)
         props.showVenueInfoHandler()
     }
 
