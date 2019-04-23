@@ -109,8 +109,6 @@ class SearchResultBox extends PureComponent {
                     minWidth: '-webkit-fill-available',
                     maxWidth: '-webkit-fill-available',
                     overflow:'auto', 
-                    position:'fixed', 
-                    padding: '14px', 
                     marginRight:'14px',
                     marginLeft: '14px'
 
