@@ -39,9 +39,12 @@ class Autocomplete extends PureComponent {
                     position: 'absolute', 
                     backgroundColor:'white',
                     border: '1px solid grey',
+                    borderRadius: '4px',
                     minWidth: 'inherit',
                     overflowY: 'auto',
-                    maxHeight: '10em'
+                    maxHeight: '10em',
+                    color:'black',
+                    fontFamily: 'Roboto, sans-serif'
                     }
                 }
             >
@@ -80,7 +83,7 @@ class Autocomplete extends PureComponent {
             <>
                 <input 
                     placeholder="address, city, state"
-                    style={{width:'inherit', border:'none', fontFamily: 'Roboto, sans-serif', outline: 'none', minHeight:'inherit'}}  
+                    style={{width:'inherit', border:'none', fontFamily: 'Roboto, sans-serif', outline: 'none', minHeight:'inherit', background: 'inherit'}}  
                     value={this.state.value} 
                     onChange={this.onTextChange} type="text" 
                 />

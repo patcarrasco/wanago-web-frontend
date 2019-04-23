@@ -1,25 +1,36 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 
-import { Grid, Button } from 'semantic-ui-react'
+import { Grid, Button, Loader } from 'semantic-ui-react'
 
 import Moment from 'react-moment'
 import 'moment-timezone'
-import { addEvent } from '../../../store/thunks/event';
+import { addEvent, deleteEvent } from '../../../store/thunks/event';
+
+import pin from '../../assets/images/pin.svg'
+import { setActiveMarker } from '../../../store/actions/mapActions';
 
 
 function EventCard(props) {
+    const [initialized, setInitialized] = useState(false)
+    const [savedActive, setSavedActive] = useState(false)
 
-    function clickHandler(props) {
-        props._addEvent(props)
+    function addToSaved() {
+        if (!savedActive) {
+            setSavedActive(true)
+            props._addEvent(props)
+        } else {
+            setSavedActive(false)
+            props._deleteEvent(props.id)
+        }
     }
 
     let {name, venues, dates, priceRanges} = props // {image, attractions}
     let date = dates.start.dateTime
     let endDate = !!dates.end ? dates.end.dateTime : false
     let venueName = !!venues ? venues[0].name : ""
-    if (venueName.length > 56) {
-        venueName = venueName.slice(0,50) + "..."
+    if (venueName.length > 40) {
+        venueName = venueName.slice(0,37) + "..."
     }
     if (name.length > 55) {
         name = name.slice(0,55) + "..."
@@ -36,6 +47,27 @@ function EventCard(props) {
                 max = priceRanges[i].max
             }
         }
+    }
+
+    const {latitude, longitude} = venues[0].location
+
+    const latlng = new props.map.props.google.maps.LatLng(latitude, longitude)
+
+    function addMarker() {
+        return new props.map.props.google.maps.Marker({
+            position: latlng,
+            map: props.map.map,
+            icon:{
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            }
+        })
+    }
+
+    function centerMapOnMarker() {
+        const marker = addMarker()
+        props.addMarkerToRecord(marker)
+        props.map.map.setZoom(15)
+        props.map.map.panTo(marker.position)
     }
 
     const desktop = () => (
@@ -59,7 +91,7 @@ function EventCard(props) {
                         {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank"> ${min} - ${max}</a> : 'prices n/a'}
                     </div>
                     <div style={{width:'25%'}}>
-                        <Button onClick={() => clickHandler(props)} basic color="red" size="mini" icon="heart" style={{borderRadius:'unset'}} ></Button>
+                        <Button onClick={addToSaved} basic color="red" size="mini" icon="heart" style={{borderRadius:'unset'}} ></Button>
                     </div>
                     {/* {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank">buy tickets</a> : ''} */}
                 </div>
@@ -72,7 +104,7 @@ function EventCard(props) {
     }
 
     const mobile = () => (
-        <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight: "9em", maxHeight:"9em", fontSize:'12px'}}>
+        <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight: "9em", maxHeight:"9em", fontSize:'12px', padding: '7px 7px 7px 7px'}}>
             <Grid.Column width={4}>
                 <div>
                     <div style={{fontSize:"22px", color:"#090c9b", alignItems:'center'}}>
@@ -85,7 +117,7 @@ function EventCard(props) {
                 </div>
             </Grid.Column>
             <Grid.Column width={10} style={{padding:'0px 0px 0px 0px'}}>
-                <div style={{fontSize:'14px', color:"#3c3744"}}>
+                <div style={{fontSize:'14px', color:"#090c9b"}}>
                     {name}
                 </div>
                 <div>
@@ -95,22 +127,36 @@ function EventCard(props) {
                     {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank"> ${min} - ${max}</a> : 'prices n/a'}
                 </div>
             </Grid.Column>
-            <Grid.Column width={2}>
-                <Button size="large" icon='heart' onClick={() => clickHandler(props)} style={{border:'none', color: props.savedEventIds.includes(props.id) ? 'red' : "#b4c5e4", backgroundColor: 'transparent', alignSelf:'center', padding: '0px 0px 0px 0px'}}>
-                </Button>
+            <Grid.Column width={2} style={{display:'flex', flexDirection: 'column', justifyContent:"space-between"}}>
+                <div>
+                    <Button size="mini" circular icon="map marker" onClick={centerMapOnMarker} style={{margin:'4px', }}/>
+                </div>
+                <div>
+                    <Button size="mini" circular icon='heart' onClick={addToSaved} style={{margin:'4px', backgroundColor: savedActive ? '#3d52d5' : '#b4c5e4', color: savedActive ? 'white' : ""}}/>
+                </div>
             </Grid.Column>
         </Grid.Row>
     )
 
-    return mobile()
+    useEffect(() => {
+        if (!initialized) {
+            props.savedEventIds.includes(props.id) && setSavedActive(true)
+            setInitialized(true)
+        }
+    })
+    
+    return initialized ? mobile() : <div></div>
 }
 
 const mapStateToProps = state => ({
-    savedEventIds: state.events.savedEventIds
+    savedEventIds: state.events.savedEventIds,
+    map: state.map.map,
 })
 
 const mapDispatchToProps = dispatch => ({
-    _addEvent: (data) => dispatch(addEvent(data))
+    _addEvent: (data) => dispatch(addEvent(data)),
+    _setActiveMarker: (marker) => dispatch(setActiveMarker(marker)),
+    _deleteEvent: (id) => dispatch(deleteEvent(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventCard)

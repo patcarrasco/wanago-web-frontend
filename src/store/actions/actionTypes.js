@@ -38,6 +38,7 @@ export const ADD_HANGOUT = 'ADD_HANGOUT'
 export const FEED_VENUE_CLICK = 'FEED_VENUE_CLICK'
 export const LOAD_LOCAL_VENUES = 'LOAD_LOCAL_VENUES'
 export const SAVE_MAP_OBJECT = 'SAVE_MAP_OBJECT'
+export const SET_ACTIVE_MARKER = 'SET_ACTIVE_MARKER' 
 
 // venue actions
 export const SAVE_SELECTED_VENUE_INFO = "VENUE_INFO"

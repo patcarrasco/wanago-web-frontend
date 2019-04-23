@@ -1,17 +1,25 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 
 import { Grid, Button } from 'semantic-ui-react'
 
 import Moment from 'react-moment'
 import 'moment-timezone'
-import { addEvent } from '../../../store/thunks/event';
+import { addEvent, deleteEvent } from '../../../store/thunks/event';
 
 
 function VenueInfoEventCard(props) {
+    const [initialized, setInitialized] = useState(false)
+    const [savedActive, setSavedActive] = useState(false)
 
-    function clickHandler(props) {
-        props._addEvent(props)
+    function addToSaved() {
+        if (!savedActive) {
+            setSavedActive(true)
+            props._addEvent(props)
+        } else {
+            setSavedActive(false)
+            props._deleteEvent(props.id)
+        }
     }
 
     let {name, dates, priceRanges} = props // {image, attractions}
@@ -57,7 +65,7 @@ function VenueInfoEventCard(props) {
                 </div>
             </Grid.Column>
             <Grid.Column width={2} style={{display: 'flex', alignItems:'center', justifyContent: 'center'}}>
-                <Button onClick={() => clickHandler(props)} basic color="red" size="mini" icon="heart" style={{borderRadius:'unset'}}></Button>
+                <Button onClick={addToSaved} basic color="red" size="mini" icon="heart" style={{borderRadius:'unset'}}></Button>
             </Grid.Column>
         </Grid.Row>
     )
@@ -90,7 +98,7 @@ function VenueInfoEventCard(props) {
                 < div style = {
                     {
                         fontSize: '16px',
-                        color: "#3c3744"
+                        color: "#090c9b"
                     }
                 } >
                     {name}
@@ -98,13 +106,19 @@ function VenueInfoEventCard(props) {
                     {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank"> ${min} - ${max}</a> : 'prices n/a'}
             </Grid.Column>
             <Grid.Column width={2}>
-                <Button size="large" icon='heart' onClick={() => clickHandler(props)} style={{border:'none', color: props.savedEventIds.includes(props.id) ? 'red' : "#b4c5e4", backgroundColor: 'transparent', alignSelf:'center', padding: '0px 0px 0px 0px'}}>
-                </Button>
+                <Button size="tiny" circular icon='heart' onClick={addToSaved} style={{backgroundColor: savedActive ? '#3d52d5' : '#b4c5e4', color: savedActive ? 'white' : ""}}/>
             </Grid.Column>
         </Grid.Row>
     )
 
-    return mobile()
+    useEffect(() => {
+        if (!initialized) {
+            props.savedEventIds.includes(props.id) && setSavedActive(true)
+            setInitialized(true)
+        }
+    })
+
+    return initialized ? mobile() : <div></div>
 }
 
 const mapStateToProps = state => ({
@@ -112,7 +126,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _addEvent: (data) => dispatch(addEvent(data))
+    _addEvent: (data) => dispatch(addEvent(data)),
+    _deleteEvent: (id) => dispatch(deleteEvent(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(VenueInfoEventCard)

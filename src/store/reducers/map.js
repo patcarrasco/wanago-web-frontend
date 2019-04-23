@@ -1,9 +1,10 @@
-import {FEED_VENUE_CLICK, LOAD_LOCAL_VENUES, SAVE_MAP_OBJECT} from '../actions/actionTypes'
+import {FEED_VENUE_CLICK, LOAD_LOCAL_VENUES, SAVE_MAP_OBJECT, SET_ACTIVE_MARKER} from '../actions/actionTypes'
 
 const initState = {
     coords: {},
     localVenues: false,
     map: null,
+    activeMarker: null
 }
 
 const reducer = (state = initState, action) => {
@@ -39,6 +40,12 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 map: action.payload
+            }
+        case SET_ACTIVE_MARKER:
+            console.log('setting marker,', action.payload)
+            return {
+                ...state,
+                activeMarker: action.payload
             }
         default:
             return state;

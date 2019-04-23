@@ -42,6 +42,7 @@ class EventSearch extends PureComponent {
                 if (status.toUpperCase() === 'OK') {
                     this.props._setLoadStatus(true)
                     this.props._showSearchResults()
+                    !!this.props.closeModal && this.props.closeModal()
                     const {lng, lat} = res[0].geometry.location;
                     const obj = {
                         queryCat: searchCategory === 'all' ? '' : searchCategory,
@@ -109,7 +110,7 @@ class EventSearch extends PureComponent {
                         <Button disabled={!this.props.mapReady} icon="search" circular size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5"}} onClick={this.searchStartHandler}></Button>
                     </Menu.Item>
                 </Responsive>
-                <Responsive maxWidth={878} style={{backgroundColor:'#fbfff1', borderRadius: '16px'}}>
+                <Responsive maxWidth={878} style={{borderRadius: '16px'}}>
                     <Form style={{padding: '14px'}}>
                         <Form.Field>
                             Find events by city
@@ -127,6 +128,7 @@ class EventSearch extends PureComponent {
                                     minWidth: '14em',
                                     minHeight: '2.71428571em',
                                     display: 'block',
+                                    backgroundColor: '#fbfff1'
                                 }
                             } >
                                 <Autocomplete locationInput={this.locationInput} searched={this.state.searched} />

@@ -7,7 +7,7 @@ import { setLoadStatus, resetSearch, showSearchResults} from '../../../store/act
 import {toggleFeed, toggleVenue, toggleSaved} from '../../../store/actions/navbarActions'
 import {selectVenue} from '../../../store/actions/venueActions'
 
-import { Header, Menu, Button, Responsive, Segment} from 'semantic-ui-react';
+import { Header, Menu, Button, Responsive, Segment, Modal} from 'semantic-ui-react';
 
 import EventSearch from '../EventSearch/EventSearch';
 
@@ -105,16 +105,16 @@ function NavBar(props) {
                             </Menu.Menu>
                         </Menu>
                     </Segment>
-                    {showSearch 
-                        ? 
-                        <Segment style={{backgroundColor:'transparent', boxShadow:'none', borderStyle:'none', padding: '0px 0px 0px 0px'}} >
-                            <div style={{backgroundColor: 'white', marginLeft: '14px', marginRight: '14px'}}>
-                                <EventSearch mapReady={props.mapReady} />
-                            </div>
-                        </Segment>
-                        :
-                        null
-                    }
+                    
+                    <Modal basic open={showSearch} onClose={()=> setShowSearch(false)} size="mini">
+                        <Modal.Content>
+                            <Button circular icon="close" onClick={()=> setShowSearch(false)} ></Button>
+                            <Segment style={{backgroundColor:'transparent', boxShadow:'none', borderStyle:'none', padding: '0px 0px 0px 0px'}} >
+                                <EventSearch mapReady={props.mapReady} closeModal={()=>{setShowSearch(false)}} />
+                            </Segment>
+                        </Modal.Content>
+                    </Modal>
+                    
                 </Responsive>
             </>
     )

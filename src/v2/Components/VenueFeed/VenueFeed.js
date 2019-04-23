@@ -67,8 +67,8 @@ class VenueFeed extends PureComponent {
             style = 
                 {
                     {
-                        maxHeight: '-webkit-fill-available',
-                        minHeight: '25%',
+                        maxHeight: '26vh',
+                        minHeight: '26vh',
                         minWidth: "-webkit-fill-available",
                         maxWidth: '-webkit-fill-available',
                         overflow:'auto', 
@@ -96,8 +96,44 @@ class VenueFeed extends PureComponent {
         </Segment>
     )
 
+    midView = () => (
+        < Segment className = {
+            'content-box'
+        }
+            style = 
+                {
+                    {
+                        maxHeight: '30vh',
+                        minHeight: '15vh',
+                        minWidth: "402px",
+                        maxWidth: '402px',
+                        overflow:'auto', 
+                        borderRadius:'unset', 
+                        marginLeft:'14px', 
+                        marginRight:'14px'
+                    }
+                }
+        >
+            {   
+                !this.state.showVenueInfo 
+            ?
+                <>
+                    <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
+                    <Grid columns={2}>
+                    {this.venues()}
+                    </Grid>
+                        <Dimmer active={!!!localStorage.getItem("localVenues")}>
+                            <Loader indeterminate size='mini'></Loader>
+                        </Dimmer>
+                </>
+            :
+                <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>
+            }
+        </Segment>
+    )
+
     desktopView = () => (
-        <Segment className={'content-box'} style={{maxWidth: "40%", minWidth:"40%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
+        <Segment className={'content-box'} style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}  >
             {
                 !this.state.showVenueInfo ?
                 <>
@@ -117,10 +153,13 @@ class VenueFeed extends PureComponent {
 
     feed = () => (
         <>
-            <Responsive minWidth={879}>
+           <Responsive minWidth={1000}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive maxWidth={878}>
+            <Responsive maxWidth={999} minWidth={480}>
+                {this.midView()}
+            </Responsive>
+            <Responsive maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>

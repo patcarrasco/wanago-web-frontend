@@ -37,24 +37,24 @@ class SavedEvents extends PureComponent {
         })
     }
 
-    desktop = () => {
+    desktopView = () => {
         return (
-            <Segment className={'content-box'} style={{maxWidth: "40%", minWidth:"40%", maxHeight:"81.5%", overflow:'auto', borderRadius:'unset', marginLeft:'14px', marginRight: '14px'}}  >
+            <Segment className={'content-box'} style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", overflow:'auto', borderRadius:'unset', marginLeft:'14px', marginRight: '14px'}}  >
                 {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
             </Segment>
         )
     }
 
-    mobile = () => {
+    mobileView = () => {
         return (
             < Segment className = {
                 'content-box'
             }
             style = {
                 {
-                    minHeight: '25%',
+                    minHeight: '26vh',
+                    maxHeight: '26vh',
                     minWidth: "-webkit-fill-available",
-                    maxHeight: '-webkit-fill-available',
                     maxWidth: '-webkit-fill-available',
                     overflow: 'auto',
                     borderRadius: 'unset',
@@ -67,13 +67,35 @@ class SavedEvents extends PureComponent {
         )
     }
 
+    midView = () => (
+        < Segment className = {'content-box'}
+            style = {
+                {
+                    minHeight: '15vh',
+                    maxHeight: '-webkit-fill-available',
+                    minWidth: "402px",
+                    maxWidth: '402px',
+                    overflow: 'auto',
+                    borderRadius: 'unset',
+                    marginRight: '14px',
+                    marginLeft: '14px'
+                }
+            } 
+        >
+            {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
+        </Segment>
+    )
+
     content = () => (
         <>
-            <Responsive minWidth={879}>
-                {this.desktop()}
+            <Responsive minWidth={1000}>
+                {this.desktopView()}
             </Responsive>
-            <Responsive maxWidth={878}>
-                {this.mobile()}
+            <Responsive maxWidth={999} minWidth={480}>
+                {this.midView()}
+            </Responsive>
+            <Responsive maxWidth={479}>
+                {this.mobileView()}
             </Responsive>
         </>
     )

@@ -6,7 +6,21 @@ import {connect} from 'react-redux'
 import EventCard from '../EventCard/EventCard'
 
 class EventFeed extends PureComponent {
-    state={localEventsSaved: false}
+    constructor(props) {
+        super(props)
+        this.state={localEventsSaved: false}
+        this.markers = []
+    }
+
+    addMarkerToRecord = (marker) => {
+        this.markers.push(marker)
+    } 
+
+    removeAllMarkers = (marker) => {
+        for (let i = 0; i < this.markers.length; i++) {
+            this.markers[i].setMap(null)
+        }
+    }
 
     componentDidMount() {
         if (!!localStorage.getItem("localEvents")) {
@@ -18,10 +32,15 @@ class EventFeed extends PureComponent {
         if (!!localStorage.getItem('localEvents') && !this.state.localEventsSaved) {
             this.setState({localEventsSaved: true})
         }
+
+        if (!this.props.feedVisible) {
+            this.removeAllMarkers()
+            this.markers = []
+        }
     }
 
     localFeedCards() {
-        return JSON.parse(localStorage.getItem("localEvents")).map(event => <EventCard key={event.key} {...event}/>)
+        return JSON.parse(localStorage.getItem("localEvents")).map(event => <EventCard key={event.key} {...event} addMarkerToRecord={this.addMarkerToRecord} />)
     }
 
     feedContent = () => {
@@ -45,9 +64,9 @@ class EventFeed extends PureComponent {
     mobileView = () => (
         < Segment style = {
             {
-                minHeight: '25%',
+                minHeight: '26vh',
+                maxHeight: '26vh',
                 minWidth: '-webkit-fill-available',
-                maxHeight: '-webkit-fill-available',
                 maxWidth: '-webkit-fill-available',
                 overflow: 'auto',
                 borderRadius: 'unset',
@@ -65,8 +84,31 @@ class EventFeed extends PureComponent {
         </Segment>
     )
 
+    midView = () => (
+        < Segment style = {
+            {
+                minHeight: '15vh',
+                minWidth: '402px',
+                maxHeight: '30vh',
+                maxWidth: '402px',
+                overflow: 'auto',
+                borderRadius: 'unset',
+                marginLeft: '14px',
+                marginRight: '14px'
+            }
+        } >
+            <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
+            <Grid columns={3}>
+                {this.feedContent()}
+            </Grid>
+            <Dimmer active={!!!localStorage.getItem("localEvents")}>
+                <Loader indeterminate size='massive'></Loader>
+            </Dimmer>
+        </Segment>
+    )
+
     desktopView = () => (
-        <Segment style={{minWidth: "40%", maxWidth: "40%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+        <Segment style={{minWidth: "41%", maxWidth: "41%", maxHeight:"81.5%", minHeight:"15%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
             <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
             <Grid columns={3}>
                 {this.feedContent()}
@@ -79,17 +121,20 @@ class EventFeed extends PureComponent {
 
     feed = () => (
         <>
-            <Responsive minWidth={879}>
+            <Responsive minWidth={1000}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive maxWidth={878}>
+            <Responsive maxWidth={999} minWidth={480}>
+                {this.midView()}
+            </Responsive>
+            <Responsive maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>
     )
     
     render() {
-        console.log('render event feed....')
+        console.log(this.props.feedVisible)
         return this.props.feedVisible ? this.feed() : null
     }
 }

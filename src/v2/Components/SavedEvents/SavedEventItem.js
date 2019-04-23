@@ -8,13 +8,13 @@ import { deleteEvent } from '../../../store/thunks/event';
 function SavedEventItem(props) {
 
     function clickHandler() {
-        props.removeEvent(props.id)
+        props.removeEvent(props.identifier)
     }
 
     return (
         <Grid.Row key={props.identifier} style = {{borderBottom: 'solid 1px #b4c5e4', padding: '14px 14px'}}>
             <Grid.Column width={6} style={{padding: '0px 0px 0px 0px'}}>
-                <div style={{fontWeight:"bold", fontSize:"16px", color:"#3c3744"}}>
+                <div style={{fontWeight:"bold", fontSize:"14px", color:"#3c3744"}}>
                     <Moment tz="America/New_York" format="ddd, MMM h:mma">{props.date}</Moment>
                 </div>
                 <a href={props.url} rel="noopener noreferrer" target="_blank"> Ticket Information </a>
@@ -23,7 +23,7 @@ function SavedEventItem(props) {
                 {props.name}
             </Grid.Column>
             <Grid.Column width={2}>
-                <Button onClick={clickHandler} size="medium" circular icon="trash" style={{backgroundColor: "#b4c5e4", color:""}}/>
+                <Button onClick={clickHandler} size="medium" circular icon="trash"/>
             </Grid.Column>
         </Grid.Row>
     )

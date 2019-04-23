@@ -41,7 +41,7 @@ function VenueCard(props) {
     return (
         <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight:"6em"}}>
             <Grid.Column width={10} style={{fontSize:"14px", color:"#3c3744"}}>
-            <div style={{fontWeight:"bold", fontSize:"18px", color:"#3c3744"}}>
+            <div style={{fontSize:"18px", color:"#090c9b"}}>
                 {name}
             </div>
             <div>
