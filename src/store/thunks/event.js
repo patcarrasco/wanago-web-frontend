@@ -26,6 +26,8 @@ export const searchForEvents = (query) => dispatch => {
 }
 
 export const getEventsByLocation = (query) => dispatch => {
+    console.log("firing get events by location")
+
     const url = ROOT_URL + '/events/by_location'
     const params = {
         // parameters for spotlight search (will be universal)

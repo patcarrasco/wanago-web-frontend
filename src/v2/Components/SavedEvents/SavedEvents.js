@@ -52,8 +52,8 @@ class SavedEvents extends PureComponent {
             }
             style = {
                 {
-                    minHeight: '26vh',
-                    maxHeight: '26vh',
+                    minHeight: '30vh',
+                    maxHeight: '30vh',
                     minWidth: "-webkit-fill-available",
                     maxWidth: '-webkit-fill-available',
                     overflowY: 'scroll',

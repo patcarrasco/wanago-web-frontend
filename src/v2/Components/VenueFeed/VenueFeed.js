@@ -67,8 +67,8 @@ class VenueFeed extends PureComponent {
             style = 
                 {
                     {
-                        maxHeight: '26vh',
-                        minHeight: '26vh',
+                        maxHeight: '30vh',
+                        minHeight: '30vh',
                         minWidth: "-webkit-fill-available",
                         maxWidth: '-webkit-fill-available',
                         overflow:'auto', 

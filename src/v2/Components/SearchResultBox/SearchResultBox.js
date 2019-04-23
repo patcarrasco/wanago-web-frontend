@@ -126,7 +126,7 @@ class SearchResultBox extends PureComponent {
                     {
                         backgroundColor: 'white', 
                         borderRadius: 'unset', 
-                        maxHeight: '26vh', 
+                        maxHeight: '30vh', 
                         overflow:'auto', 
                         position:'fixed', 
                         padding: '14px', 

@@ -30,11 +30,15 @@ class MapContainer extends PureComponent {
 
     componentDidMount() {
         const {lat, lon} = this.props
-        if (!!lat && !!lon && localStorage.getItem('localEvents') && localStorage.getItem('localVenues')) {
+        if (!!lat && !!lon && !!localStorage.getItem('localEvents') && !!localStorage.getItem('localVenues')) {
             this.setState({mapReady: true})
             this.props.mapMounted()
         } else {
-            this.props._loadPosition()
+            setTimeout(()=>{
+                if (!this.state.mapReady) {
+                    this.props._loadPosition()
+                }
+            },7000)
         }
     }
 
@@ -125,6 +129,7 @@ class MapContainer extends PureComponent {
 
 
     render() {
+        console.log('mapready',this.state.mapReady)
         return this.state.mapReady ? this.mapRenderer() : <Dimmer active><Loader size="massive"></Loader></Dimmer>
     }
 } 
