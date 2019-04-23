@@ -117,11 +117,12 @@ function NavBar(props) {
                     </Modal>
 
                     <Modal basic open={showLogout} onClose={()=> setShowLogout(false)} size="mini">
+                        <Button circlular icon="close" onClick={()=>setShowLogout(false)} />
                         <Modal.Header>
-                            You're about to logout, confirm?
+                            You're about to logout, are you sure?
                         </Modal.Header>
                         <Modal.Content>
-                            <Button onClick={handleLogout}>logout</Button>
+                            <Button onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}>Logout</Button>
                         </Modal.Content>
                     </Modal>
                 </Responsive>

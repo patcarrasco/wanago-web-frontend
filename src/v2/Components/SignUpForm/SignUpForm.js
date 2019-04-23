@@ -66,8 +66,9 @@ class SignUpForm extends PureComponent {
                 })
             
             setTimeout(() => {
-                if (!this.state.complete) {
+                if (!this.state.complete && this.state.signUpClicked) {
                     this.setState({herokuError:true, herokuErrorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."})
+                    setTimeout(()=>this.setState({herokuError:false}), 10000)
                 }
             }, 10000)
         }

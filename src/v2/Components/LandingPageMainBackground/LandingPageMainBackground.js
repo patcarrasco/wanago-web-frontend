@@ -2,7 +2,9 @@ import React from 'react'
 import SignInForm from '../SignInForm/SignInForm';
 import { Responsive } from 'semantic-ui-react';
 
-
+import treelights from '../../assets/images/treelights.jpeg'
+import horizlights from '../../assets/images/horizlights.jpeg'
+import open from '../../assets/images/open.jpeg'
 const LandingPageMainBackground = () => {
 
     const desktop = () => (
@@ -12,8 +14,9 @@ const LandingPageMainBackground = () => {
                 height: "100vh",
                 minHeight: "100vh",
                 backgroundColor: '#3d52d5',
-                backgroundImage: `-webkit-linear-gradient(20deg, #b4c5e4 20%, #3c3744)`,
-                backgroundSize: 'contain',
+                backgroundImage: `url(${treelights})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -31,9 +34,9 @@ const LandingPageMainBackground = () => {
                 < h1 style = {
                     {
                         fontFamily: "Roboto, sans-serif",
-                        fontWeight: "300",
+                        fontWeight: "bold",
                         fontSize: "8em",
-                        color: "#fbfff1"
+                        color: "#f45b69"
                     }
                 } > wanago </h1>
             </div>
@@ -75,11 +78,12 @@ const LandingPageMainBackground = () => {
         < div style = {
             {
                 width: "auto",
-                height: "100%",
-                minHeight: "100%",
-                // backgroundColor: '#3c3744',
-                // backgroundImage: `-webkit-linear-gradient(20deg, #b4c5e4 10%, transparent)`,
-                // backgroundSize: 'contain',
+                maxHeight: "-webkit-fill-available",
+                minHeight: "-webkit-fill-available",
+                backgroundImage: `url(${treelights})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition:'center',
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -100,9 +104,9 @@ const LandingPageMainBackground = () => {
                 < h1 style = {
                     {
                         fontFamily: "Roboto, sans-serif",
-                        fontWeight: "300",
+                        fontWeight: "bold",
                         fontSize: "6em",
-                        color: "#fbfff1"
+                        color: "#f45b69"
                     }
                 } > wanago </h1>
             </div>

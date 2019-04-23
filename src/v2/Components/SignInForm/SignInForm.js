@@ -54,8 +54,9 @@ class SignInForm extends PureComponent {
         })
 
         setTimeout(() => {
-            if (!this.state.complete) {
-                this.setState({herokuError:true, herokuErrorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."})
+            if (!this.state.complete && this.state.signInClicked) {
+                this.setState({herokuError:true, herokuErrorMessage:"App may be asleep :(. Please wait while heroku backend boots up."})
+                setTimeout(()=>this.setState({herokuError:false}), 10000)
             }
         }, 10000)
     }
@@ -69,6 +70,7 @@ class SignInForm extends PureComponent {
     render() {
         return(
                 <>
+                    {this.state.herokuError && <Message>{this.state.herokuErrorMessage}</Message>}
                     <Form className="big">
                         <Form.Field>
                             <Input icon="user" placeholder = "username" name='username' value={this.state.username} onChange={this.handleInputChange}
@@ -105,7 +107,6 @@ class SignInForm extends PureComponent {
                                     LOG IN
                                 </Button>
                             }
-                            {this.state.herokuError && <Message>{this.state.herokuErrorMessage}</Message>}
                         </Form.Field>
                         <Form.Field style={{color: '#fbfff1', fontFamily: "Roboto, sans-serif", textAlign:'center'}}>
                             No account?
