@@ -3,8 +3,6 @@ import SignInForm from '../SignInForm/SignInForm';
 import { Responsive } from 'semantic-ui-react';
 
 import treelights from '../../assets/images/treelights.jpeg'
-import horizlights from '../../assets/images/horizlights.jpeg'
-import open from '../../assets/images/open.jpeg'
 const LandingPageMainBackground = () => {
 
     const desktop = () => (
