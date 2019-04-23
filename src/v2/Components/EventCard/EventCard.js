@@ -9,8 +9,6 @@ import { addEvent, deleteEvent } from '../../../store/thunks/event';
 
 import { setActiveMarker } from '../../../store/actions/mapActions';
 
-import pin from '../../assets/images/pin.svg'
-
 function EventCard(props) {
     const [initialized, setInitialized] = useState(false)
     const [savedActive, setSavedActive] = useState(false)
@@ -80,7 +78,7 @@ function EventCard(props) {
     }
 
     const mobile = () => (
-        <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight: "9em", maxHeight:"9em", fontSize:'12px', padding: '7px 7px 7px 7px'}}>
+        <Grid.Row columns={2} style={{borderBottom:"1px solid #b4c5e4", minHeight: "9em", maxHeight:"9em", fontSize:'12px'}}>
             <Grid.Column width={4}>
                 <div>
                     <div style={{fontSize:"22px", color:"#090c9b", alignItems:'center'}}>
@@ -103,7 +101,7 @@ function EventCard(props) {
                     {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank"> ${min} - ${max}</a> : 'prices n/a'}
                 </div>
             </Grid.Column>
-            <Grid.Column width={2} style={{display:'flex', flexDirection: 'column', justifyContent:"space-between"}}>
+            <Grid.Column width={2} style={{display:'flex', flexDirection: 'column', justifyContent:"space-between", padding:'4px 0px 0px 0px'}}>
                 <div>
                     <Button size="mini" circular icon="map marker" onClick={centerMapOnMarker} style={{margin:'4px', }}/>
                 </div>

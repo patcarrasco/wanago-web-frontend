@@ -10,7 +10,7 @@ import {loadPositional} from '../../../store/thunks/users'
 
 
 class SignUpForm extends PureComponent {
-    state = {username:'', password:'', showForm: false, error: false, errorMessage: ""}
+    state = {username:'', password:'', showForm: false, error: false, errorMessage: "", active:false, signUpClicked: false, complete: false, herokuError: false}
 
     handleInputChange = (e) => {
         this.setState({[e.target.name]: e.target.value, error: false})
@@ -24,13 +24,19 @@ class SignUpForm extends PureComponent {
         this.props.showSignup(false)
     }
 
+    handleMouse = () => {
+        this.setState({
+            active: !this.state.active
+        })
+    }
+
     createUser = () => {
         if (this.state.password.length < 4) {
             this.setState({error: true, errorMessage: ["Password must be atleast 4 characters"]})
         } else {
+            this.setState({signUpClicked: true})
             this.props.createUser(this.state).then((e) => {
                 if (e.status) {
-                    console.log(e, firebase)
                     firebase
                         .auth()
                         .signInWithCustomToken(localStorage.getItem('token'))
@@ -44,6 +50,12 @@ class SignUpForm extends PureComponent {
                 }
                 })
                 .catch((err) => console.error('There was an ERROR: ', err))
+            
+            setTimeout(() => {
+                if (!this.state.complete) {
+                    this.setState({herokuError:true, errorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."})
+                }
+            }, 10000)
         }
     }
 
@@ -74,11 +86,6 @@ class SignUpForm extends PureComponent {
 
     signUpForm = () => (
         <>
-            <Container textAlign='center'>
-                Sign up with Facebook or Google
-            </Container>
-            <Divider horizontal> or </Divider>
-
             <Form>
                 <Form.Field>
                     <Form.Input 
@@ -110,14 +117,30 @@ class SignUpForm extends PureComponent {
                         list={this.state.errorMessage}
                     />              
                     :
-                    <Button fluid size='large' color='purple' onClick={this.createUser} style={{borderRadius: 'unset', backgroundColor:'#3d52d5'}}>
+                    <Button loading={this.state.signUpClicked} fluid size='large' color='purple' onClick={this.createUser} style={{borderRadius: 'unset', backgroundColor:'#3d52d5'}}>
                         Sign up
                     </Button>
                 }
             </Form>
+            {this.state.herokuError && <Message>{this.state.errorMessage}</Message>}
             <Divider/>
             <Container textAlign='center'>
-                Already Have an Account? Log in
+                Already Have an Account?
+                 <button 
+                    name='login' 
+                    onClick={()=>this.props.showSignup(false)}
+                    onMouseEnter={this.handleMouse}
+                    onMouseLeave={this.handleMouse}
+                    style={{
+                        borderWidth: 0,
+                        borderColor: "transparent",
+                        backgroundColor: "transparent",
+                        color: `${this.state.active ? '#3d52d5' : '#3c3744'}`,
+                        fontWeight: `${this.state.active ? 'bold' : ''}`
+                    }}
+                >
+                    Log in
+                </button>
             </Container>
         </>
     )

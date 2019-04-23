@@ -134,7 +134,6 @@ class EventFeed extends PureComponent {
     )
     
     render() {
-        console.log(this.props.feedVisible)
         return this.props.feedVisible ? this.feed() : null
     }
 }

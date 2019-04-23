@@ -69,7 +69,7 @@ function NavBar(props) {
                             <Menu.Item> 
                                 <div style={{display:'flex', alignItems:'center', justifyContent:"center", marginLeft:'1em'}}>
                                     <Button disabled={!props.mapReady} circular icon = "heart outline" style={{color: showSaved ? '#feffff' : `#3c3744`, backgroundColor: showSaved ? '#3d52d5':'#B4C5E4'}} onClick={handleSavedEventsClick} />
-                                    <Button disabled={!props.mapReady} circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
+                                    <Button disabled={!props.mapReady} circular icon = "map marker" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
                                     <Button disabled={!props.mapReady} circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={handleFeedClick}/>
                                 </div>
                             </Menu.Item>
@@ -98,7 +98,7 @@ function NavBar(props) {
                                      <div style={{display:'flex', alignItems:'center', justifyContent:"center", marginRight:'14px'}}>
                                         <Button disabled={!props.mapReady} circular icon = 'search' style={{color: showSearch ? '#feffff' : `#3c3744`, backgroundColor: showSearch ? '#3d52d5':'#B4C5E4'}} onClick={handleShowSearch}></Button>
                                         <Button disabled={!props.mapReady} circular icon = "heart outline" style={{color: showSaved ? '#feffff' : `#3c3744`, backgroundColor: showSaved ? '#3d52d5':'#B4C5E4'}} onClick={handleSavedEventsClick} />
-                                        <Button disabled={!props.mapReady} circular icon = "map pin" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
+                                        <Button disabled={!props.mapReady} circular icon = "map marker" style={{color: showVenue ? '#feffff' : `#3c3744`, backgroundColor: showVenue ? '#3d52d5':'#B4C5E4'}} onClick={handleVenueClick} />
                                         <Button disabled={!props.mapReady} circular icon = "feed" style={{color: showFeed ? '#feffff' : `#3c3744`, backgroundColor: showFeed ? '#3d52d5':'#B4C5E4'}} onClick={handleFeedClick}/>
                                         <Button disabled={!props.mapReady} circular icon = 'power off' onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}></Button>
                                     </div>

@@ -11,7 +11,7 @@ import {loadPositional} from '../../../store/thunks/users'
 
 
 class SignInForm extends PureComponent {
-    state = {username:'', password:'', active: false, error: false, errorMessage: "", signInClicked: false, herokuError: false}
+    state = {username:'', password:'', active: false, error: false, errorMessage: "", signInClicked: false, herokuError: false, complete: false}
 
     handleInputChange = (e) => {
         this.setState({[e.target.name]: e.target.value, error: false})
@@ -23,14 +23,13 @@ class SignInForm extends PureComponent {
 
     handleSubmit = () => {
         this.setState({signInClicked: true})
-        setTimeout(() => this.setState({herokuError:true, errorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."}), 20000)
         this.props.signIn(this.state).then((status) => {
             if (status) {
-                console.log(status, firebase)
                 firebase
                     .auth()
                     .signInWithCustomToken(localStorage.getItem('token'))
                     .then(() => {
+                        this.setState({complete: true})
                         this.props._loadPositional()
                         this.props.showLogin(false)
                         this.props.history.push('/home')
@@ -39,6 +38,12 @@ class SignInForm extends PureComponent {
                 this.setState({errorMessage: "username / password does not match our records", error: true})
             }
         }).catch((err) => console.error('There was an ERROR: ', err))
+
+        setTimeout(() => {
+            if (!this.state.complete) {
+                this.setState({herokuError:true, errorMessage:"This app may have been asleep :(. Please wait while the heroku backend boots up."})
+            }
+        }, 10000)
     }
 
     handleMouse = () => {

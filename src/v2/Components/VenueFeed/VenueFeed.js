@@ -74,6 +74,7 @@ class VenueFeed extends PureComponent {
                         overflow:'auto', 
                         borderRadius:'unset', 
                         marginLeft:'14px', 
+                        marginRight:'14px'
                     }
                 }
         >

@@ -77,7 +77,7 @@ function VenueInfoEventCard(props) {
                 </div>
                     {(!!max && !!min) ? <a href={props.url} rel="noopener noreferrer" target="_blank"> ${min} - ${max}</a> : 'prices n/a'}
             </Grid.Column>
-            <Grid.Column width={2}>
+            <Grid.Column width={2} style={{padding:'4px 0px 0px 0px'}}>
                 <Button size="tiny" circular icon='heart' onClick={addToSaved} style={{backgroundColor: savedActive ? '#3d52d5' : '#b4c5e4', color: savedActive ? 'white' : ""}}/>
             </Grid.Column>
         </Grid.Row>
