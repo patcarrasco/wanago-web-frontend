@@ -107,7 +107,7 @@ class SearchResultBox extends PureComponent {
                     minHeight: '30vh',
                     maxHeight: '30vh',
                     minWidth: '-webkit-fill-available',
-                    maxWidth: '-webkit-fill-available',
+                    maxWidth: '100vw',
                     overflowY:'scroll', 
                     overflowX:'hidden',
                     position:'fixed', 
