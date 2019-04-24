@@ -23,7 +23,7 @@ function VenueCard(props) {
         props._loadVenueEvents(props.id)
         props.map.map.panTo(latlng)
         props.map.map.setZoom(15)
-        props.map.map.panBy(0, 0)
+        props.map.map.panBy(0, -10)
         props.showVenueInfoHandler()
     }
 
