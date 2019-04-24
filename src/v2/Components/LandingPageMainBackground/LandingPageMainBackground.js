@@ -105,25 +105,21 @@ const LandingPageMainBackground = () => {
                     minHeight: "-webkit-fill-available",
                     backgroundImage: 'url(https://maxcdn.icons8.com/app/uploads/2018/08/how-to-create-gradient-article.jpg)',
                     backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
+                    // backgroundRepeat: 'no-repeat',
                     backgroundPosition:'center',
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    padding: "6em"
                 }
             } >
                 <div style = {
                     {
-                        border: "1px solid #fbfff1",
-                        backgroundColor: '#8EC5FC',
+                        // border: "1px solid #fbfff1",
+                        // backgroundColor: '#8EC5FC',
                         // backgroundImage: 'linear-gradient(62deg, #8EC5FC 0% , #E0C3FC 100% )',
-                        backgroundImage: 'url(https://maxcdn.icons8.com/app/uploads/2018/08/how-to-create-gradient-article.jpg)',
+                        // backgroundImage: 'url(https://maxcdn.icons8.com/app/uploads/2018/08/how-to-create-gradient-article.jpg)',
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        padding: "2em"
-                    }
+                        padding: "1em"
+                    }b
                 }>
                     <div style={
                             {
