@@ -27,7 +27,7 @@ const LandingPageMainBackground = () => {
             < div style = {
                     {
                         border: "1px solid #fbfff1",
-                        backgroundColor: '#8EC5FC',
+                        backgroundColor: '#3c3744',
                         backgroundImage: `url(${gradient})`,
                         minHeight: 'fit-content',
                         display: "flex",
