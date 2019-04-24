@@ -34,7 +34,7 @@ const LandingPageMainBackground = () => {
                         fontFamily: "Roboto, sans-serif",
                         fontWeight: "lighter",
                         fontSize: "8em",
-                        color: "#f45b69"
+                        color: "#b4c5e4"
                     }
                 } > wanago </h1>
             </div>
@@ -103,7 +103,7 @@ const LandingPageMainBackground = () => {
                         fontFamily: "Roboto, sans-serif",
                         fontWeight: "lighter",
                         fontSize: "6em",
-                        color: "#f45b69"
+                        color: "#b4c5e4"
                     }
                 } > wanago </h1>
             </div>

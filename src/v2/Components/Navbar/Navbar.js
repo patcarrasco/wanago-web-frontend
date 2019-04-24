@@ -63,7 +63,14 @@ function NavBar(props) {
                     <Segment style={{backgroundColor:'transparent', boxShadow:'none', borderStyle:'none'}}>
                         < Menu fluid style = {{backgroundColor: '#3c3744', borderRadius:'unset'}} >
                             <Menu.Item style={{justifyContent:'flex-start'}}>
-                                < Header as='h1'style = {{fontFamily: "Roboto, sans-serif",fontWeight: "300",color: "#f45b69",}} > 
+                                < Header as = 'h1'
+                                style = {
+                                    {
+                                        fontFamily: "Roboto, sans-serif",
+                                        fontWeight: "300",
+                                        color: "#b4c5e4",
+                                    }
+                                } >
                                     wanago 
                                 </Header>
                             </Menu.Item>
