@@ -65,16 +65,16 @@ class MapContainer extends PureComponent {
     }
 
     handleMarkerClick = (venue) => {
-        if (this.activeMarker === venue.key) {
-            this.props._toggleVenue(false)
-            this.props._selectVenue(false)
-            this.activeMarker = null
-        } else {
+        // if (this.activeMarker === venue.key) {
+        //     this.props._toggleVenue(false)
+        //     this.props._selectVenue(false)
+        //     this.activeMarker = null
+        // } else {
             this.props._toggleVenue(true)
             this.props._loadVenueEvents(venue.id)
             this.props._selectVenue(venue)
             this.activeMarker = venue.key
-        }
+        // }
     }
 
     localVenues = () => {
