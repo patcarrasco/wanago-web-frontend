@@ -2,7 +2,6 @@ import React from 'react'
 import SignInForm from '../SignInForm/SignInForm';
 import { Responsive } from 'semantic-ui-react';
 
-import treelights from '../../assets/images/treelights.jpeg'
 const LandingPageMainBackground = () => {
 
     const desktop = () => (
@@ -119,7 +118,7 @@ const LandingPageMainBackground = () => {
                         flexDirection: "column",
                         alignItems: "center",
                         padding: "1em"
-                    }b
+                    }
                 }>
                     <div style={
                             {
