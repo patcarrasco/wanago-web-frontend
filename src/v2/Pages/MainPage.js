@@ -5,7 +5,6 @@ import EventFeed from '../Components/EventFeed/EventFeed';
 import VenueFeed from '../Components/VenueFeed/VenueFeed';
 import SearchResultBox from '../Components/SearchResultBox/SearchResultBox';
 import SavedEvents from '../Components/SavedEvents/SavedEvents';
-import { Responsive } from 'semantic-ui-react';
 
 
 function MainPage(props) {

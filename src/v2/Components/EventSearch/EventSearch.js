@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import {Menu, Dropdown, Button, Label, Responsive, Form} from 'semantic-ui-react'
+import {Menu, Dropdown, Button, Label, Responsive, Form, Header} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
 
@@ -110,10 +110,12 @@ class EventSearch extends PureComponent {
                         <Button disabled={!this.props.mapReady} icon="search" circular size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5"}} onClick={this.searchStartHandler}></Button>
                     </Menu.Item>
                 </Responsive>
-                <Responsive maxWidth={878} style={{borderRadius: '16px'}}>
-                    <Form style={{padding: '14px'}}>
-                        <Form.Field>
-                            Find events by city
+                <Responsive maxWidth={878} style={{}}>
+                    < Form >
+                        <Form.Field style={{color:"#3c3744"}}>
+                            <Header as="h4">
+                                Find events by city
+                            </Header>
                         </Form.Field>
                         <Form.Field>
                             <Dropdown selection name='searchCategory' style={{borderRadius:'unset'}} value={this.state.searchCategory} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
@@ -136,7 +138,7 @@ class EventSearch extends PureComponent {
                             </div>
                         </Form.Field>
                         <Form.Field>
-                            <Button disabled={!this.props.mapReady} fluid size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5", borderRadius:'unset'}} onClick={this.searchStartHandler}>SEARCH</Button>
+                            <Button disabled={!this.props.mapReady} fluid size='large' type='submit' style={{backgroundColor:"#3d52d5", color:"#fbfff1", borderRadius:'unset'}} onClick={this.searchStartHandler}>SEARCH</Button>
                         </Form.Field>
                     </Form>
                 </Responsive>

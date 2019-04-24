@@ -44,7 +44,7 @@ class SearchResultBox extends PureComponent {
 
     desktopView = () => {
         return (
-            <Segment style={{minWidth: "41%", maxWidth: "41%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'16px'}}>
+            <Segment style={{minWidth: "41%", maxWidth: "41%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px'}}>
                 <Dimmer active={this.props.loading}>
                     <Loader>Searching for Events...</Loader> 
                 </Dimmer>

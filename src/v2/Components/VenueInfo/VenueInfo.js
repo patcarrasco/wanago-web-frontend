@@ -28,7 +28,7 @@ class VenueInfo extends React.PureComponent {
                         </div>
                     </div>
                     <div style={{width:'inherit', minHeight:'160px'}}>
-                        {!!this.props.events ? this.content() : <Dimmer active> <Loader size='massive'/> </Dimmer>}
+                        {!!this.props.events ? this.content() : <Dimmer active><Loader size='small'/></Dimmer>}
                     </div>
                 </>
         )

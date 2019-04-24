@@ -56,8 +56,7 @@ class SavedEvents extends PureComponent {
                     maxHeight: '30vh',
                     minWidth: "-webkit-fill-available",
                     maxWidth: '-webkit-fill-available',
-                    overflowY: 'scroll',
-                    overflowX: 'hidden',
+                    overflow: 'auto',
                     borderRadius: 'unset',
                     marginRight: '14px',
                     marginLeft: '14px',
@@ -96,7 +95,7 @@ class SavedEvents extends PureComponent {
             <Responsive style={{position:'fixed'}} maxWidth={999} minWidth={480}>
                 {this.midView()}
             </Responsive>
-            <Responsive style={{position:'fixed', maxWidth:"max-content"}} maxWidth={479}>
+            <Responsive style={{position:'fixed', minWidth:"-webkit-fill-available"}} maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>

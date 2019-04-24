@@ -84,11 +84,11 @@ class VenueFeed extends PureComponent {
                 <>
                     <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
                     <Grid columns={2}>
-                    {this.venues()}
-                    </Grid>
+                        {this.venues()}
                         <Dimmer active={!!!localStorage.getItem("localVenues")}>
-                            <Loader indeterminate size='mini'></Loader>
+                            <Loader size='mini'></Loader>
                         </Dimmer>
+                    </Grid>
                 </>
             :
                 <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>
@@ -120,10 +120,10 @@ class VenueFeed extends PureComponent {
                     <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
                     <Grid columns={2}>
                     {this.venues()}
+                    <Dimmer active={!!!localStorage.getItem("localVenues")}>
+                        <Loader indeterminate size='mini'></Loader>
+                    </Dimmer>
                     </Grid>
-                        <Dimmer active={!!!localStorage.getItem("localVenues")}>
-                            <Loader indeterminate size='mini'></Loader>
-                        </Dimmer>
                 </>
             :
                 <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>
@@ -138,11 +138,11 @@ class VenueFeed extends PureComponent {
                 <>
                     <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
                     <Grid columns={2} >
-                    {this.venues()}
+                        {this.venues()}
+                        <Dimmer active={!!!localStorage.getItem("localVenues")}>
+                            <Loader indeterminate size='small'></Loader>
+                        </Dimmer>
                     </Grid>
-                    <Dimmer active={!!!localStorage.getItem("localVenues")}>
-                        <Loader indeterminate size='massive'></Loader>
-                    </Dimmer>
                 </>
                     :
                     <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>

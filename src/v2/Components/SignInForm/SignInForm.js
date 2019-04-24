@@ -97,8 +97,8 @@ class SignInForm extends PureComponent {
                                     loading={this.state.signInClicked}
                                     style={{
                                         borderRadius:"0px",
-                                        backgroundColor: "#b4c5e4",
-                                        color: "#3c3744",
+                                        backgroundColor: "#3d52d5",
+                                        color: "#fbfff1",
                                         width: "100%",
                                         height: "40px",
                                         fontFamily:"Roboto, sans-serif"

@@ -62,7 +62,10 @@ export const getSavedEvents = () => dispatch => {
 export const addEvent = (params) => dispatch => {
     const id = localStorage.getItem("id")
     const url = ROOT_URL + `/users/${id}/events`
-    
+    let venueName = ""
+    if (!!params.venues) {
+        venueName = params.venues[0].name
+    }
     const obj = {
         user: {
             event_data : {
@@ -70,6 +73,7 @@ export const addEvent = (params) => dispatch => {
                 date: params.dates.start.dateTime,
                 url: params.url,
                 id: params.id,
+                information: venueName
             }
         }
     }

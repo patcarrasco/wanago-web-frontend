@@ -52,6 +52,7 @@ class SignUpForm extends PureComponent {
                         .auth()
                         .signInWithCustomToken(localStorage.getItem('token'))
                         .then(() => {
+                            this.setState({complete: true})
                             this.props._loadPosition()
                             this.props.showSignup(false)
                             this.props.history.push('/home')

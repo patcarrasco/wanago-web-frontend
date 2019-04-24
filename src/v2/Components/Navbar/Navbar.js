@@ -63,7 +63,7 @@ function NavBar(props) {
                     <Segment style={{backgroundColor:'transparent', boxShadow:'none', borderStyle:'none'}}>
                         < Menu fluid style = {{backgroundColor: '#3c3744', borderRadius:'unset'}} >
                             <Menu.Item style={{justifyContent:'flex-start'}}>
-                                < Header as='h1'style = {{fontFamily: "Roboto, sans-serif",fontWeight: "300",color: "#b4c5e4",}} > 
+                                < Header as='h1'style = {{fontFamily: "Roboto, sans-serif",fontWeight: "300",color: "#f45b69",}} > 
                                     wanago 
                                 </Header>
                             </Menu.Item>
@@ -107,10 +107,10 @@ function NavBar(props) {
                         </Menu>
                     </Segment>
                     
-                    <Modal basic open={showSearch} onClose={()=> setShowSearch(false)} size="mini">
+                    <Modal basic open={showSearch} onClose={()=> setShowSearch(false)} size="small">
                         <Modal.Content>
-                            <Button circular icon="close" onClick={()=> setShowSearch(false)} ></Button>
-                            <Segment style={{backgroundColor:'transparent', boxShadow:'none', borderStyle:'none', padding: '0px 0px 0px 0px'}} >
+                            <Segment style={{backgroundColor:'white', boxShadow:'none', borderStyle:'none', borderRadius:'unset'}} >
+                                    <Button circular icon="close" onClick={()=> setShowSearch(false)} style={{marginBottom:'14px'}}></Button>
                                 <EventSearch mapReady={props.mapReady} closeModal={()=>{setShowSearch(false)}} />
                             </Segment>
                         </Modal.Content>
@@ -118,13 +118,15 @@ function NavBar(props) {
 
                     <Modal basic open={showLogout} onClose={()=> setShowLogout(false)} size="mini">
                         <Modal.Content>
-                            <Button circular icon="close" onClick={()=>setShowLogout(false)} />
-                        </Modal.Content>
-                        <Modal.Header>
-                            You're about to logout, are you sure?
-                        </Modal.Header>
-                        <Modal.Content>
-                            <Button onClick={handleLogout} style={{backgroundColor:"#B4C5E4", color:"3D52D5"}}>Logout</Button>
+                            <Segment style={{borderRadius:'unset'}}>
+                                <div>
+                                    <Button circular icon="close" onClick={()=>setShowLogout(false)} />
+                                </div>
+                                <p style={{color:"#3c3744"}}>
+                                You're about to logout. Are you sure?
+                                </p>
+                                <Button fluid onClick={handleLogout} style={{backgroundColor:"#3d52d5", color:"#fbfff1", borderRadius:'unset'}}>LOGOUT</Button>
+                            </Segment>
                         </Modal.Content>
                     </Modal>
                 </Responsive>
