@@ -16,7 +16,7 @@ function SavedEventItem(props) {
     function clickHandler() {
         props.removeEvent(props.identifier)
     }
-    console.log(props)
+    
     return (
         <Grid.Row key={props.identifier} style = {{borderBottom: 'solid 1px #b4c5e4', padding: '14px 14px', minHeight: '4em', fontSize:'12px'}}>
             <Grid.Column width={4} style={{padding: '0px 0px 0px 0px', display:'flex', flexDirection: 'column'}}>
