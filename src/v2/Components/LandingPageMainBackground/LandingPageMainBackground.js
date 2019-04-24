@@ -2,6 +2,8 @@ import React from 'react'
 import SignInForm from '../SignInForm/SignInForm';
 import { Responsive } from 'semantic-ui-react';
 
+import gradient from '../../assets/images/gradient.jpg'
+
 const LandingPageMainBackground = () => {
 
     const desktop = () => (
@@ -12,7 +14,7 @@ const LandingPageMainBackground = () => {
                     height: "100vh",
                     minHeight: "100vh",
                     backgroundColor: '#3c3744',
-                    backgroundImage: `url(https://maxcdn.icons8.com/app/uploads/2018/08/how-to-create-gradient-article.jpg)`,
+                    backgroundImage: `url(${gradient})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     display: "flex",
@@ -26,8 +28,8 @@ const LandingPageMainBackground = () => {
                     {
                         border: "1px solid #fbfff1",
                         backgroundColor: '#8EC5FC',
-                        // backgroundImage: 'linear-gradient(62deg, #8EC5FC 0% , #E0C3FC 100% )',
-                        backgroundImage: 'url(https://maxcdn.icons8.com/app/uploads/2018/08/how-to-create-gradient-article.jpg)',
+                        backgroundImage: `url(${gradient})`,
+                        minHeight: 'fit-content',
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -75,6 +77,7 @@ const LandingPageMainBackground = () => {
                                 fontFamily: "Roboto, san-serif",
                                 fontSize: "50px",
                                 color: "#fbfff1",
+                                padding: '14px'
                             }
                         } 
                     >
@@ -102,18 +105,13 @@ const LandingPageMainBackground = () => {
                     width: "auto",
                     maxHeight: "-webkit-fill-available",
                     minHeight: "-webkit-fill-available",
-                    backgroundImage: 'url(https://maxcdn.icons8.com/app/uploads/2018/08/how-to-create-gradient-article.jpg)',
+                    backgroundImage: `url(${gradient})`,
                     backgroundSize: 'cover',
-                    // backgroundRepeat: 'no-repeat',
                     backgroundPosition:'center',
                 }
             } >
                 <div style = {
                     {
-                        // border: "1px solid #fbfff1",
-                        // backgroundColor: '#8EC5FC',
-                        // backgroundImage: 'linear-gradient(62deg, #8EC5FC 0% , #E0C3FC 100% )',
-                        // backgroundImage: 'url(https://maxcdn.icons8.com/app/uploads/2018/08/how-to-create-gradient-article.jpg)',
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
