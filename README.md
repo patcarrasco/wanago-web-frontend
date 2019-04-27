@@ -20,13 +20,13 @@ Created with:
 * [React-Router-Dom](https://www.npmjs.com/package/react-router-dom) - Page navigation 
 * [Rails](https://rubyonrails.org/) - Save user credentials/information and references to event information
 * [PostgreSQL](https://www.postgresql.org/) - Database
-* [Firebase](https://firebase.google.com/) - Custom Token Authentication 
+* [Firebase](https://firebase.google.com/) - Custom token authentication 
 * [Bcrypt](https://www.npmjs.com/package/bcrypt) - Hash user credentials
 * [JWT](https://jwt.io/) - Secure transfer of credentials
-* [Semantic-UI](https://semantic-ui.com/) - CSS Theming
-* [Semantic-UI React](https://react.semantic-ui.com/) - Styled React Components
-* [Google Cloud](https://cloud.google.com/maps-platform/) - Location information, Map, and User interactivity
-* [Ticketmaster](https://developer.ticketmaster.com/)  - Event and Venue Information
+* [Semantic-UI](https://semantic-ui.com/) - CSS theming
+* [Semantic-UI React](https://react.semantic-ui.com/) - Styled react components
+* [Google Cloud](https://cloud.google.com/maps-platform/) - Location information, map, and user interactivity
+* [Ticketmaster](https://developer.ticketmaster.com/)  - Event and venue information
 
 ## Web Screenshots
 
