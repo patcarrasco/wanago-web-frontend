@@ -28,7 +28,7 @@ class SignInForm extends PureComponent {
     }
 
     handleSignUpClick = (e) => {
-        this.setState({active: false})
+        this.setState({active:false})
         this.props.showSignup(true)
     }
 
@@ -62,11 +62,9 @@ class SignInForm extends PureComponent {
         }, 10000)
     }
 
-    handleMouse = () => {
-        this.setState({
-            active: !this.state.active
-        })
-    }
+    handleMouseIn = () => this.setState({active: true})
+    handleMouseOut = () => this.setState({active: false})
+
 
     render() {
         return(
@@ -116,8 +114,8 @@ class SignInForm extends PureComponent {
                             <button 
                                 name='signUp' 
                                 onClick={this.handleSignUpClick}
-                                onMouseEnter={this.handleMouse}
-                                onMouseLeave={this.handleMouse}
+                                onMouseEnter={this.handleMouseIn}
+                                onMouseLeave={this.handleMouseOut}
                                 style={{
                                 //     borderRadius:"3px",
                                     borderWidth: 0,
