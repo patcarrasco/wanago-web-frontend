@@ -129,6 +129,7 @@ class EventSearch extends PureComponent {
                                     lineHeight: '1em',
                                     minWidth: '14em',
                                     minHeight: '2.71428571em',
+                                    border: 'none',
                                     display: 'block',
                                 }
                             } >
