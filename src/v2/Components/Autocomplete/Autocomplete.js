@@ -84,7 +84,18 @@ class Autocomplete extends PureComponent {
             <>
                 <input 
                     placeholder="address, city, state"
-                    style={{width:'inherit', border:'none', fontFamily: 'Roboto, sans-serif', outline: 'none', minHeight:'inherit', background: 'inherit', fontSize: '16px'}}  
+                    style = {
+                        {
+                            width: 'inherit',
+                            border: 'none',
+                            borderBottom: '1px solid #B4C5E4',
+                            fontFamily: 'Roboto, sans-serif',
+                            outline: 'none',
+                            minHeight: 'inherit',
+                            backgroundColor: '#ffffff',
+                            fontSize: '16px'
+                        }
+                    }
                     value={this.state.value} 
                     onChange={this.onTextChange} type="text" 
                 />

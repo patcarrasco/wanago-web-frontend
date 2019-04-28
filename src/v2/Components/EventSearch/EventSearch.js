@@ -114,7 +114,7 @@ class EventSearch extends PureComponent {
                 <Responsive maxWidth={878} style={{}}>
                     < Form >
                         <Form.Field style={{color:"#3c3744"}}>
-                            <Header as="h4">
+                            <Header as="h3">
                                 Find events by city
                             </Header>
                         </Form.Field>
