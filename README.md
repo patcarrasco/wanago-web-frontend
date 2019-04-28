@@ -41,11 +41,9 @@ Created with:
 
 ## Mobile Screenshots
 
-<img src="https://user-images.githubusercontent.com/39533889/56859183-53c3fa80-6955-11e9-841a-9daefa1c041c.png" width="40%")
+<!-- <img src="https://user-images.githubusercontent.com/39533889/56859183-53c3fa80-6955-11e9-841a-9daefa1c041c.png" width="40%"/> -->
 
-![wanago-mobile-inapp1](https://user-images.githubusercontent.com/39533889/56859193-64747080-6955-11e9-9450-c68ee8c1532c.png | width=48)
-
-![wanago-mobile-inapp2](https://user-images.githubusercontent.com/39533889/56859201-70603280-6955-11e9-8892-8b072b7ce41f.png | width=48)
+<img src="https://user-images.githubusercontent.com/39533889/56859193-64747080-6955-11e9-9450-c68ee8c1532c.png" width="48%"/><img src="https://user-images.githubusercontent.com/39533889/56859201-70603280-6955-11e9-8892-8b072b7ce41f.png" width="48%"/>
 
 ## Additional Notes
 
