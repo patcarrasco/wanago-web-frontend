@@ -1,27 +1,42 @@
-# Wanago - Frontend
+# Wanago
 
-An interactive concert and sporting event discovery tool created with Rails, React, Google Maps and Firebase. The aim was to approach event discovery in an alternate manner, where users can find events by discovering nearby event venues, with an additional option to search for upcoming events traditionally. Try the demo [here](https://wanago.herokuapp.com/)
+An interactive concert and sporting event discovery tool created with Rails, React, Google Maps and Firebase. The aim was to approach event discovery in an alternate manner, where users can find events by discovering nearby event venues, with an additional option to search for upcoming events traditionally. 
 
-Check out the backend code [here](https://github.com/patcarrasco/wanago-backend)
+[Try the app on heroku](https://wanago.herokuapp.com/)
+
+[Watch the demo video](https://drive.google.com/file/d/12qu2_zha1RWnL_Z8Mt6vkRFB9HYNRV5h/view?usp=sharing)
+
+[Check out the backend code](https://github.com/patcarrasco/wanago-backend)
 
 ## Table of contents
 * [Technologies](#technologies)
 * [Web Screenshots](#web-screenshots)
+* [Additional Notes](#additional-notes)
 
 ## Technologies
 Created with:
-* React
-* Rails
-* Semantic-UI
-* Firebase
-* Google Maps
-* Ticketmaster
-* Redux
+* [React](https://reactjs.org/) - Front end interface
+* [Redux](https://redux.js.org/) - State management
+* [React-Router-Dom](https://www.npmjs.com/package/react-router-dom) - Page navigation 
+* [Rails](https://rubyonrails.org/) - Save user credentials/information and references to event information
+* [PostgreSQL](https://www.postgresql.org/) - Database
+* [Firebase](https://firebase.google.com/) - Custom token authentication 
+* [Bcrypt](https://www.npmjs.com/package/bcrypt) - Hash user credentials
+* [JWT](https://jwt.io/) - Secure transfer of credentials
+* [Semantic-UI](https://semantic-ui.com/) - CSS theming
+* [Semantic-UI React](https://react.semantic-ui.com/) - Styled react components
+* [Google Cloud](https://cloud.google.com/maps-platform/) - Location information, map, and user interactivity
+* [Ticketmaster](https://developer.ticketmaster.com/)  - Event and venue information
 
 ## Web Screenshots
 
-![alt text](https://github.com/patcarrasco/wanago-web-frontend/blob/master/screenshots/Screen%20Shot%202019-04-21%20at%201.26.51%20AM.png "wanago homepage")
+![wanago-landing](https://user-images.githubusercontent.com/39533889/56843037-f99a3b00-6869-11e9-96a9-305d4ddd85b6.png)
 
-![alt_text](https://github.com/patcarrasco/wanago-web-frontend/blob/master/screenshots/Screen%20Shot%202019-04-21%20at%201.27.20%20AM.png "clickable venue markers on map" )
+![wanago-home](https://user-images.githubusercontent.com/39533889/56843076-6dd4de80-686a-11e9-93c9-fc4f57b6a6c5.png)
 
-![alt_text](https://github.com/patcarrasco/wanago-web-frontend/blob/master/screenshots/Screen%20Shot%202019-04-21%20at%201.29.19%20AM.png "search results from searchbar")
+![eventfeed](https://user-images.githubusercontent.com/39533889/56843098-b55b6a80-686a-11e9-81b8-7ed0410936e6.png)
+
+## Additional Notes
+
+The initial idea behind the app also includes User-User interaction, in that User's can post events onto a global feed, as well as a friend feed. The endpoints for these features are already built into the backend, and were available in v1 of this app. I'll be integrating that functionality in the future.
+
