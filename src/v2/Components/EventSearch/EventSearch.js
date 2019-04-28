@@ -131,7 +131,6 @@ class EventSearch extends PureComponent {
                                     minWidth: '14em',
                                     minHeight: '2.71428571em',
                                     display: 'block',
-                                    backgroundColor: '#fbfff1'
                                 }
                             } >
                                 <Autocomplete locationInput={this.locationInput} searched={this.state.searched} />

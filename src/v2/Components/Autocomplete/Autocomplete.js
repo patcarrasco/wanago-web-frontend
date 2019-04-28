@@ -88,11 +88,9 @@ class Autocomplete extends PureComponent {
                         {
                             width: 'inherit',
                             border: 'none',
-                            borderBottom: '1px solid #B4C5E4',
                             fontFamily: 'Roboto, sans-serif',
                             outline: 'none',
                             minHeight: 'inherit',
-                            backgroundColor: '#ffffff',
                             fontSize: '16px'
                         }
                     }

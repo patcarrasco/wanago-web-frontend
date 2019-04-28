@@ -53,10 +53,10 @@ function VenueCard(props) {
             <Grid.Column width={6}>
                 <div>
                     <Responsive minWidth={1000}>
-                        <Button size="small" content={buttonContent()} icon="map marker" style={{backgroundColor:'#b4c5e4', borderRadius:'16px'}} className={"show-venue-info"}fluid onClick={() => venueClickHandler()}/>
+                        <Button size="small" content={buttonContent()} icon="map marker" style={{backgroundColor:'#b4c5e4', borderRadius:'unset'}} className={"show-venue-info"}fluid onClick={() => venueClickHandler()}/>
                     </Responsive>
                     <Responsive maxWidth={999}>
-                        <Button size="small" content={buttonContent()} icon="map marker" style={{backgroundColor:'#b4c5e4', borderRadius:'16px'}} className={"show-venue-info"}fluid onClick={() => venueClickHandlerMobile()}/> 
+                        <Button size="small" content={buttonContent()} icon="map marker" style={{backgroundColor:'#b4c5e4', borderRadius:'unset'}} className={"show-venue-info"}fluid onClick={() => venueClickHandlerMobile()}/> 
                     </Responsive>
                 </div>
 
