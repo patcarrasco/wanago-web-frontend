@@ -94,7 +94,19 @@ class SignUpForm extends PureComponent {
             
             <Divider horizontal> Or </Divider>
 
-            <Button size='large' fluid color='purple' onClick={this.toggleSignUpForm} style={{borderRadius:'unset', backgroundColor:'#3d52d5'}}>
+            < Button size = 'large'
+            fluid color = 'purple'
+            onClick = {
+                this.toggleSignUpForm
+            }
+            style = {
+                {
+                    borderRadius: 'unset',
+                    backgroundColor: '#3d52d5',
+                    fontSize: '16px',
+                    fontWeight: '400'
+                }
+            } >
                 Create an Account
             </Button>
         </>
@@ -133,7 +145,22 @@ class SignUpForm extends PureComponent {
                         list={this.state.errorMessage}
                     />              
                     :
-                    <Button loading={this.state.signUpClicked} fluid size='large' color='purple' onClick={this.createUser} style={{borderRadius: 'unset', backgroundColor:'#3d52d5'}}>
+                    < Button loading = {
+                        this.state.signUpClicked
+                    }
+                    fluid size = 'large'
+                    color = 'purple'
+                    onClick = {
+                        this.createUser
+                    }
+                    style = {
+                        {
+                            borderRadius: 'unset',
+                            backgroundColor: '#3d52d5',
+                            fontSize: '16px',
+                            fontWeight: '400'
+                        }
+                    } >
                         Sign up
                     </Button>
                 }

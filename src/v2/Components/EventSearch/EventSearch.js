@@ -111,7 +111,7 @@ class EventSearch extends PureComponent {
                         <Button disabled={!this.props.mapReady} icon="search" circular size='large' type='submit' style={{backgroundColor:"#B4C5E4", color:"3D52D5"}} onClick={this.searchStartHandler}></Button>
                     </Menu.Item>
                 </Responsive>
-                <Responsive maxWidth={878} style={{}}>
+                <Responsive maxWidth={878}>
                     < Form >
                         <Form.Field style={{color:"#3c3744"}}>
                             <Header as="h3">
