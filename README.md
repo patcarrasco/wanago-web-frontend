@@ -35,7 +35,7 @@ Created with:
 
 ![wanago-landing](https://user-images.githubusercontent.com/39533889/56843037-f99a3b00-6869-11e9-96a9-305d4ddd85b6.png)
 
-![wanago-home](https://user-images.githubusercontent.com/39533889/56859443-0d709a80-6959-11e9-97d5-8c1a2326b254.png)
+![wanago-home](https://user-images.githubusercontent.com/39533889/56859472-6fc99b00-6959-11e9-8fd7-7bac9f6c918b.png)
 
 ![eventfeed](https://user-images.githubusercontent.com/39533889/56859450-18c3c600-6959-11e9-96e3-34621f9b05d2.png)
 
