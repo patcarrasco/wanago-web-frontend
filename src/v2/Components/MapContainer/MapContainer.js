@@ -9,12 +9,13 @@ import {selectVenue} from '../../../store/actions/venueActions'
 import {toggleVenue} from '../../../store/actions/navbarActions'
 
 
-// import {styles} from '../../assets/map/dayStyles'
-import {styles} from '../../assets/map/styles'
+import {styles} from '../../assets/map/dayStyles'
+// import {styles} from '../../assets/map/styles'
 // import {styles} from '../../assets/map/appleStyle'
 
 import { Loader, Dimmer } from 'semantic-ui-react';
 import marker from '../../assets/images/hangoutpin.svg'
+
 
     
 const size = {height:'100%', width:'100%', position: 'relative', padding:'0', margin:'0'}

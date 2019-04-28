@@ -101,10 +101,12 @@ class SignInForm extends PureComponent {
                                         color: "#3c3744",
                                         width: "100%",
                                         height: "40px",
-                                        fontFamily:"Roboto, sans-serif"
+                                        fontFamily:"Roboto, sans-serif",
+                                        fontSize: '16px',
+                                        fontWeight: '400'
                                     }} 
                                 > 
-                                    LOG IN
+                                    Sign in
                                 </Button>
                             }
                         </Form.Field>

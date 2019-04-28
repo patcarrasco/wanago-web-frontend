@@ -5,17 +5,22 @@ import {showSearchResults} from '../../../store/actions/eventActions'
 
 import { Segment, Button, Loader, Grid, Responsive, Dimmer, Header } from 'semantic-ui-react';
 import EventCard from '../EventCard/EventCard';
+import HideButton from '../HideButton/HideButton';
 
 class SearchResultBox extends PureComponent {
     constructor(props) {
         super(props)
         this.markers = []
+        this.state = {show: true}
     }
 
     componentDidUpdate() {
         if (!this.props.showSearchResults) {
             this.removeAllMarkers()
             this.markers = []
+            if(!this.state.show) {
+                this.setState({show: true})
+            }
         }
     }
 
@@ -100,21 +105,23 @@ class SearchResultBox extends PureComponent {
 
     mobileView = () => {
         return (
-            <div style={
+        <>
+            <Segment style=
                 {
-                    backgroundColor: 'white', 
-                    borderRadius: 'unset', 
-                    minHeight: '30vh',
-                    maxHeight: '30vh',
-                    minWidth: '-webkit-fill-available',
-                    maxWidth: '100vw',
-                    overflowY:'scroll', 
-                    overflowX:'hidden',
-                    position:'fixed', 
-                    marginRight:'14px',
-                    marginLeft: '14px',
-                    padding: "14px 14px"
-
+                    {
+                        backgroundColor: 'white', 
+                        borderRadius: 'unset', 
+                        minHeight: '30vh',
+                        maxHeight: '30vh',
+                        minWidth: '-webkit-fill-available',
+                        maxWidth: '100vw',
+                        overflow: 'auto',
+                        marginRight:'14px',
+                        marginLeft: '14px',
+                        padding: "14px 14px",
+                        paddingBottom: '0',
+                        marginBottom: '0px',
+                        display: this.state.show ? 'block' : 'none'
                     }
                 }
             >
@@ -133,24 +140,27 @@ class SearchResultBox extends PureComponent {
                 <Grid>
                     {this.createFeed()}
                 </Grid>
-            </div>
+            </Segment>
+            <HideButton toggle={()=>this.setState({show:!this.state.show})} show={this.state.show} />
+        </>
         )
     }
 
 
     content = () => (
         <>
-             <Responsive style={{position:"fixed"}} minWidth={1000}>
+             <Responsive style={{display:"grid"}} minWidth={1000}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive style={{position:"fixed"}} maxWidth={999} minWidth={480}>
+            <Responsive style={{display:"grid"}} maxWidth={999} minWidth={480}>
                 {this.midView()}
             </Responsive>
-            <Responsive style={{position:"fixed"}} maxWidth={479}>
+            <Responsive style={{display:"grid"}} maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>
     )
+
 
     render() {
         return this.props.showSearchResults ? this.content() : null

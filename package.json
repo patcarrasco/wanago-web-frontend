@@ -24,7 +24,7 @@
     "ticketmaster": "^2.0.4"
   },
   "scripts": {
-    "dev": "react-scripts start",
+    "dev": "PORT=5000 react-scripts start",
     "start": "serve -s build",
     "build-semantic": "cd src/semantic && npx gulp build",
     "watch-semantic": "cd src/semantic && npm run build-semantic && npx gulp watch",

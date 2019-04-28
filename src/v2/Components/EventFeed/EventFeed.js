@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react'
-import { Segment, Header, Dimmer, Loader, Grid, Responsive } from 'semantic-ui-react';
+import { Segment, Header, Dimmer, Loader, Grid, Responsive} from 'semantic-ui-react';
 
 import {connect} from 'react-redux'
 
 import EventCard from '../EventCard/EventCard'
+import HideButton from '../HideButton/HideButton';
 
 class EventFeed extends PureComponent {
     constructor(props) {
         super(props)
-        this.state={localEventsSaved: false}
+        this.state={localEventsSaved: false, show: true}
         this.markers = []
     }
 
@@ -36,6 +37,9 @@ class EventFeed extends PureComponent {
         if (!this.props.feedVisible) {
             this.removeAllMarkers()
             this.markers = []
+            if(!this.state.show) {
+                this.setState({show: true})
+            }
         }
     }
 
@@ -63,28 +67,35 @@ class EventFeed extends PureComponent {
     }
 
     mobileView = () => (
-        < Segment style = {
-            {
-                minHeight: '30vh',
-                maxHeight: '30vh',
-                minWidth: '-webkit-fill-available',
-                maxWidth: '-webkit-fill-available',
-                overflow: 'auto',
-                borderRadius: 'unset',
-                marginLeft: '14px',
-                marginRight: '14px'
-            }
-        } >
-            <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
-            <Grid columns={3}>
-                {this.feedContent()}
-            </Grid>
-            <Dimmer active={!!!localStorage.getItem("localEvents")}>
-                <Loader indeterminate size='massive'></Loader>
-            </Dimmer>
-        </Segment>
+        <>
+            < Segment style = {
+                {
+                    minHeight: '30vh',
+                    maxHeight: '30vh',
+                    minWidth: '-webkit-fill-available',
+                    maxWidth: '-webkit-fill-available',
+                    overflow: 'auto',
+                    borderRadius: 'unset',
+                    marginLeft: '14px',
+                    marginRight: '14px',
+                    paddingBottom: '0',
+                    marginBottom: '0px',
+                    display: this.state.show ? 'block' : 'none' 
+                }
+            } >
+                <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
+                <Grid columns={3}>
+                    {this.feedContent()}
+                </Grid>
+                <Dimmer active={!!!localStorage.getItem("localEvents")}>
+                    <Loader indeterminate size='massive'></Loader>
+                </Dimmer>
+            </Segment>
+            <HideButton toggle={()=>this.setState({show:!this.state.show})} show={this.state.show} />
+        </>
     )
 
+   
     midView = () => (
         < Segment style = {
             {
@@ -122,13 +133,13 @@ class EventFeed extends PureComponent {
 
     feed = () => (
         <>
-            <Responsive style={{position:'fixed'}} minWidth={1000}>
+            <Responsive style={{display:'grid'}} minWidth={1000}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive style={{position:'fixed'}} maxWidth={999} minWidth={480}>
+            <Responsive style={{display:'grid'}} maxWidth={999} minWidth={480}>
                 {this.midView()}
             </Responsive>
-            <Responsive style={{position:'fixed'}} maxWidth={479}>
+            <Responsive style={{display:'grid'}} maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>

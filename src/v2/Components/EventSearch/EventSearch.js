@@ -68,6 +68,7 @@ class EventSearch extends PureComponent {
             </div>
         )
     }
+    
 
     render() {
         const searchOptions = [
@@ -138,7 +139,23 @@ class EventSearch extends PureComponent {
                             </div>
                         </Form.Field>
                         <Form.Field>
-                            <Button disabled={!this.props.mapReady} fluid size='large' type='submit' style={{backgroundColor:"#3d52d5", color:"#fbfff1", borderRadius:'unset'}} onClick={this.searchStartHandler}>SEARCH</Button>
+                            < Button disabled = {
+                                !this.props.mapReady
+                            }
+                            fluid size = 'large'
+                            type = 'submit'
+                            style = {
+                                {
+                                    backgroundColor: "#3d52d5",
+                                    color: "#fbfff1",
+                                    borderRadius: 'unset',
+                                    fontSize: '16px',
+                                    fontWeight: '400'
+                                }
+                            }
+                            onClick = {
+                                this.searchStartHandler
+                            } > Search </Button>
                         </Form.Field>
                     </Form>
                 </Responsive>

@@ -4,9 +4,10 @@ import {connect} from 'react-redux'
 import { Segment, Grid, Responsive, Header } from 'semantic-ui-react';
 import { getSavedEvents } from '../../../store/thunks/event';
 import SavedEventItem from './SavedEventItem';
+import HideButton from '../HideButton/HideButton';
 
 class SavedEvents extends PureComponent {
-    state = {safeMount: false}
+    state = {safeMount: false, show: true}
 
     componentDidMount() {
         if (!this.props.myEvents) {
@@ -19,6 +20,13 @@ class SavedEvents extends PureComponent {
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.myEvents !== this.props.myEvents) {
             this.setState({safeMount: true})
+        }
+        if (this.props.show !== prevProps.show) {
+            if (!this.state.show) {
+                this.setState({
+                    show: true
+                })
+            }
         }
     } 
 
@@ -47,24 +55,30 @@ class SavedEvents extends PureComponent {
 
     mobileView = () => {
         return (
-            < Segment className = {
-                'content-box'
-            }
-            style = {
-                {
-                    minHeight: '30vh',
-                    maxHeight: '30vh',
-                    minWidth: "-webkit-fill-available",
-                    maxWidth: '-webkit-fill-available',
-                    overflow: 'auto',
-                    borderRadius: 'unset',
-                    marginRight: '14px',
-                    marginLeft: '14px',
-                    padding: '14px'
+            <>
+                < Segment className = {
+                    'content-box'
                 }
-            } >
-                {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
-            </Segment>
+                style = {
+                    {
+                        minHeight: '30vh',
+                        maxHeight: '30vh',
+                        minWidth: "-webkit-fill-available",
+                        maxWidth: '-webkit-fill-available',
+                        overflow: 'auto',
+                        borderRadius: 'unset',
+                        marginRight: '14px',
+                        marginLeft: '14px',
+                        padding: '14px',
+                        paddingBottom: '0',
+                        marginBottom: '0px',
+                        display: this.state.show ? 'block' : 'none' 
+                    }
+                } >
+                    {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
+                </Segment>
+                 <HideButton toggle={()=>this.setState({show:!this.state.show})} show={this.state.show} />
+            </>
         )
     }
 
@@ -89,13 +103,13 @@ class SavedEvents extends PureComponent {
 
     content = () => (
         <>
-            <Responsive style={{position:'fixed'}} minWidth={1000}>
+            <Responsive style={{display:'grid'}} minWidth={1000}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive style={{position:'fixed'}} maxWidth={999} minWidth={480}>
+            <Responsive style={{display:'grid'}} maxWidth={999} minWidth={480}>
                 {this.midView()}
             </Responsive>
-            <Responsive style={{position:'fixed', minWidth:"-webkit-fill-available"}} maxWidth={479}>
+            <Responsive style={{display:'grid', minWidth:"-webkit-fill-available"}} maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>

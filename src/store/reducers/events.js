@@ -71,7 +71,8 @@ const reducer = (state = initState, action) => {
         case SHOW_SEARCH_RESULTS:
             return {
                 ...state,
-                showSearchResults: action.payload
+                showSearchResults: action.payload,
+                searchedEvents: []
             }
         default:
             return state;

@@ -5,11 +5,12 @@ import {selectVenue} from '../../../store/actions/venueActions'
 import { Segment, Header, Grid, Dimmer, Loader, Responsive} from 'semantic-ui-react';
 import VenueCard from '../VenueCard/VenueCard';
 import VenueInfo from '../VenueInfo/VenueInfo';
+import HideButton from '../HideButton/HideButton';
 
 
 
 class VenueFeed extends PureComponent {
-    state={localVenuesSaved: false, showVenueInfo: false, scrollResetPos: null}
+    state={localVenuesSaved: false, showVenueInfo: false, scrollResetPos: null, show: true}
 
     componentDidMount(){
         if (!!localStorage.getItem('localVenues')) {
@@ -25,6 +26,9 @@ class VenueFeed extends PureComponent {
 
         if (this.props.showVenue === false) {
             this.setState({showVenueInfo: false})
+            if(!this.state.show) {
+                this.setState({show: true})
+            }
         }
     }
     
@@ -61,39 +65,45 @@ class VenueFeed extends PureComponent {
     } 
 
     mobileView = () => (
-        < Segment className = {
-            'content-box'
-        }
-            style = 
-                {
-                    {
-                        maxHeight: '30vh',
-                        minHeight: '30vh',
-                        minWidth: "-webkit-fill-available",
-                        maxWidth: '-webkit-fill-available',
-                        overflow:'auto', 
-                        borderRadius:'unset', 
-                        marginLeft:'14px', 
-                        marginRight:'14px'
-                    }
-                }
-        >
-            {   
-                !this.state.showVenueInfo 
-            ?
-                <>
-                    <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
-                    <Grid columns={2}>
-                        {this.venues()}
-                        <Dimmer active={!!!localStorage.getItem("localVenues")}>
-                            <Loader size='mini'></Loader>
-                        </Dimmer>
-                    </Grid>
-                </>
-            :
-                <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>
+        <>
+            < Segment className = {
+                'content-box'
             }
-        </Segment>
+                style = 
+                    {
+                        {
+                            maxHeight: '30vh',
+                            minHeight: '30vh',
+                            minWidth: "-webkit-fill-available",
+                            maxWidth: '-webkit-fill-available',
+                            overflow:'auto', 
+                            borderRadius:'unset', 
+                            marginLeft:'14px', 
+                            marginRight:'14px',
+                            paddingBottom: '0',
+                            marginBottom: '0px',
+                            display: this.state.show ? 'block' : 'none' 
+                        }
+                    }
+            >
+                {   
+                    !this.state.showVenueInfo 
+                ?
+                    <>
+                        <Header as='h2'style={{color:"#3c3744"}}>Venues near you</Header>
+                        <Grid columns={2}>
+                            {this.venues()}
+                            <Dimmer active={!!!localStorage.getItem("localVenues")}>
+                                <Loader size='mini'></Loader>
+                            </Dimmer>
+                        </Grid>
+                    </>
+                :
+                    <VenueInfo closeVenueInfoHandler={this.closeVenueInfoHandler}/>
+                }
+            </Segment>
+            <HideButton toggle={()=>this.setState({show:!this.state.show})} show={this.state.show} />
+        </>
     )
 
     midView = () => (
@@ -152,13 +162,13 @@ class VenueFeed extends PureComponent {
 
     feed = () => (
         <>
-           <Responsive style={{position:'fixed'}} minWidth={1000}>
+           <Responsive style={{display:'grid'}} minWidth={1000}>
                 {this.desktopView()}
             </Responsive>
-            <Responsive style={{position:'fixed'}} maxWidth={999} minWidth={480}>
+            <Responsive style={{display:'grid'}} maxWidth={999} minWidth={480}>
                 {this.midView()}
             </Responsive>
-            <Responsive style={{position:'fixed'}} maxWidth={479}>
+            <Responsive style={{display:'grid'}} maxWidth={479}>
                 {this.mobileView()}
             </Responsive>
         </>
