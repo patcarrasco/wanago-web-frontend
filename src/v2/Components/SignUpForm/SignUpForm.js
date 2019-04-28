@@ -144,7 +144,7 @@ class SignUpForm extends PureComponent {
                 Already Have an Account?
                  <button 
                     name='login' 
-                    onClick={()=>this.props.showSignup(false)}
+                    onClick={()=>{this.props.showSignup(false);this.setState({active:false})}}
                     onMouseEnter={this.handleMouse}
                     onMouseLeave={this.handleMouse}
                     style={{

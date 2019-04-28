@@ -29,6 +29,7 @@ class SignInForm extends PureComponent {
 
     handleSignUpClick = (e) => {
         this.props.showSignup(true)
+        this.setState({active: false})
     }
 
     handleSubmit = () => {

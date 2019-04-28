@@ -125,7 +125,6 @@ class EventSearch extends PureComponent {
                             <div style = {
                                 {
                                     width: '100%',
-                                    borderBottom: '1px solid #3d52d5',
                                     fontFamily: 'Roboto, sans-serif',
                                     lineHeight: '1em',
                                     minWidth: '14em',
