@@ -4,7 +4,8 @@ An interactive concert and sporting event discovery tool created with Rails, Rea
 
 [Try the app on heroku](https://wanago.herokuapp.com/)
 
-[Watch the demo video](https://drive.google.com/file/d/12qu2_zha1RWnL_Z8Mt6vkRFB9HYNRV5h/view?usp=sharing)
+[Watch the web demo video](https://drive.google.com/file/d/12qu2_zha1RWnL_Z8Mt6vkRFB9HYNRV5h/view?usp=sharing)
+[Watch the mobile demo video](https://drive.google.com/file/d/19sjj645fU5MhXs4MoIvDfZ2vk7fzx-Is/view?usp=sharing)
 
 [Check out the backend code](https://github.com/patcarrasco/wanago-backend)
 
