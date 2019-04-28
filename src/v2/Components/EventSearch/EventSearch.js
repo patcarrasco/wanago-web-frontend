@@ -87,7 +87,7 @@ class EventSearch extends PureComponent {
         ]
         return (
             <>
-                <Responsive minWidth={879} style={{display: "flex", backgroundColor:'#fbfff1', borderRadius:'16px'}}>
+                <Responsive minWidth={879} style={{display: "flex", backgroundColor:'#ffffff', borderRadius:'16px'}}>
                     <Menu.Item style={{position:'static', padding:'1'}}>
                         <Dropdown selection name='searchCategory' style={{borderRadius:'16px'}} value={this.state.searchCategory} options={searchOptions} onChange={this.dropdownHandler} placeholder="category"/>
                     </Menu.Item>
