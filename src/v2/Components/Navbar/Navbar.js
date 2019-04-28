@@ -43,7 +43,6 @@ class NavBar extends React.PureComponent{
         this.props._clearVenue()
         this.props._closeSearchResults()
         this.state.showSearch && this.setState({showSearch: false})
-        // this.props._closeSearchEvents()
     }
 
     handleFeedClick = () => {
@@ -51,8 +50,6 @@ class NavBar extends React.PureComponent{
         this.props._toggleFeed()
         this.props._closeSearchResults()
         this.state.showSearch && this.setState({showSearch: false})
-
-        // this.props._closeSearchEvents()
     }
 
     handleSavedEventsClick = () => {
@@ -195,7 +192,6 @@ const mapDispatchToProps = (dispatch) => ({
     _toggleVenue: (bool) => dispatch(toggleVenue(bool)),
     _toggleSaved: (bool) => dispatch(toggleSaved(bool)),
     _clearVenue: () => dispatch(selectVenue(false)),
-    _closeSearchEvents: () => dispatch(showSearchResults(false)),
     _closeSearchResults: () => dispatch(showSearchResults(false))
 })
 

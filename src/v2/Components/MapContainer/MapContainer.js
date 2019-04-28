@@ -15,6 +15,7 @@ import {styles} from '../../assets/map/dayStyles'
 
 import { Loader, Dimmer } from 'semantic-ui-react';
 import marker from '../../assets/images/hangoutpin.svg'
+import { showSearchResults } from '../../../store/actions/eventActions';
 
 
     
@@ -66,16 +67,11 @@ class MapContainer extends PureComponent {
     }
 
     handleMarkerClick = (venue) => {
-        // if (this.activeMarker === venue.key) {
-        //     this.props._toggleVenue(false)
-        //     this.props._selectVenue(false)
-        //     this.activeMarker = null
-        // } else {
-            this.props._toggleVenue(true)
-            this.props._loadVenueEvents(venue.id)
-            this.props._selectVenue(venue)
-            this.activeMarker = venue.key
-        // }
+        this.props._toggleVenue(true)
+        this.props._loadVenueEvents(venue.id)
+        this.props._selectVenue(venue)
+        this.props._closeSearchResults()
+        this.activeMarker = venue.key
     }
 
     localVenues = () => {
@@ -146,8 +142,8 @@ const mapDispatchToProps = (dispatch) => ({
     _saveMap: (map) => dispatch(saveMap(map)),
     _selectVenue: (venue) => dispatch(selectVenue(venue)),
     _loadVenueEvents: (id) => dispatch(getVenueInformation(id)),
-    _toggleVenue: () => dispatch(toggleVenue())
-
+    _toggleVenue: () => dispatch(toggleVenue()),
+    _closeSearchResults: () => dispatch(showSearchResults(false))
 })
 
 export default GoogleApiWrapper({
