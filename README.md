@@ -35,9 +35,9 @@ Created with:
 
 ![wanago-landing](https://user-images.githubusercontent.com/39533889/56843037-f99a3b00-6869-11e9-96a9-305d4ddd85b6.png)
 
-![wanago-home](https://user-images.githubusercontent.com/39533889/56843076-6dd4de80-686a-11e9-93c9-fc4f57b6a6c5.png)
+![wanago-home](https://user-images.githubusercontent.com/39533889/56859443-0d709a80-6959-11e9-97d5-8c1a2326b254.png)
 
-![eventfeed](https://user-images.githubusercontent.com/39533889/56843098-b55b6a80-686a-11e9-81b8-7ed0410936e6.png)
+![eventfeed](https://user-images.githubusercontent.com/39533889/56859450-18c3c600-6959-11e9-96e3-34621f9b05d2.png)
 
 ## Mobile Screenshots
 
