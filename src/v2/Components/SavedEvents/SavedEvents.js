@@ -47,7 +47,7 @@ class SavedEvents extends PureComponent {
 
     desktopView = () => {
         return (
-            <Segment className={'content-box'} style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", overflow:'auto', borderRadius:'unset', marginLeft:'14px', marginRight: '14px', position:'fixed'}}  >
+            <Segment className={'content-box'} style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", overflow:'auto', borderRadius:'unset', marginLeft:'14px', marginRight: '14px', marginTop:'14px', position:'fixed'}}  >
                 {this.state.safeMount ? <><Header as='h2'style={{color:"#3c3744"}}>Saved</Header><Grid>{this.createSavedEventsList()}</Grid></>: null}
             </Segment>
         )

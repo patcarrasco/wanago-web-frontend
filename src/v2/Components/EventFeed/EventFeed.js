@@ -120,7 +120,7 @@ class EventFeed extends PureComponent {
     )
 
     desktopView = () => (
-        <Segment style={{minWidth: "41%", maxWidth: "41%", maxHeight:"81.5%", minHeight:"15%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px'}}>
+        <Segment style={{minWidth: "41%", maxWidth: "41%", maxHeight:"81.5%", minHeight:"15%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px', marginTop:'14px'}}>
             <Header as='h2'style={{color:"#3c3744"}}>Happening Near You</Header>
             <Grid columns={3}>
                 {this.feedContent()}

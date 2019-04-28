@@ -142,7 +142,7 @@ class VenueFeed extends PureComponent {
     )
 
     desktopView = () => (
-        <Segment className={'content-box'} style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px'}}  >
+        <Segment className={'content-box'} style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px', marginTop: '14px'}}  >
             {
                 !this.state.showVenueInfo ?
                 <>
