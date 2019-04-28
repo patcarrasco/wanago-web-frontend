@@ -65,7 +65,7 @@ class SignInForm extends PureComponent {
     handleMouseIn = () => this.setState({active: true})
     handleMouseOut = () => this.setState({active: false})
 
-
+    
     render() {
         return(
                 <>
@@ -122,7 +122,7 @@ class SignInForm extends PureComponent {
                                     borderColor: "transparent",
                                     backgroundColor: "transparent",
                                     color: `${this.state.active ? '#fbfff1' : '#b4c5e4'}`,
-                                    fontWeight: `${this.state.active ? 'bold' : ''}`
+                                    fontWeight: `${this.state.active ? 'bold' : 'thin'}`
                                 //     width: "100%",
                                 //     height: "50px"
                                 }}
