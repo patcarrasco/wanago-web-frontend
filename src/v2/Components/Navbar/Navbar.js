@@ -39,7 +39,7 @@ class NavBar extends React.PureComponent{
     }
     handleVenueClick = () => {
         
-        this.props._toggleVenue(!this.state.showVenue)
+        this.props._toggleVenue(!this.props.showVenue)
         this.props._clearVenue()
         this.props._closeSearchResults()
         this.state.showSearch && this.setState({showSearch: false})
