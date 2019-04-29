@@ -182,7 +182,7 @@ class VenueFeed extends PureComponent {
     venueFromMap = () => (
         <>
             <Responsive minWidth={1000}>
-                <Segment style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px'}}>
+                <Segment style={{maxWidth: "41%", minWidth:"41%", maxHeight:"81.5%", minHeight:"81.5%", overflow:'auto', position:'fixed', borderRadius:'unset', marginLeft:'14px', marginTop:'14px'}}>
                     <VenueInfo closeVenueInfoHandler={this.closeVenueFromMapHandler} />
                 </Segment>
             </Responsive>
