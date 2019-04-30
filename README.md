@@ -2,7 +2,7 @@
 
 An interactive concert and sporting event discovery tool created with Rails, React, Google Maps and Firebase. The aim was to approach event discovery in an alternate manner, where users can find events by discovering nearby event venues, with an additional option to search for upcoming events traditionally. 
 
-[Try the app on heroku](https://wanago.herokuapp.com/)
+[See the app on Heroku](https://wanago.herokuapp.com/)
 
 [Watch the demo video](https://drive.google.com/file/d/1oLPSlW7LYnsGRXtHkP2OtrXlZCrq8tdH/view?usp=sharing)
 
