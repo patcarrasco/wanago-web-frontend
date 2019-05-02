@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LandingPage from './v2/Pages/LandingPage'
 import { PrivateRoute } from './helpers/Routes/PrivateRoute';
